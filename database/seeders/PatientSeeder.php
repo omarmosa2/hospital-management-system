@@ -20,7 +20,6 @@ class PatientSeeder extends Seeder
                 [
                     'specialty' => 'طبيب عام',
                     'phone' => '01234567890',
-                    'license_number' => 'DOC123456',
                     'working_hours' => ['09:00-17:00'],
                     'bio' => 'طبيب متخصص في الطب العام',
                     'consultation_fee' => 100.00,

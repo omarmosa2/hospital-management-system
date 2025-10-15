@@ -145,7 +145,6 @@ class DoctorController extends Controller
             'email' => 'required|string|email|max:255|unique:users,email,' . $doctor->user_id,
             'clinic_id' => 'required|exists:clinics,id',
             'phone' => 'required|string|max:20',
-            'license_number' => 'required|string|max:50|unique:doctors,license_number,' . $doctor->id,
             'consultation_fee' => 'required|numeric|min:0',
             'bio' => 'nullable|string',
             'working_hours' => 'nullable|array',
@@ -182,7 +181,6 @@ class DoctorController extends Controller
         $doctor->update([
             'clinic_id' => $request->clinic_id,
             'phone' => $request->phone,
-            'license_number' => $request->license_number,
             'working_hours' => $workingHours,
             'bio' => $request->bio,
             'consultation_fee' => $request->consultation_fee,

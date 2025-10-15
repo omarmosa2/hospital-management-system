@@ -125,6 +125,10 @@
                     <i class="fas fa-calendar-alt text-orange-600 text-2xl mb-2"></i>
                     <span class="text-sm font-medium text-orange-900">إدارة المواعيد</span>
                 </a>
+                <a href="{{ route('reception.doctors.index') }}" class="flex flex-col items-center p-4 bg-teal-50 rounded-lg hover:bg-teal-100 transition-colors">
+                    <i class="fas fa-list text-teal-600 text-2xl mb-2"></i>
+                    <span class="text-sm font-medium text-teal-900">عرض الأطباء</span>
+                </a>
             </div>
         </div>
     </div>

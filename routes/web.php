@@ -14,6 +14,7 @@ use App\Http\Controllers\SalaryController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\PatientFileController;
+use App\Http\Controllers\ReceptionController;
 
 // Public routes
 Route::get('/', function () {
@@ -84,4 +85,12 @@ Route::middleware(['auth:web'])->group(function () {
     Route::get('/patient-files/{patient}', [PatientFileController::class, 'show'])->name('patient-files.show');
     Route::get('/patient-files/{patient}/pdf', [PatientFileController::class, 'generatePdf'])->name('patient-files.generate-pdf');
     Route::get('/patient-files/{patient}/print', [PatientFileController::class, 'print'])->name('patient-files.print');
+    
+    // Reception routes (read-only access)
+    Route::prefix('reception')->name('reception.')->group(function () {
+        Route::get('/clinics', [ReceptionController::class, 'clinicsIndex'])->name('clinics.index');
+        Route::get('/clinics/{clinic}', [ReceptionController::class, 'clinicsShow'])->name('clinics.show');
+        Route::get('/doctors', [ReceptionController::class, 'doctorsIndex'])->name('doctors.index');
+        Route::get('/doctors/{doctor}', [ReceptionController::class, 'doctorsShow'])->name('doctors.show');
+    });
 });

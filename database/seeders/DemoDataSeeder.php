@@ -69,9 +69,7 @@ class DemoDataSeeder extends Seeder
         // Create doctor profiles
         Doctor::create([
             'user_id' => $doctor1->id,
-            'specialty' => 'Cardiology',
             'phone' => '+1-555-0101',
-            'license_number' => 'MD123456',
             'working_hours' => [
                 'monday' => ['09:00', '17:00'],
                 'tuesday' => ['09:00', '17:00'],
@@ -86,9 +84,7 @@ class DemoDataSeeder extends Seeder
 
         Doctor::create([
             'user_id' => $doctor2->id,
-            'specialty' => 'Pediatrics',
             'phone' => '+1-555-0102',
-            'license_number' => 'MD123457',
             'working_hours' => [
                 'monday' => ['08:00', '16:00'],
                 'tuesday' => ['08:00', '16:00'],

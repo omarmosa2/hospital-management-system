@@ -51,15 +51,6 @@
                 </div>
                 
                 <div class="space-y-4">
-                    <div class="flex items-start">
-                        <div class="w-24 text-sm font-medium text-gray-500">الهاتف:</div>
-                        <div class="text-sm text-gray-900">{{ $clinic->phone ?? 'غير محدد' }}</div>
-                    </div>
-                    
-                    <div class="flex items-start">
-                        <div class="w-24 text-sm font-medium text-gray-500">البريد:</div>
-                        <div class="text-sm text-gray-900">{{ $clinic->email ?? 'غير محدد' }}</div>
-                    </div>
                     
                     <div class="flex items-start">
                         <div class="w-24 text-sm font-medium text-gray-500">الحالة:</div>

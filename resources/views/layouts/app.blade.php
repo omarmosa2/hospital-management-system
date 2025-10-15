@@ -79,17 +79,31 @@
                     </a>
                     
                     @can('view clinics')
-                    <a href="{{ route('clinics.index') }}" class="flex items-center space-x-3 px-4 py-3 text-blue-200 rounded-lg hover:bg-blue-600 hover:text-white transition-colors duration-200 {{ request()->routeIs('clinics.*') ? 'bg-blue-600 text-white' : '' }}">
-                        <i class="fas fa-hospital w-5"></i>
-                        <span>العيادات</span>
-                    </a>
+                        @if(auth()->user()->isReceptionist())
+                            <a href="{{ route('reception.clinics.index') }}" class="flex items-center space-x-3 px-4 py-3 text-blue-200 rounded-lg hover:bg-blue-600 hover:text-white transition-colors duration-200 {{ request()->routeIs('reception.clinics.*') ? 'bg-blue-600 text-white' : '' }}">
+                                <i class="fas fa-hospital w-5"></i>
+                                <span>العيادات</span>
+                            </a>
+                        @else
+                            <a href="{{ route('clinics.index') }}" class="flex items-center space-x-3 px-4 py-3 text-blue-200 rounded-lg hover:bg-blue-600 hover:text-white transition-colors duration-200 {{ request()->routeIs('clinics.*') ? 'bg-blue-600 text-white' : '' }}">
+                                <i class="fas fa-hospital w-5"></i>
+                                <span>العيادات</span>
+                            </a>
+                        @endif
                     @endcan
                     
                     @can('view doctors')
-                    <a href="{{ route('doctors.index') }}" class="flex items-center space-x-3 px-4 py-3 text-blue-200 rounded-lg hover:bg-blue-600 hover:text-white transition-colors duration-200 {{ request()->routeIs('doctors.*') ? 'bg-blue-600 text-white' : '' }}">
-                        <i class="fas fa-user-md w-5"></i>
-                        <span>الأطباء</span>
-                    </a>
+                        @if(auth()->user()->isReceptionist())
+                            <a href="{{ route('reception.doctors.index') }}" class="flex items-center space-x-3 px-4 py-3 text-blue-200 rounded-lg hover:bg-blue-600 hover:text-white transition-colors duration-200 {{ request()->routeIs('reception.doctors.*') ? 'bg-blue-600 text-white' : '' }}">
+                                <i class="fas fa-user-md w-5"></i>
+                                <span>الأطباء</span>
+                            </a>
+                        @else
+                            <a href="{{ route('doctors.index') }}" class="flex items-center space-x-3 px-4 py-3 text-blue-200 rounded-lg hover:bg-blue-600 hover:text-white transition-colors duration-200 {{ request()->routeIs('doctors.*') ? 'bg-blue-600 text-white' : '' }}">
+                                <i class="fas fa-user-md w-5"></i>
+                                <span>الأطباء</span>
+                            </a>
+                        @endif
                     @endcan
                     
                     @can('view patients')

@@ -134,10 +134,6 @@
                         <i class="fas fa-phone w-4 mr-2"></i>
                         <span class="text-sm">{{ $appointment->doctor->phone ?? '' }}</span>
                     </div>
-                    <div class="flex items-center text-gray-600">
-                        <i class="fas fa-id-card w-4 mr-2"></i>
-                        <span class="text-sm">{{ $appointment->doctor->license_number ?? '' }}</span>
-                    </div>
                 </div>
                 <div class="mt-4">
                     <a href="{{ route('doctors.show', $appointment->doctor) }}" class="text-blue-600 hover:text-blue-800 text-sm font-medium">

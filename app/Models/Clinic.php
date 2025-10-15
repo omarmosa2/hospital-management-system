@@ -11,8 +11,6 @@ class Clinic extends Model
         'name',
         'description',
         'location',
-        'phone',
-        'email',
         'is_active',
         'working_hours',
     ];

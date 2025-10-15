@@ -39,6 +39,15 @@ A comprehensive Hospital Management System built with Laravel 11, featuring role
 - Database notifications
 - Comprehensive validation
 
+## System Requirements
+
+- PHP 8.2 or higher
+- Composer
+- Node.js and NPM
+- MySQL 5.7+ or MariaDB 10.2+ (Recommended)
+- SQLite 3 (Alternative for development)
+- Web server (Apache/Nginx) or PHP built-in server
+
 ## Installation
 
 1. **Clone the repository**
@@ -60,11 +69,37 @@ A comprehensive Hospital Management System built with Laravel 11, featuring role
    ```
 
 4. **Database configuration**
-   - Update `.env` with your database credentials
-   - Run migrations and seeders:
+   
+   ### MySQL Setup (Recommended)
+   - Install MySQL server (XAMPP, WAMP, or standalone MySQL)
+   - Create a new database:
+   ```sql
+   CREATE DATABASE hospital_management CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+   ```
+   - Update `.env` with your MySQL credentials:
+   ```env
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=hospital_management
+   DB_USERNAME=root
+   DB_PASSWORD=your_password
+   ```
+   
+   ### Alternative: SQLite Setup
+   - For development, you can use SQLite by updating `.env`:
+   ```env
+   DB_CONNECTION=sqlite
+   DB_DATABASE=database/database.sqlite
+   ```
+   - Create the SQLite file:
    ```bash
-   php artisan migrate
-   php artisan db:seed
+   touch database/database.sqlite
+   ```
+   
+   ### Run migrations and seeders:
+   ```bash
+   php artisan migrate:fresh --seed
    ```
 
 5. **Start the application**
@@ -90,7 +125,7 @@ The seeder creates demo users with the following credentials:
 
 - **Backend**: Laravel 11
 - **Frontend**: Blade templates with TailwindCSS
-- **Database**: MySQL
+- **Database**: MySQL (Primary) / SQLite (Development)
 - **Authentication**: Laravel Fortify
 - **Authorization**: Spatie Laravel Permission
 - **Charts**: Chart.js
@@ -190,6 +225,36 @@ Similar patterns for patients, appointments, medical records, prescriptions, and
 ## License
 
 This project is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## Troubleshooting
+
+### Common Issues
+
+1. **Database Connection Error**
+   - Ensure MySQL service is running
+   - Check database credentials in `.env`
+   - Verify database exists and user has proper permissions
+
+2. **Migration Errors**
+   - Clear cache: `php artisan cache:clear`
+   - Reset migrations: `php artisan migrate:fresh --seed`
+
+3. **Permission Errors**
+   - Ensure storage and bootstrap/cache directories are writable
+   - Run: `chmod -R 775 storage bootstrap/cache`
+
+4. **Composer Issues**
+   - Update composer: `composer self-update`
+   - Clear composer cache: `composer clear-cache`
+   - Reinstall dependencies: `composer install --no-dev --optimize-autoloader`
+
+### Database Migration from SQLite to MySQL
+
+If you're migrating from SQLite to MySQL:
+
+1. Update `.env` file with MySQL credentials
+2. Create MySQL database
+3. Run: `php artisan migrate:fresh --seed`
 
 ## Support
 

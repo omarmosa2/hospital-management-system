@@ -69,6 +69,13 @@ class RolePermissionSeeder extends Seeder
             'delete expenses',
             'approve expenses',
             
+            // Bills
+            'view bills',
+            'create bills',
+            'edit bills',
+            'delete bills',
+            'process payments',
+            
             // Services
             'view services',
             'create services',
@@ -131,6 +138,11 @@ class RolePermissionSeeder extends Seeder
             'edit expenses',
             'delete expenses',
             'approve expenses',
+            'view bills',
+            'create bills',
+            'edit bills',
+            'delete bills',
+            'process payments',
             'view services',
             'create services',
             'edit services',

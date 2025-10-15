@@ -124,109 +124,241 @@
 
     <!-- Search and Filters -->
     <div class="bg-white rounded-2xl p-6 shadow-lg">
-        <div class="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0">
-            <div class="flex-1 md:mr-6">
-                <div class="relative">
-                    <input type="text" placeholder="البحث عن موعد..." class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                    <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+        <form method="GET" class="space-y-4">
+            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0">
+                <div class="flex-1 lg:mr-6">
+                    <div class="relative">
+                        <input type="text" 
+                               name="search" 
+                               value="{{ request('search') }}"
+                               placeholder="البحث عن موعد، مريض، طبيب..." 
+                               class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200">
+                        <i class="fas fa-search absolute left-3 top-3.5 text-gray-400"></i>
+                    </div>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <select name="status" class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200">
+                        <option value="">جميع الحالات</option>
+                        <option value="scheduled" {{ request('status') == 'scheduled' ? 'selected' : '' }}>مجدول</option>
+                        <option value="confirmed" {{ request('status') == 'confirmed' ? 'selected' : '' }}>مؤكد</option>
+                        <option value="completed" {{ request('status') == 'completed' ? 'selected' : '' }}>مكتمل</option>
+                        <option value="cancelled" {{ request('status') == 'cancelled' ? 'selected' : '' }}>ملغي</option>
+                    </select>
+                    
+                    <select name="doctor_id" class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200">
+                        <option value="">جميع الأطباء</option>
+                        @foreach($doctors ?? [] as $doctor)
+                            <option value="{{ $doctor->id }}" {{ request('doctor_id') == $doctor->id ? 'selected' : '' }}>
+                                {{ $doctor->user->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                    
+                    <input type="date" 
+                           name="date" 
+                           value="{{ request('date') }}"
+                           class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200">
+                    
+                    <button type="submit" class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 flex items-center justify-center">
+                        <i class="fas fa-search mr-2"></i>
+                        بحث
+                    </button>
+                    
+                    @if(request()->hasAny(['search', 'status', 'doctor_id', 'date']))
+                        <a href="{{ route('appointments.index') }}" class="px-6 py-3 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors duration-200 flex items-center justify-center">
+                            <i class="fas fa-times mr-2"></i>
+                            مسح
+                        </a>
+                    @endif
                 </div>
             </div>
-            <div class="flex space-x-4">
-                <select class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                    <option>جميع الحالات</option>
-                    <option>مجدول</option>
-                    <option>مؤكد</option>
-                    <option>مكتمل</option>
-                    <option>ملغي</option>
-                </select>
-                <select class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                    <option>جميع الأطباء</option>
-                    <option>د. أحمد محمد</option>
-                    <option>د. فاطمة علي</option>
-                </select>
-                <input type="date" class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-            </div>
-        </div>
+        </form>
     </div>
 
     <!-- Appointments List -->
     <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
-        <div class="p-6 border-b border-gray-200">
-            <h3 class="text-lg font-semibold text-gray-900">قائمة المواعيد</h3>
+        <div class="p-6 border-b border-gray-200 bg-gradient-to-r from-blue-50 to-indigo-50">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-900">قائمة المواعيد</h3>
+                    <p class="text-sm text-gray-600 mt-1">إجمالي {{ $appointments->total() }} موعد</p>
+                </div>
+                <div class="flex items-center space-x-2 text-sm text-gray-500">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>آخر تحديث: {{ now()->format('H:i') }}</span>
+                </div>
+            </div>
         </div>
         
         <div class="overflow-x-auto">
             <table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gray-50">
+                <thead class="bg-gradient-to-r from-gray-50 to-gray-100">
                     <tr>
-                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">المريض</th>
-                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">الطبيب</th>
-                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">العيادة</th>
-                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">التاريخ والوقت</th>
-                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">السبب</th>
-                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">الحالة</th>
-                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">الرسوم</th>
-                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">الإجراءات</th>
+                        <th class="px-6 py-4 text-right text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                            <div class="flex items-center">
+                                <i class="fas fa-user mr-2"></i>
+                                المريض
+                            </div>
+                        </th>
+                        <th class="px-6 py-4 text-right text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                            <div class="flex items-center">
+                                <i class="fas fa-user-md mr-2"></i>
+                                الطبيب
+                            </div>
+                        </th>
+                        <th class="px-6 py-4 text-right text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                            <div class="flex items-center">
+                                <i class="fas fa-hospital mr-2"></i>
+                                العيادة
+                            </div>
+                        </th>
+                        <th class="px-6 py-4 text-right text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                            <div class="flex items-center">
+                                <i class="fas fa-clock mr-2"></i>
+                                التاريخ والوقت
+                            </div>
+                        </th>
+                        <th class="px-6 py-4 text-right text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                            <div class="flex items-center">
+                                <i class="fas fa-file-medical mr-2"></i>
+                                السبب
+                            </div>
+                        </th>
+                        <th class="px-6 py-4 text-right text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                            <div class="flex items-center">
+                                <i class="fas fa-info-circle mr-2"></i>
+                                الحالة
+                            </div>
+                        </th>
+                        <th class="px-6 py-4 text-right text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                            <div class="flex items-center">
+                                <i class="fas fa-dollar-sign mr-2"></i>
+                                الرسوم
+                            </div>
+                        </th>
+                        <th class="px-6 py-4 text-right text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                            <div class="flex items-center">
+                                <i class="fas fa-cogs mr-2"></i>
+                                الإجراءات
+                            </div>
+                        </th>
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
                     @forelse($appointments as $appointment)
-                        <tr class="hover:bg-gray-50">
-                            <td class="px-6 py-4 whitespace-nowrap">
+                        <tr class="hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 transition-all duration-200 group">
+                            <!-- Patient Column -->
+                            <td class="px-6 py-5 whitespace-nowrap">
                                 <div class="flex items-center">
-                                    <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
-                                        <span class="text-blue-600 font-medium text-sm">{{ substr($appointment->patient->user->name ?? 'N', 0, 1) }}</span>
+                                    <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center shadow-lg">
+                                        <span class="text-white font-bold text-lg">{{ substr($appointment->patient->user->name ?? 'N', 0, 1) }}</span>
                                     </div>
                                     <div class="mr-4">
-                                        <div class="text-sm font-medium text-gray-900">{{ $appointment->patient->user->name ?? 'غير محدد' }}</div>
-                                        <div class="text-sm text-gray-500">{{ $appointment->patient->medical_record_number ?? '' }}</div>
+                                        <div class="text-sm font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">
+                                            {{ $appointment->patient->user->name ?? 'غير محدد' }}
+                                        </div>
+                                        <div class="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full inline-block mt-1">
+                                            {{ $appointment->patient->medical_record_number ?? 'MR-000000' }}
+                                        </div>
                                     </div>
                                 </div>
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm font-medium text-gray-900">{{ $appointment->doctor->user->name ?? 'غير محدد' }}</div>
-                                <div class="text-sm text-gray-500">{{ $appointment->doctor->specialty ?? '' }}</div>
+                            
+                            <!-- Doctor Column -->
+                            <td class="px-6 py-5 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fas fa-user-md text-white text-xs"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-sm font-semibold text-gray-900">{{ $appointment->doctor->user->name ?? 'غير محدد' }}</div>
+                                        <div class="text-xs text-gray-500">{{ $appointment->doctor->specialty ?? 'طبيب عام' }}</div>
+                                    </div>
+                                </div>
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm font-medium text-gray-900">{{ $appointment->clinic->name ?? 'غير محدد' }}</div>
-                                <div class="text-sm text-gray-500">{{ $appointment->clinic->location ?? '' }}</div>
+                            
+                            <!-- Clinic Column -->
+                            <td class="px-6 py-5 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fas fa-hospital text-white text-xs"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-sm font-semibold text-gray-900">{{ $appointment->clinic->name ?? 'غير محدد' }}</div>
+                                        <div class="text-xs text-gray-500">{{ $appointment->clinic->location ?? 'غير محدد' }}</div>
+                                    </div>
+                                </div>
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm text-gray-900">{{ $appointment->appointment_date->format('d/m/Y') }}</div>
-                                <div class="text-sm text-gray-500">{{ $appointment->appointment_time }}</div>
+                            
+                            <!-- Date & Time Column -->
+                            <td class="px-6 py-5 whitespace-nowrap">
+                                <div class="text-center">
+                                    <div class="text-sm font-bold text-gray-900 bg-blue-50 px-3 py-1 rounded-lg inline-block">
+                                        {{ $appointment->appointment_date->format('d/m/Y') }}
+                                    </div>
+                                    <div class="text-xs text-gray-600 mt-1 flex items-center justify-center">
+                                        <i class="fas fa-clock mr-1"></i>
+                                        {{ $appointment->appointment_time ?? 'غير محدد' }}
+                                    </div>
+                                </div>
                             </td>
-                            <td class="px-6 py-4">
-                                <div class="text-sm text-gray-900 max-w-xs truncate">{{ $appointment->reason ?? 'غير محدد' }}</div>
+                            
+                            <!-- Reason Column -->
+                            <td class="px-6 py-5">
+                                <div class="text-sm text-gray-900 max-w-xs">
+                                    <div class="bg-gray-50 px-3 py-2 rounded-lg border-r-4 border-blue-500">
+                                        {{ $appointment->reason ?? 'غير محدد' }}
+                                    </div>
+                                </div>
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full
-                                    @if($appointment->status == 'scheduled') bg-yellow-100 text-yellow-800
-                                    @elseif($appointment->status == 'confirmed') bg-blue-100 text-blue-800
-                                    @elseif($appointment->status == 'completed') bg-green-100 text-green-800
-                                    @else bg-red-100 text-red-800
+                            
+                            <!-- Status Column -->
+                            <td class="px-6 py-5 whitespace-nowrap">
+                                <span class="px-3 py-1 inline-flex text-xs leading-5 font-bold rounded-full
+                                    @if($appointment->status == 'scheduled') bg-yellow-100 text-yellow-800 border border-yellow-200
+                                    @elseif($appointment->status == 'confirmed') bg-blue-100 text-blue-800 border border-blue-200
+                                    @elseif($appointment->status == 'completed') bg-green-100 text-green-800 border border-green-200
+                                    @else bg-red-100 text-red-800 border border-red-200
                                     @endif">
-                                    @if($appointment->status == 'scheduled') مجدول
-                                    @elseif($appointment->status == 'confirmed') مؤكد
-                                    @elseif($appointment->status == 'completed') مكتمل
-                                    @else ملغي
+                                    @if($appointment->status == 'scheduled')
+                                        <i class="fas fa-clock mr-1"></i>مجدول
+                                    @elseif($appointment->status == 'confirmed')
+                                        <i class="fas fa-check mr-1"></i>مؤكد
+                                    @elseif($appointment->status == 'completed')
+                                        <i class="fas fa-check-circle mr-1"></i>مكتمل
+                                    @else
+                                        <i class="fas fa-times mr-1"></i>ملغي
                                     @endif
                                 </span>
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                ${{ number_format($appointment->fee ?? 0, 2) }}
+                            
+                            <!-- Fee Column -->
+                            <td class="px-6 py-5 whitespace-nowrap text-center">
+                                <div class="text-sm font-bold text-gray-900 bg-green-50 px-3 py-1 rounded-lg inline-block">
+                                    ${{ number_format($appointment->fee ?? 0, 2) }}
+                                </div>
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                <div class="flex space-x-2">
-                                    <a href="{{ route('appointments.show', $appointment) }}" class="text-blue-600 hover:text-blue-900">
+                            
+                            <!-- Actions Column -->
+                            <td class="px-6 py-5 whitespace-nowrap text-sm font-medium">
+                                <div class="flex items-center justify-center space-x-1">
+                                    <a href="{{ route('appointments.show', $appointment) }}" 
+                                       class="p-2 text-blue-600 hover:text-blue-800 hover:bg-blue-100 rounded-lg transition-all duration-200" 
+                                       title="عرض التفاصيل">
                                         <i class="fas fa-eye"></i>
                                     </a>
-                                    <a href="{{ route('appointments.edit', $appointment) }}" class="text-green-600 hover:text-green-900">
+                                    <a href="{{ route('appointments.edit', $appointment) }}" 
+                                       class="p-2 text-green-600 hover:text-green-800 hover:bg-green-100 rounded-lg transition-all duration-200" 
+                                       title="تعديل الموعد">
                                         <i class="fas fa-edit"></i>
                                     </a>
                                     @if($appointment->status == 'scheduled')
                                         <form action="{{ route('appointments.confirm', $appointment) }}" method="POST" class="inline">
                                             @csrf
-                                            <button type="submit" class="text-blue-600 hover:text-blue-900" title="تأكيد الموعد">
+                                            <button type="submit" 
+                                                    class="p-2 text-blue-600 hover:text-blue-800 hover:bg-blue-100 rounded-lg transition-all duration-200" 
+                                                    title="تأكيد الموعد"
+                                                    onclick="return confirm('هل تريد تأكيد هذا الموعد؟')">
                                                 <i class="fas fa-check"></i>
                                             </button>
                                         </form>
@@ -234,15 +366,21 @@
                                     @if($appointment->status == 'confirmed')
                                         <form action="{{ route('appointments.complete', $appointment) }}" method="POST" class="inline">
                                             @csrf
-                                            <button type="submit" class="text-green-600 hover:text-green-900" title="إكمال الموعد">
+                                            <button type="submit" 
+                                                    class="p-2 text-green-600 hover:text-green-800 hover:bg-green-100 rounded-lg transition-all duration-200" 
+                                                    title="إكمال الموعد"
+                                                    onclick="return confirm('هل تريد إكمال هذا الموعد؟')">
                                                 <i class="fas fa-check-circle"></i>
                                             </button>
                                         </form>
                                     @endif
-                                    <form action="{{ route('appointments.destroy', $appointment) }}" method="POST" class="inline" onsubmit="return confirm('هل أنت متأكد من حذف هذا الموعد؟')">
+                                    <form action="{{ route('appointments.destroy', $appointment) }}" method="POST" class="inline">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="text-red-600 hover:text-red-900">
+                                        <button type="submit" 
+                                                class="p-2 text-red-600 hover:text-red-800 hover:bg-red-100 rounded-lg transition-all duration-200" 
+                                                title="حذف الموعد"
+                                                onclick="return confirm('هل أنت متأكد من حذف هذا الموعد؟')">
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </form>
@@ -251,13 +389,16 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="8" class="px-6 py-12 text-center">
+                            <td colspan="8" class="px-6 py-16 text-center">
                                 <div class="flex flex-col items-center">
-                                    <i class="fas fa-calendar-times text-gray-300 text-4xl mb-4"></i>
-                                    <h3 class="text-lg font-medium text-gray-900 mb-2">لا توجد مواعيد</h3>
-                                    <p class="text-gray-500 mb-6">لم يتم حجز أي مواعيد بعد</p>
+                                    <div class="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mb-4">
+                                        <i class="fas fa-calendar-times text-gray-300 text-3xl"></i>
+                                    </div>
+                                    <h3 class="text-xl font-semibold text-gray-900 mb-2">لا توجد مواعيد</h3>
+                                    <p class="text-gray-500 mb-6 max-w-md text-center">لم يتم حجز أي مواعيد بعد. ابدأ بحجز أول موعد للمرضى</p>
                                     @can('create appointments')
-                                    <a href="{{ route('appointments.create') }}" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200">
+                                    <a href="{{ route('appointments.create') }}" 
+                                       class="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 shadow-lg">
                                         <i class="fas fa-plus mr-2"></i>
                                         حجز أول موعد
                                     </a>
@@ -274,8 +415,65 @@
     <!-- Pagination -->
     @if($appointments->hasPages())
         <div class="bg-white rounded-2xl p-6 shadow-lg">
-            {{ $appointments->links() }}
+            <div class="flex items-center justify-between">
+                <div class="text-sm text-gray-700">
+                    عرض 
+                    <span class="font-semibold">{{ $appointments->firstItem() }}</span>
+                    إلى 
+                    <span class="font-semibold">{{ $appointments->lastItem() }}</span>
+                    من 
+                    <span class="font-semibold">{{ $appointments->total() }}</span>
+                    نتيجة
+                </div>
+                <div class="flex items-center space-x-2">
+                    {{ $appointments->appends(request()->query())->links() }}
+                </div>
+            </div>
         </div>
     @endif
 </div>
 @endsection
+
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Auto-submit form on filter change
+    const filterSelects = document.querySelectorAll('select[name="status"], select[name="doctor_id"]');
+    filterSelects.forEach(select => {
+        select.addEventListener('change', function() {
+            this.form.submit();
+        });
+    });
+    
+    // Add loading state to buttons
+    const submitButton = document.querySelector('button[type="submit"]');
+    if (submitButton) {
+        submitButton.addEventListener('click', function() {
+            this.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>جاري البحث...';
+            this.disabled = true;
+        });
+    }
+    
+    // Add confirmation for status changes
+    const statusButtons = document.querySelectorAll('button[title="تأكيد الموعد"], button[title="إكمال الموعد"]');
+    statusButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            if (!confirm(this.getAttribute('onclick').match(/confirm\('([^']+)'\)/)[1])) {
+                e.preventDefault();
+            }
+        });
+    });
+    
+    // Add tooltips for action buttons
+    const actionButtons = document.querySelectorAll('a[title], button[title]');
+    actionButtons.forEach(button => {
+        button.addEventListener('mouseenter', function() {
+            this.style.transform = 'scale(1.1)';
+        });
+        button.addEventListener('mouseleave', function() {
+            this.style.transform = 'scale(1)';
+        });
+    });
+});
+</script>
+@endpush

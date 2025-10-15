@@ -12,7 +12,6 @@ class Doctor extends Model
         'user_id',
         'clinic_id',
         'phone',
-        'license_number',
         'working_hours',
         'bio',
         'consultation_fee',

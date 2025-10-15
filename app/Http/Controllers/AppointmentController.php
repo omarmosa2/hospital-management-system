@@ -20,27 +20,50 @@ class AppointmentController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $user = auth()->user();
         
+        // Build query based on user role
+        $query = Appointment::with(['patient.user', 'doctor.user', 'clinic']);
+        
         if ($user->isDoctor()) {
             // Doctors only see their own appointments
-            $appointments = Appointment::with(['patient.user', 'doctor.user', 'clinic'])
-                ->where('doctor_id', $user->doctor->id)
-                ->orderBy('appointment_date', 'desc')
-                ->paginate(10);
-        } elseif ($user->isReceptionist()) {
-            // Receptionists can see all appointments
-            $appointments = Appointment::with(['patient.user', 'doctor.user', 'clinic'])
-                ->orderBy('appointment_date', 'desc')
-                ->paginate(10);
-        } else {
-            // Other roles see all appointments
-            $appointments = Appointment::with(['patient.user', 'doctor.user', 'clinic'])
-                ->orderBy('appointment_date', 'desc')
-                ->paginate(10);
+            $query->where('doctor_id', $user->doctor->id);
         }
+        // Receptionists and other roles can see all appointments
+        
+        // Apply filters
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function($q) use ($search) {
+                $q->whereHas('patient.user', function($q) use ($search) {
+                    $q->where('name', 'like', "%{$search}%");
+                })
+                ->orWhereHas('doctor.user', function($q) use ($search) {
+                    $q->where('name', 'like', "%{$search}%");
+                })
+                ->orWhere('reason', 'like', "%{$search}%")
+                ->orWhere('notes', 'like', "%{$search}%");
+            });
+        }
+        
+        if ($request->filled('status')) {
+            $query->where('status', $request->status);
+        }
+        
+        if ($request->filled('doctor_id')) {
+            $query->where('doctor_id', $request->doctor_id);
+        }
+        
+        if ($request->filled('date')) {
+            $query->whereDate('appointment_date', $request->date);
+        }
+        
+        // Order and paginate
+        $appointments = $query->orderBy('appointment_date', 'desc')
+            ->orderBy('appointment_time', 'desc')
+            ->paginate(15);
         
         // Get statistics
         $stats = [
@@ -54,7 +77,10 @@ class AppointmentController extends Controller
             'this_month_appointments' => Appointment::whereMonth('appointment_date', now()->month)->count(),
         ];
         
-        return view('appointments.index', compact('appointments', 'stats'));
+        // Get doctors for filter dropdown
+        $doctors = Doctor::with('user')->where('is_available', true)->get();
+        
+        return view('appointments.index', compact('appointments', 'stats', 'doctors'));
     }
 
     /**

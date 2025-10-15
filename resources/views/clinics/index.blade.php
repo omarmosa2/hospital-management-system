@@ -78,15 +78,6 @@
                         </div>
                         @endif
                         
-                        <div class="flex items-center text-gray-600">
-                            <i class="fas fa-phone w-5 mr-3"></i>
-                            <span class="text-sm">{{ $clinic->phone }}</span>
-                        </div>
-                        
-                        <div class="flex items-center text-gray-600">
-                            <i class="fas fa-envelope w-5 mr-3"></i>
-                            <span class="text-sm">{{ $clinic->email }}</span>
-                        </div>
                         
                         <div class="flex items-center justify-between text-gray-600">
                             <div class="flex items-center">

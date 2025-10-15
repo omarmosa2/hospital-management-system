@@ -49,10 +49,6 @@
                         <span>{{ $doctor->phone }}</span>
                     </div>
                     <div class="flex items-center text-gray-600">
-                        <i class="fas fa-id-card w-5 mr-3"></i>
-                        <span>{{ $doctor->license_number }}</span>
-                    </div>
-                    <div class="flex items-center text-gray-600">
                         <i class="fas fa-dollar-sign w-5 mr-3"></i>
                         <span class="font-medium">${{ number_format($doctor->consultation_fee, 2) }}</span>
                     </div>
