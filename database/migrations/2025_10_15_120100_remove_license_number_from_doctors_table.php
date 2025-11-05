@@ -11,9 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('doctors', function (Blueprint $table) {
-            $table->dropColumn('license_number');
-        });
+        // تحقّق أولاً من وجود العمود قبل محاولة حذفه
+        if (Schema::hasColumn('doctors', 'license_number')) {
+            Schema::table('doctors', function (Blueprint $table) {
+                // إذا كان عليه فهرس فريد، نحذفه قبل حذف العمود
+                try {
+                    $table->dropUnique(['license_number']);
+                } catch (\Throwable $e) {
+                    // تجاهل الخطأ في حال لم يكن هناك فهرس بهذا الاسم
+                }
+
+                $table->dropColumn('license_number');
+            });
+        }
     }
 
     /**
@@ -21,8 +31,11 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('doctors', function (Blueprint $table) {
-            $table->string('license_number')->nullable();
-        });
+        // إعادة العمود عند التراجع (rollback)
+        if (!Schema::hasColumn('doctors', 'license_number')) {
+            Schema::table('doctors', function (Blueprint $table) {
+                $table->string('license_number')->unique()->nullable();
+            });
+        }
     }
 };
