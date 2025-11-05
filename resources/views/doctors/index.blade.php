@@ -42,85 +42,152 @@
         </div>
     </div>
 
-    <!-- Doctors Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        @forelse($doctors as $doctor)
-            <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover">
-                <div class="p-6">
-                    <!-- Doctor Avatar and Status -->
-                    <div class="flex items-center justify-between mb-4">
-                        <div class="flex items-center space-x-4">
-                            <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
-                                <span class="text-white text-xl font-bold">{{ substr($doctor->user->name, 0, 1) }}</span>
-                            </div>
-                            <div>
-                                <h3 class="text-xl font-bold text-gray-900">{{ $doctor->user->name }}</h3>
-                                <p class="text-gray-600">طبيب</p>
-                            </div>
-                        </div>
-                        <div class="text-right">
-                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium {{ $doctor->is_available ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
-                                <i class="fas fa-circle text-xs mr-1"></i>
-                                {{ $doctor->is_available ? 'متاح' : 'غير متاح' }}
-                            </span>
-                        </div>
-                    </div>
+    <!-- Doctors Table -->
+    <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+        @if($doctors->count() > 0)
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gradient-to-r from-green-500 to-green-600">
+                        <tr>
+                            <th scope="col" class="px-6 py-4 text-right text-xs font-bold text-white uppercase tracking-wider">
+                                <i class="fas fa-user-md ml-2"></i>
+                                اسم الطبيب
+                            </th>
+                            <th scope="col" class="px-6 py-4 text-right text-xs font-bold text-white uppercase tracking-wider">
+                                <i class="fas fa-envelope ml-2"></i>
+                                البريد الإلكتروني
+                            </th>
+                            <th scope="col" class="px-6 py-4 text-right text-xs font-bold text-white uppercase tracking-wider">
+                                <i class="fas fa-hospital ml-2"></i>
+                                العيادة
+                            </th>
+                            <th scope="col" class="px-6 py-4 text-right text-xs font-bold text-white uppercase tracking-wider">
+                                <i class="fas fa-phone ml-2"></i>
+                                رقم الهاتف
+                            </th>
+                            <th scope="col" class="px-6 py-4 text-right text-xs font-bold text-white uppercase tracking-wider">
+                                <i class="fas fa-dollar-sign ml-2"></i>
+                                رسوم الاستشارة
+                            </th>
+                            <th scope="col" class="px-6 py-4 text-right text-xs font-bold text-white uppercase tracking-wider">
+                                <i class="fas fa-toggle-on ml-2"></i>
+                                الحالة
+                            </th>
+                            <th scope="col" class="px-6 py-4 text-right text-xs font-bold text-white uppercase tracking-wider">
+                                <i class="fas fa-cog ml-2"></i>
+                                الإجراءات
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        @foreach($doctors as $doctor)
+                            <tr class="hover:bg-gray-50 transition-colors duration-200">
+                                <!-- Doctor Name -->
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0 h-10 w-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
+                                            <span class="text-white text-sm font-bold">{{ substr($doctor->user->name, 0, 1) }}</span>
+                                        </div>
+                                        <div class="mr-4">
+                                            <div class="text-sm font-bold text-gray-900">{{ $doctor->user->name }}</div>
+                                            <div class="text-xs text-gray-500">طبيب</div>
+                                        </div>
+                                    </div>
+                                </td>
 
-                    <!-- Doctor Info -->
-                    <div class="space-y-3 mb-6">
-                        <div class="flex items-center text-gray-600">
-                            <i class="fas fa-envelope w-5 mr-3"></i>
-                            <span class="text-sm">{{ $doctor->user->email }}</span>
-                        </div>
-                        <div class="flex items-center text-gray-600">
-                            <i class="fas fa-phone w-5 mr-3"></i>
-                            <span class="text-sm">{{ $doctor->phone }}</span>
-                        </div>
-                        <div class="flex items-center text-gray-600">
-                            <i class="fas fa-dollar-sign w-5 mr-3"></i>
-                            <span class="text-sm font-medium">${{ number_format($doctor->consultation_fee, 2) }}</span>
-                        </div>
-                    </div>
+                                <!-- Email -->
+                                <td class="px-6 py-4">
+                                    <div class="text-sm text-gray-900">
+                                        <i class="fas fa-envelope text-gray-400 ml-2"></i>
+                                        {{ $doctor->user->email }}
+                                    </div>
+                                </td>
 
-                    <!-- Bio -->
-                    @if($doctor->bio)
-                        <p class="text-gray-600 text-sm mb-6 line-clamp-2">{{ $doctor->bio }}</p>
-                    @endif
+                                <!-- Clinic -->
+                                <td class="px-6 py-4">
+                                    <div class="text-sm text-gray-900">
+                                        <i class="fas fa-hospital text-gray-400 ml-2"></i>
+                                        {{ $doctor->clinic->name ?? 'غير محدد' }}
+                                    </div>
+                                </td>
 
-                    <!-- Action Buttons -->
-                    <div class="flex space-x-2">
-                        <a href="{{ route('doctors.show', $doctor) }}" class="flex-1 bg-blue-50 text-blue-600 px-4 py-2 rounded-lg text-center text-sm font-medium hover:bg-blue-100 transition-colors duration-200">
-                            <i class="fas fa-eye mr-1"></i>
-                            عرض
-                        </a>
-                        <a href="{{ route('doctors.edit', $doctor) }}" class="flex-1 bg-green-50 text-green-600 px-4 py-2 rounded-lg text-center text-sm font-medium hover:bg-green-100 transition-colors duration-200">
-                            <i class="fas fa-edit mr-1"></i>
-                            تعديل
-                        </a>
-                        <form action="{{ route('doctors.destroy', $doctor) }}" method="POST" class="flex-1" onsubmit="return confirm('هل أنت متأكد من حذف هذا الطبيب؟')">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="w-full bg-red-50 text-red-600 px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-100 transition-colors duration-200">
-                                <i class="fas fa-trash mr-1"></i>
-                                حذف
-                            </button>
-                        </form>
-                    </div>
-                </div>
+                                <!-- Phone -->
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm text-gray-900">
+                                        <i class="fas fa-phone text-gray-400 ml-2"></i>
+                                        {{ $doctor->phone }}
+                                    </div>
+                                </td>
+
+                                <!-- Consultation Fee -->
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+                                            <i class="fas fa-dollar-sign ml-2"></i>
+                                            {{ number_format($doctor->consultation_fee, 2) }}
+                                        </span>
+                                    </div>
+                                </td>
+
+                                <!-- Availability Status -->
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    @if($doctor->is_available)
+                                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                            <i class="fas fa-check-circle ml-1"></i>
+                                            متاح
+                                        </span>
+                                    @else
+                                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                                            <i class="fas fa-times-circle ml-1"></i>
+                                            غير متاح
+                                        </span>
+                                    @endif
+                                </td>
+
+                                <!-- Actions -->
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                    <div class="flex items-center gap-2">
+                                        <a href="{{ route('doctors.show', $doctor) }}"
+                                           class="inline-flex items-center px-3 py-1.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200"
+                                           title="عرض">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+
+                                        <a href="{{ route('doctors.edit', $doctor) }}"
+                                           class="inline-flex items-center px-3 py-1.5 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors duration-200"
+                                           title="تعديل">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+
+                                        <form action="{{ route('doctors.destroy', $doctor) }}" method="POST" class="inline-block" onsubmit="return confirm('هل أنت متأكد من حذف هذا الطبيب؟')">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit"
+                                                    class="inline-flex items-center px-3 py-1.5 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors duration-200"
+                                                    title="حذف">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
-        @empty
-            <div class="col-span-full">
-                <div class="text-center py-12">
-                    <i class="fas fa-user-md text-gray-300 text-6xl mb-4"></i>
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2">لا توجد أطباء</h3>
-                    <p class="text-gray-600 mb-6">لم يتم إضافة أي أطباء بعد</p>
-                    <a href="{{ route('doctors.create') }}" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200">
-                        <i class="fas fa-plus mr-2"></i>
-                        إضافة أول طبيب
-                    </a>
+        @else
+            <div class="p-12 text-center">
+                <div class="bg-gray-100 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-user-md text-gray-400 text-3xl"></i>
                 </div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-2">لا توجد أطباء</h3>
+                <p class="text-gray-600 mb-6">لم يتم إضافة أي أطباء بعد</p>
+                <a href="{{ route('doctors.create') }}" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200">
+                    <i class="fas fa-plus mr-2"></i>
+                    إضافة أول طبيب
+                </a>
             </div>
-        @endforelse
+        @endif
     </div>
 
     <!-- Pagination -->
