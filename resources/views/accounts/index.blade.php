@@ -7,15 +7,15 @@
     <!-- Header Section -->
     <div class="flex flex-col md:flex-row md:items-center md:justify-between">
         <div>
-            <h1 class="text-3xl font-bold text-gray-900">إدارة الحسابات</h1>
-            <p class="text-gray-600 mt-2">إدارة جميع حسابات المستخدمين في النظام</p>
+            <h1 class="text-3xl font-bold text-gray-900 dark:text-slate-100">إدارة الحسابات</h1>
+            <p class="text-gray-600 dark:text-slate-400 mt-2">إدارة جميع حسابات المستخدمين في النظام</p>
         </div>
         <div class="mt-4 md:mt-0">
-            <a href="{{ route('accounts.create') }}" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 mr-3">
+            <a href="{{ route('accounts.create') }}" class="inline-flex items-center px-4 py-2 bg-blue-600 dark:bg-blue-700 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors duration-200 mr-3">
                 <i class="fas fa-plus mr-2"></i>
                 إنشاء حساب جديد
             </a>
-            <button onclick="exportAccounts()" class="inline-flex items-center px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors duration-200">
+            <button onclick="exportAccounts()" class="inline-flex items-center px-4 py-2 bg-green-600 dark:bg-green-700 text-white rounded-lg hover:bg-green-700 dark:hover:bg-green-600 transition-colors duration-200">
                 <i class="fas fa-download mr-2"></i>
                 تصدير البيانات
             </button>
@@ -23,16 +23,16 @@
     </div>
 
     <!-- Search and Filters -->
-    <div class="bg-white rounded-2xl p-6 shadow-lg">
+    <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg dark:shadow-slate-900">
         <div class="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0">
             <div class="flex-1 md:mr-6">
                 <div class="relative">
-                    <input type="text" placeholder="البحث عن حساب..." class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                    <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                    <input type="text" placeholder="البحث عن حساب..." class="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-100 placeholder-gray-400 dark:placeholder-slate-400">
+                    <i class="fas fa-search absolute left-3 top-3 text-gray-400 dark:text-slate-400"></i>
                 </div>
             </div>
             <div class="flex space-x-4">
-                <select class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                <select class="px-4 py-2 border border-gray-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-100">
                     <option>جميع الأدوار</option>
                     <option>مدير</option>
                     <option>طبيب</option>
@@ -40,7 +40,7 @@
                     <option>موظف استقبال</option>
                     <option>مريض</option>
                 </select>
-                <select class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                <select class="px-4 py-2 border border-gray-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-100">
                     <option>جميع الحالات</option>
                     <option>نشط</option>
                     <option>غير نشط</option>
@@ -50,50 +50,50 @@
     </div>
 
     <!-- Accounts Table -->
-    <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
-        <div class="p-6 border-b border-gray-200">
-            <h3 class="text-lg font-semibold text-gray-900">قائمة الحسابات</h3>
+    <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-lg dark:shadow-slate-900 overflow-hidden">
+        <div class="p-6 border-b border-gray-200 dark:border-slate-700">
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-slate-100">قائمة الحسابات</h3>
         </div>
-        
+
         <div class="overflow-x-auto">
-            <table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gray-50">
+            <table class="min-w-full divide-y divide-gray-200 dark:divide-slate-700">
+                <thead class="bg-gray-50 dark:bg-slate-700">
                     <tr>
-                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">المستخدم</th>
-                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">البريد الإلكتروني</th>
-                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">الدور</th>
-                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">كلمة المرور</th>
-                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">الحالة</th>
-                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">تاريخ الإنشاء</th>
-                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">الإجراءات</th>
+                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-slate-300 uppercase tracking-wider">المستخدم</th>
+                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-slate-300 uppercase tracking-wider">البريد الإلكتروني</th>
+                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-slate-300 uppercase tracking-wider">الدور</th>
+                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-slate-300 uppercase tracking-wider">كلمة المرور</th>
+                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-slate-300 uppercase tracking-wider">الحالة</th>
+                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-slate-300 uppercase tracking-wider">تاريخ الإنشاء</th>
+                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-slate-300 uppercase tracking-wider">الإجراءات</th>
                     </tr>
                 </thead>
-                <tbody class="bg-white divide-y divide-gray-200">
+                <tbody class="bg-white dark:bg-slate-800 divide-y divide-gray-200 dark:divide-slate-700">
                     @forelse($users as $user)
-                        <tr class="hover:bg-gray-50">
+                        <tr class="hover:bg-gray-50 dark:hover:bg-slate-700">
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="flex items-center">
                                     <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
                                         <span class="text-white text-sm font-bold">{{ substr($user->name, 0, 1) }}</span>
                                     </div>
                                     <div class="mr-4">
-                                        <div class="text-sm font-medium text-gray-900">{{ $user->name }}</div>
-                                        <div class="text-sm text-gray-500">ID: {{ $user->id }}</div>
+                                        <div class="text-sm font-medium text-gray-900 dark:text-slate-100">{{ $user->name }}</div>
+                                        <div class="text-sm text-gray-500 dark:text-slate-400">ID: {{ $user->id }}</div>
                                     </div>
                                 </div>
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-slate-100">
                                 {{ $user->email }}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 @foreach($user->roles as $role)
-                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium 
-                                        @if($role->name == 'Admin') bg-red-100 text-red-800
-                                        @elseif($role->name == 'Doctor') bg-blue-100 text-blue-800
-                                        @elseif($role->name == 'Nurse') bg-green-100 text-green-800
-                                        @elseif($role->name == 'Receptionist') bg-yellow-100 text-yellow-800
-                                        @elseif($role->name == 'Patient') bg-purple-100 text-purple-800
-                                        @else bg-gray-100 text-gray-800
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
+                                        @if($role->name == 'Admin') bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200
+                                        @elseif($role->name == 'Doctor') bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200
+                                        @elseif($role->name == 'Nurse') bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200
+                                        @elseif($role->name == 'Receptionist') bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200
+                                        @elseif($role->name == 'Patient') bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200
+                                        @else bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200
                                         @endif">
                                         @if($role->name == 'Admin') مدير
                                         @elseif($role->name == 'Doctor') طبيب
@@ -107,12 +107,12 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="flex items-center">
-                                    <input type="password" 
-                                           value="••••••••" 
-                                           class="text-sm font-mono bg-gray-100 border-0 rounded px-2 py-1 w-24" 
+                                    <input type="password"
+                                           value="••••••••"
+                                           class="text-sm font-mono bg-gray-100 dark:bg-slate-700 text-gray-900 dark:text-slate-100 border-0 rounded px-2 py-1 w-24"
                                            readonly>
-                                    <button onclick="showPassword({{ $user->id }})" 
-                                            class="mr-2 text-blue-600 hover:text-blue-900" 
+                                    <button onclick="showPassword({{ $user->id }})"
+                                            class="mr-2 text-blue-600 dark:text-blue-400 hover:text-blue-900 dark:hover:text-blue-300"
                                             title="إظهار كلمة المرور">
                                         <i class="fas fa-eye"></i>
                                     </button>

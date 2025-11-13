@@ -7,11 +7,11 @@
     <!-- Header Section -->
     <div class="flex flex-col md:flex-row md:items-center md:justify-between">
         <div>
-            <h1 class="text-3xl font-bold text-gray-900">الأطباء</h1>
-            <p class="text-gray-600 mt-2">إدارة معلومات الأطباء والمتخصصين</p>
+            <h1 class="text-3xl font-bold text-gray-900 dark:text-slate-100">الأطباء</h1>
+            <p class="text-gray-600 dark:text-slate-400 mt-2">إدارة معلومات الأطباء والمتخصصين</p>
         </div>
         <div class="mt-4 md:mt-0">
-            <a href="{{ route('doctors.create') }}" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200">
+            <a href="{{ route('doctors.create') }}" class="inline-flex items-center px-4 py-2 bg-blue-600 dark:bg-blue-700 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors duration-200">
                 <i class="fas fa-plus mr-2"></i>
                 إضافة طبيب جديد
             </a>
@@ -19,21 +19,21 @@
     </div>
 
     <!-- Search and Filters -->
-    <div class="bg-white rounded-2xl p-6 shadow-lg">
+    <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg dark:shadow-slate-900">
         <div class="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0">
             <div class="flex-1 md:mr-6">
                 <div class="relative">
-                    <input type="text" placeholder="البحث عن طبيب..." class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                    <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                    <input type="text" placeholder="البحث عن طبيب..." class="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-100 placeholder-gray-400 dark:placeholder-slate-400">
+                    <i class="fas fa-search absolute left-3 top-3 text-gray-400 dark:text-slate-500"></i>
                 </div>
             </div>
             <div class="flex space-x-4">
-                <select class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                <select class="px-4 py-2 border border-gray-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-100">
                     <option>جميع الأطباء</option>
                     <option>متاح</option>
                     <option>غير متاح</option>
                 </select>
-                <select class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                <select class="px-4 py-2 border border-gray-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-100">
                     <option>جميع الحالات</option>
                     <option>متاح</option>
                     <option>غير متاح</option>
@@ -43,11 +43,11 @@
     </div>
 
     <!-- Doctors Table -->
-    <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+    <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-lg dark:shadow-slate-900 overflow-hidden">
         @if($doctors->count() > 0)
             <div class="overflow-x-auto">
-                <table class="min-w-full divide-y divide-gray-200">
-                    <thead class="bg-gradient-to-r from-green-500 to-green-600">
+                <table class="min-w-full divide-y divide-gray-200 dark:divide-slate-700">
+                    <thead class="bg-gradient-to-r from-green-500 to-green-600 dark:from-green-900 dark:to-green-800">
                         <tr>
                             <th scope="col" class="px-6 py-4 text-right text-xs font-bold text-white uppercase tracking-wider">
                                 <i class="fas fa-user-md ml-2"></i>
@@ -79,25 +79,25 @@
                             </th>
                         </tr>
                     </thead>
-                    <tbody class="bg-white divide-y divide-gray-200">
+                    <tbody class="bg-white dark:bg-slate-800 divide-y divide-gray-200 dark:divide-slate-700">
                         @foreach($doctors as $doctor)
-                            <tr class="hover:bg-gray-50 transition-colors duration-200">
+                            <tr class="hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors duration-200">
                                 <!-- Doctor Name -->
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="flex items-center">
-                                        <div class="flex-shrink-0 h-10 w-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
+                                        <div class="flex-shrink-0 h-10 w-10 bg-gradient-to-br from-blue-500 to-purple-600 dark:from-blue-700 dark:to-purple-700 rounded-full flex items-center justify-center">
                                             <span class="text-white text-sm font-bold">{{ substr($doctor->user->name, 0, 1) }}</span>
                                         </div>
                                         <div class="mr-4">
-                                            <div class="text-sm font-bold text-gray-900">{{ $doctor->user->name }}</div>
-                                            <div class="text-xs text-gray-500">طبيب</div>
+                                            <div class="text-sm font-bold text-gray-900 dark:text-slate-100">{{ $doctor->user->name }}</div>
+                                            <div class="text-xs text-gray-500 dark:text-slate-400">طبيب</div>
                                         </div>
                                     </div>
                                 </td>
 
                                 <!-- Email -->
                                 <td class="px-6 py-4">
-                                    <div class="text-sm text-gray-900">
+                                    <div class="text-sm text-gray-900 dark:text-slate-100">
                                         <i class="fas fa-envelope text-gray-400 ml-2"></i>
                                         {{ $doctor->user->email }}
                                     </div>

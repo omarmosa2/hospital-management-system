@@ -1,60 +1,60 @@
 <!-- Doctor Statistics Cards -->
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
     <!-- My Appointments Card -->
-    <div class="bg-white rounded-2xl p-6 shadow-lg card-hover border-l-4 border-blue-500">
+    <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg dark:shadow-slate-900 card-hover border-l-4 border-blue-500">
         <div class="flex items-center justify-between">
             <div>
-                <p class="text-gray-600 text-sm font-medium">مواعيدي</p>
-                <p class="text-3xl font-bold text-gray-900 mt-2">{{ $stats['my_appointments'] ?? 0 }}</p>
-                <p class="text-blue-600 text-sm mt-1">
+                <p class="text-gray-600 dark:text-slate-400 text-sm font-medium">مواعيدي</p>
+                <p class="text-3xl font-bold text-gray-900 dark:text-slate-100 mt-2">{{ $stats['my_appointments'] ?? 0 }}</p>
+                <p class="text-blue-600 dark:text-blue-400 text-sm mt-1">
                     <i class="fas fa-calendar mr-1"></i>إجمالي المواعيد
                 </p>
             </div>
-            <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center">
-                <i class="fas fa-calendar-alt text-blue-600 text-2xl"></i>
+            <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center">
+                <i class="fas fa-calendar-alt text-blue-600 dark:text-blue-400 text-2xl"></i>
             </div>
         </div>
     </div>
 
     <!-- Today's Appointments Card -->
-    <div class="bg-white rounded-2xl p-6 shadow-lg card-hover border-l-4 border-green-500">
+    <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg dark:shadow-slate-900 card-hover border-l-4 border-green-500">
         <div class="flex items-center justify-between">
             <div>
-                <p class="text-gray-600 text-sm font-medium">مواعيد اليوم</p>
-                <p class="text-3xl font-bold text-gray-900 mt-2">{{ $stats['today_appointments'] ?? 0 }}</p>
-                <p class="text-green-600 text-sm mt-1">
+                <p class="text-gray-600 dark:text-slate-400 text-sm font-medium">مواعيد اليوم</p>
+                <p class="text-3xl font-bold text-gray-900 dark:text-slate-100 mt-2">{{ $stats['today_appointments'] ?? 0 }}</p>
+                <p class="text-green-600 dark:text-green-400 text-sm mt-1">
                     <i class="fas fa-clock mr-1"></i>مواعيد مجدولة
                 </p>
             </div>
-            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center">
-                <i class="fas fa-calendar-day text-green-600 text-2xl"></i>
+            <div class="w-16 h-16 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center">
+                <i class="fas fa-calendar-day text-green-600 dark:text-green-400 text-2xl"></i>
             </div>
         </div>
     </div>
 
     <!-- Pending Appointments Card -->
-    <div class="bg-white rounded-2xl p-6 shadow-lg card-hover border-l-4 border-yellow-500">
+    <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg dark:shadow-slate-900 card-hover border-l-4 border-yellow-500">
         <div class="flex items-center justify-between">
             <div>
-                <p class="text-gray-600 text-sm font-medium">مواعيد معلقة</p>
-                <p class="text-3xl font-bold text-gray-900 mt-2">{{ $stats['pending_appointments'] ?? 0 }}</p>
-                <p class="text-yellow-600 text-sm mt-1">
+                <p class="text-gray-600 dark:text-slate-400 text-sm font-medium">مواعيد معلقة</p>
+                <p class="text-3xl font-bold text-gray-900 dark:text-slate-100 mt-2">{{ $stats['pending_appointments'] ?? 0 }}</p>
+                <p class="text-yellow-600 dark:text-yellow-400 text-sm mt-1">
                     <i class="fas fa-hourglass-half mr-1"></i>تحتاج تأكيد
                 </p>
             </div>
-            <div class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center">
-                <i class="fas fa-exclamation-triangle text-yellow-600 text-2xl"></i>
+            <div class="w-16 h-16 bg-yellow-100 dark:bg-yellow-900 rounded-full flex items-center justify-center">
+                <i class="fas fa-exclamation-triangle text-yellow-600 dark:text-yellow-400 text-2xl"></i>
             </div>
         </div>
     </div>
 
     <!-- My Patients Card -->
-    <div class="bg-white rounded-2xl p-6 shadow-lg card-hover border-l-4 border-purple-500">
+    <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg dark:shadow-slate-900 card-hover border-l-4 border-purple-500">
         <div class="flex items-center justify-between">
             <div>
-                <p class="text-gray-600 text-sm font-medium">مرضاي</p>
-                <p class="text-3xl font-bold text-gray-900 mt-2">{{ $stats['my_patients'] ?? 0 }}</p>
-                <p class="text-purple-600 text-sm mt-1">
+                <p class="text-gray-600 dark:text-slate-400 text-sm font-medium">مرضاي</p>
+                <p class="text-3xl font-bold text-gray-900 dark:text-slate-100 mt-2">{{ $stats['my_patients'] ?? 0 }}</p>
+                <p class="text-purple-600 dark:text-purple-400 text-sm mt-1">
                     <i class="fas fa-user-friends mr-1"></i>إجمالي المرضى
                 </p>
             </div>

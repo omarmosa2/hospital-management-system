@@ -7,11 +7,11 @@
     <!-- Header Section -->
     <div class="flex flex-col md:flex-row md:items-center md:justify-between">
         <div>
-            <h1 class="text-3xl font-bold text-gray-900">تعديل المصروف</h1>
-            <p class="text-gray-600 mt-2">رقم المصروف: {{ $expense->expense_number }}</p>
+            <h1 class="text-3xl font-bold text-gray-900 dark:text-slate-100">تعديل المصروف</h1>
+            <p class="text-gray-600 dark:text-slate-400 mt-2">رقم المصروف: {{ $expense->expense_number }}</p>
         </div>
         <div class="mt-4 md:mt-0">
-            <a href="{{ route('expenses.index') }}" class="inline-flex items-center px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors duration-200">
+            <a href="{{ route('expenses.index') }}" class="inline-flex items-center px-4 py-2 bg-gray-100 dark:bg-slate-700 text-gray-700 dark:text-slate-200 rounded-lg hover:bg-gray-200 dark:hover:bg-slate-600 transition-colors duration-200">
                 <i class="fas fa-arrow-right mr-2"></i>
                 رجوع للمصروفات
             </a>
@@ -19,44 +19,44 @@
     </div>
 
     <!-- Form Section -->
-    <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+    <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-lg dark:shadow-slate-900 overflow-hidden">
         <form action="{{ route('expenses.update', $expense) }}" method="POST" class="p-6 space-y-6">
             @csrf
             @method('PUT')
-            
+
             <!-- Basic Information -->
-            <div class="border-b border-gray-200 pb-6">
-                <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-                    <i class="fas fa-info-circle text-blue-600 mr-2"></i>
+            <div class="border-b border-gray-200 dark:border-slate-700 pb-6">
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-slate-100 mb-4 flex items-center">
+                    <i class="fas fa-info-circle text-blue-600 dark:text-blue-400 mr-2"></i>
                     المعلومات الأساسية
                 </h3>
-                
+
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <!-- Title -->
                     <div class="space-y-2">
-                        <label for="title" class="block text-sm font-medium text-gray-700">
-                            عنوان المصروف <span class="text-red-500">*</span>
+                        <label for="title" class="block text-sm font-medium text-gray-700 dark:text-slate-300">
+                            عنوان المصروف <span class="text-red-500 dark:text-red-400">*</span>
                         </label>
-                        <input type="text" 
-                               id="title" 
-                               name="title" 
+                        <input type="text"
+                               id="title"
+                               name="title"
                                value="{{ old('title', $expense->title) }}"
-                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('title') border-red-500 @enderror"
+                               class="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-100 placeholder-gray-400 dark:placeholder-slate-400 @error('title') border-red-500 @enderror"
                                placeholder="أدخل عنوان المصروف"
                                required>
                         @error('title')
-                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                            <p class="text-red-500 dark:text-red-400 text-sm mt-1">{{ $message }}</p>
                         @enderror
                     </div>
 
                     <!-- Category -->
                     <div class="space-y-2">
-                        <label for="category" class="block text-sm font-medium text-gray-700">
-                            الفئة <span class="text-red-500">*</span>
+                        <label for="category" class="block text-sm font-medium text-gray-700 dark:text-slate-300">
+                            الفئة <span class="text-red-500 dark:text-red-400">*</span>
                         </label>
-                        <select id="category" 
-                                name="category" 
-                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('category') border-red-500 @enderror"
+                        <select id="category"
+                                name="category"
+                                class="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-100 @error('category') border-red-500 @enderror"
                                 required>
                             <option value="">اختر الفئة</option>
                             <option value="equipment" {{ old('category', $expense->category) == 'equipment' ? 'selected' : '' }}>معدات</option>
@@ -68,31 +68,31 @@
                             <option value="other" {{ old('category', $expense->category) == 'other' ? 'selected' : '' }}>أخرى</option>
                         </select>
                         @error('category')
-                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                            <p class="text-red-500 dark:text-red-400 text-sm mt-1">{{ $message }}</p>
                         @enderror
                     </div>
                 </div>
 
                 <!-- Description -->
                 <div class="mt-6 space-y-2">
-                    <label for="description" class="block text-sm font-medium text-gray-700">
+                    <label for="description" class="block text-sm font-medium text-gray-700 dark:text-slate-300">
                         الوصف
                     </label>
-                    <textarea id="description" 
-                              name="description" 
+                    <textarea id="description"
+                              name="description"
                               rows="3"
-                              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('description') border-red-500 @enderror"
+                              class="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-100 placeholder-gray-400 dark:placeholder-slate-400 @error('description') border-red-500 @enderror"
                               placeholder="أدخل وصفاً مفصلاً للمصروف">{{ old('description', $expense->description) }}</textarea>
                     @error('description')
-                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        <p class="text-red-500 dark:text-red-400 text-sm mt-1">{{ $message }}</p>
                     @enderror
                 </div>
             </div>
 
             <!-- Financial Information -->
-            <div class="border-b border-gray-200 pb-6">
-                <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-                    <i class="fas fa-dollar-sign text-green-600 mr-2"></i>
+            <div class="border-b border-gray-200 dark:border-slate-700 pb-6">
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-slate-100 mb-4 flex items-center">
+                    <i class="fas fa-dollar-sign text-green-600 dark:text-green-400 mr-2"></i>
                     المعلومات المالية
                 </h3>
                 

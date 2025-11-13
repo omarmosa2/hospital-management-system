@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" class="dark">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,10 +14,15 @@
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <!-- Custom Styles -->
     <style>
         * { font-family: 'Tajawal', sans-serif; }
@@ -178,18 +183,6 @@
                             </button>
                         </div>
                     </form>
-
-                    <!-- Demo credentials -->
-                    <div class="mt-6 p-4 bg-blue-50 rounded-xl border border-blue-200">
-                        <h4 class="text-sm font-medium text-blue-800 mb-2">
-                            <i class="fas fa-info-circle mr-1"></i>
-                            بيانات الدخول التجريبية:
-                        </h4>
-                        <div class="text-xs text-blue-700 space-y-1">
-                            <div><strong>البريد الإلكتروني:</strong> admin@hospital.com</div>
-                            <div><strong>كلمة المرور:</strong> password123</div>
-                        </div>
-                    </div>
                 </div>
 
                 <!-- Footer -->

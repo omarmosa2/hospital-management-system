@@ -8,4 +8,169 @@
 @theme {
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
+
+    /* Dark Mode Configuration for Tailwind v4 */
+    color-scheme: light dark;
+}
+
+/* Dark Mode Styles for Tailwind v4 */
+@layer base {
+    /* Light Mode (Default) */
+    :root {
+        color-scheme: light;
+    }
+
+    /* Dark Mode */
+    html.dark {
+        color-scheme: dark;
+    }
+}
+
+/* Smooth transitions for theme changes */
+@layer components {
+    * {
+        @apply transition-colors duration-300;
+    }
+
+    body {
+        @apply bg-white dark:bg-slate-900 text-gray-900 dark:text-slate-100;
+    }
+
+    /* Header */
+    header {
+        @apply bg-white dark:bg-slate-800 border-gray-200 dark:border-slate-700;
+    }
+
+    /* Cards and containers */
+    .card, .bg-white {
+        @apply bg-white dark:bg-slate-800 text-gray-900 dark:text-slate-100;
+    }
+
+    /* Inputs */
+    input, textarea, select {
+        @apply bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-100 border-gray-300 dark:border-slate-600;
+    }
+
+    input::placeholder, textarea::placeholder {
+        @apply text-gray-400 dark:text-slate-400;
+    }
+
+    /* Tables */
+    table {
+        @apply divide-gray-200 dark:divide-slate-700;
+    }
+
+    thead {
+        @apply bg-gray-50 dark:bg-slate-700;
+    }
+
+    tbody {
+        @apply bg-white dark:bg-slate-800;
+    }
+
+    tbody tr {
+        @apply border-gray-200 dark:border-slate-700 hover:bg-gray-50 dark:hover:bg-slate-700;
+    }
+
+    /* Text colors */
+    .text-gray-900 {
+        @apply dark:text-slate-100;
+    }
+
+    .text-gray-600 {
+        @apply dark:text-slate-400;
+    }
+
+    .text-gray-400 {
+        @apply dark:text-slate-500;
+    }
+
+    .text-gray-500 {
+        @apply dark:text-slate-500;
+    }
+
+    /* Border colors */
+    .border-gray-200 {
+        @apply dark:border-slate-700;
+    }
+
+    .border-gray-300 {
+        @apply dark:border-slate-600;
+    }
+
+    /* Background colors */
+    .bg-gray-50 {
+        @apply dark:bg-slate-900;
+    }
+
+    .bg-gray-100 {
+        @apply dark:bg-slate-700;
+    }
+
+    /* Shadows */
+    .shadow-sm, .shadow-lg, .shadow-xl {
+        @apply dark:shadow-slate-900;
+    }
+
+    /* Buttons */
+    button {
+        @apply transition-colors duration-300;
+    }
+
+    /* Status badges */
+    .bg-green-100 {
+        @apply dark:bg-green-900;
+    }
+
+    .text-green-800 {
+        @apply dark:text-green-200;
+    }
+
+    .bg-yellow-100 {
+        @apply dark:bg-yellow-900;
+    }
+
+    .text-yellow-800 {
+        @apply dark:text-yellow-200;
+    }
+
+    .bg-red-100 {
+        @apply dark:bg-red-900;
+    }
+
+    .text-red-800 {
+        @apply dark:text-red-200;
+    }
+
+    .bg-blue-100 {
+        @apply dark:bg-blue-900;
+    }
+
+    .text-blue-800 {
+        @apply dark:text-blue-200;
+    }
+
+    .bg-purple-100 {
+        @apply dark:bg-purple-900;
+    }
+
+    .text-purple-800 {
+        @apply dark:text-purple-200;
+    }
+
+    .bg-pink-100 {
+        @apply dark:bg-pink-900;
+    }
+
+    .text-pink-800 {
+        @apply dark:text-pink-200;
+    }
+
+    .bg-indigo-100 {
+        @apply dark:bg-indigo-900;
+    }
+
+    .text-indigo-800 {
+        @apply dark:text-indigo-200;
+    }
 }

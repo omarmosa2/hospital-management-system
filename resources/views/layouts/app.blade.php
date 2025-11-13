@@ -30,27 +30,109 @@
         .card-hover:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
         .sidebar-gradient { background: linear-gradient(180deg, #1e3a8a 0%, #1e40af 100%); }
         .text-gradient { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
-        
-        /* Custom scrollbar */
+
+        /* Custom scrollbar - Light Mode */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #f1f1f1; }
         ::-webkit-scrollbar-thumb { background: #c1c1c1; border-radius: 3px; }
         ::-webkit-scrollbar-thumb:hover { background: #a8a8a8; }
-        
+
+        /* Custom scrollbar - Dark Mode */
+        html.dark ::-webkit-scrollbar-track { background: #1e293b; }
+        html.dark ::-webkit-scrollbar-thumb { background: #475569; border-radius: 3px; }
+        html.dark ::-webkit-scrollbar-thumb:hover { background: #64748b; }
+
         /* Animation for cards */
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
         .animate-fadeInUp { animation: fadeInUp 0.6s ease-out; }
-        
+
         /* Mobile optimizations */
         @media (max-width: 768px) {
             .card-hover:hover { transform: none; }
         }
+
+        /* Theme Toggle Button Animation */
+        .theme-toggle-btn {
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle-btn:hover {
+            transform: rotate(20deg);
+        }
+
+        /* Dark Mode Specific Styles */
+        html.dark .bg-white {
+            background-color: #1e293b;
+            color: #f1f5f9;
+        }
+
+        html.dark .text-gray-900 {
+            color: #f1f5f9;
+        }
+
+        html.dark .text-gray-600 {
+            color: #cbd5e1;
+        }
+
+        html.dark .text-gray-400 {
+            color: #94a3b8;
+        }
+
+        html.dark .border-gray-200 {
+            border-color: #334155;
+        }
+
+        html.dark .bg-gray-50 {
+            background-color: #0f172a;
+        }
+
+        html.dark .bg-gray-100 {
+            background-color: #1e293b;
+        }
+
+        html.dark .shadow-sm,
+        html.dark .shadow-lg,
+        html.dark .shadow-xl {
+            box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.3);
+        }
+
+        html.dark input,
+        html.dark textarea,
+        html.dark select {
+            background-color: #0f172a;
+            border-color: #475569;
+            color: #f1f5f9;
+        }
+
+        html.dark input::placeholder,
+        html.dark textarea::placeholder {
+            color: #94a3b8;
+        }
+
+        html.dark .hover\:bg-gray-100:hover {
+            background-color: #334155;
+        }
+
+        html.dark .hover\:bg-red-50:hover {
+            background-color: #1e293b;
+        }
+
+        html.dark .hover\:bg-green-100:hover {
+            background-color: #1e293b;
+        }
     </style>
+
+    <!-- Tailwind Dark Mode Configuration -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
 </head>
-<body class="font-sans antialiased bg-gray-50">
+<body class="font-sans antialiased bg-gray-50 dark:bg-slate-900">
     <div class="min-h-screen flex">
         <!-- Mobile Menu Button -->
         <button class="md:hidden fixed top-4 left-4 z-50 p-2 bg-white rounded-lg shadow-lg" onclick="toggleMobileMenu()">
@@ -187,29 +269,18 @@
         <!-- Main Content -->
         <div class="flex-1 flex flex-col md:mr-0">
             <!-- Top Bar -->
-            <header class="bg-white shadow-sm border-b border-gray-200">
+            <header class="bg-white shadow-sm border-b border-gray-200 dark:bg-slate-800 dark:border-slate-700">
                 <div class="px-4 md:px-6 py-4">
                     <div class="flex items-center justify-between">
                         <div class="md:block">
-                            <h2 class="text-xl md:text-2xl font-bold text-gray-900">@yield('title', 'لوحة التحكم')</h2>
-                            <p class="text-gray-600 text-sm mt-1 hidden md:block">مرحباً بك في نظام إدارة المستشفى</p>
+                            <h2 class="text-xl md:text-2xl font-bold text-gray-900 dark:text-slate-100">@yield('title', 'لوحة التحكم')</h2>
+                            <p class="text-gray-600 dark:text-slate-400 text-sm mt-1 hidden md:block">مرحباً بك في نظام إدارة المستشفى</p>
                         </div>
                         <div class="flex items-center space-x-2 md:space-x-4">
-                            <!-- Notifications -->
-                            <button class="relative p-2 text-gray-400 hover:text-gray-600">
-                                <i class="fas fa-bell text-lg md:text-xl"></i>
-                                <span class="absolute -top-1 -right-1 h-4 w-4 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">3</span>
-                            </button>
-                            
-                            <!-- Search -->
-                            <div class="relative hidden md:block">
-                                <input type="text" placeholder="البحث..." class="w-64 pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                                <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
-                            </div>
-                            
-                            <!-- Mobile Search -->
-                            <button class="md:hidden p-2 text-gray-400 hover:text-gray-600">
-                                <i class="fas fa-search text-lg"></i>
+                            <!-- Theme Toggle Button -->
+                            <button id="theme-toggle-btn" class="theme-toggle-btn relative p-2 text-gray-400 hover:text-gray-600 dark:text-slate-400 dark:hover:text-slate-200 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors duration-300" title="تبديل الوضع">
+                                <i class="fas fa-moon text-lg md:text-xl dark:hidden"></i>
+                                <i class="fas fa-sun text-lg md:text-xl hidden dark:inline"></i>
                             </button>
                         </div>
                     </div>
@@ -250,6 +321,23 @@
     </div>
 
     <script>
+        // Wait for theme manager to be ready
+        function initializeThemeToggle() {
+            if (window.themeManager) {
+                console.log('✓ Theme manager is ready');
+            } else {
+                console.warn('⚠ Theme manager not ready, retrying...');
+                setTimeout(initializeThemeToggle, 100);
+            }
+        }
+
+        // Initialize theme toggle
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeThemeToggle);
+        } else {
+            initializeThemeToggle();
+        }
+
         // Toggle user menu
         document.getElementById('user-menu-button').addEventListener('click', function(e) {
             e.stopPropagation();
@@ -261,7 +349,7 @@
         document.addEventListener('click', function(event) {
             const button = document.getElementById('user-menu-button');
             const menu = document.getElementById('user-menu');
-            
+
             if (!button.contains(event.target) && !menu.contains(event.target)) {
                 menu.classList.add('hidden');
             }
@@ -279,9 +367,9 @@
         document.addEventListener('click', function(event) {
             const sidebar = document.getElementById('sidebar');
             const mobileButton = document.querySelector('[onclick="toggleMobileMenu()"]');
-            
-            if (window.innerWidth < 768 && 
-                !sidebar.contains(event.target) && 
+
+            if (window.innerWidth < 768 &&
+                !sidebar.contains(event.target) &&
                 !mobileButton.contains(event.target)) {
                 sidebar.classList.add('hidden');
                 sidebar.classList.remove('fixed', 'z-40');
@@ -298,6 +386,89 @@
                 sidebar.classList.add('hidden');
             }
         });
+    </script>
+
+    <!-- Theme Manager Script -->
+    <script type="module">
+        /**
+         * Dark Mode Theme Manager
+         * Handles theme switching and persistence
+         */
+        class ThemeManager {
+            constructor() {
+                this.STORAGE_KEY = 'hospital-theme-mode';
+                this.DARK_CLASS = 'dark';
+                this.init();
+                this.setupEventListeners();
+            }
+
+            init() {
+                const savedTheme = localStorage.getItem(this.STORAGE_KEY);
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const isDark = savedTheme ? savedTheme === 'dark' : prefersDark;
+                this.setTheme(isDark);
+
+                window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+                    if (!localStorage.getItem(this.STORAGE_KEY)) {
+                        this.setTheme(e.matches);
+                    }
+                });
+            }
+
+            setupEventListeners() {
+                const setupButton = () => {
+                    const themeToggleBtn = document.getElementById('theme-toggle-btn');
+                    if (themeToggleBtn) {
+                        themeToggleBtn.addEventListener('click', (e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            this.toggle();
+                        });
+                        console.log('✓ Theme toggle button initialized');
+                    } else {
+                        console.warn('⚠ Theme toggle button not found');
+                    }
+                };
+
+                if (document.readyState === 'loading') {
+                    document.addEventListener('DOMContentLoaded', setupButton);
+                } else {
+                    setupButton();
+                }
+            }
+
+            setTheme(isDark) {
+                const html = document.documentElement;
+                if (isDark) {
+                    html.classList.add(this.DARK_CLASS);
+                    localStorage.setItem(this.STORAGE_KEY, 'dark');
+                    console.log('🌙 Dark mode enabled');
+                } else {
+                    html.classList.remove(this.DARK_CLASS);
+                    localStorage.setItem(this.STORAGE_KEY, 'light');
+                    console.log('☀️ Light mode enabled');
+                }
+                window.dispatchEvent(new CustomEvent('themechange', { detail: { isDark } }));
+            }
+
+            toggle() {
+                const isDark = document.documentElement.classList.contains(this.DARK_CLASS);
+                console.log('Toggling theme from:', isDark ? 'dark' : 'light');
+                this.setTheme(!isDark);
+            }
+
+            getCurrentTheme() {
+                return document.documentElement.classList.contains(this.DARK_CLASS) ? 'dark' : 'light';
+            }
+
+            isDarkMode() {
+                return document.documentElement.classList.contains(this.DARK_CLASS);
+            }
+        }
+
+        // Initialize theme manager
+        window.themeManager = new ThemeManager();
+        console.log('✓ Theme Manager initialized successfully');
     </script>
 </body>
 </html>

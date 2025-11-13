@@ -7,12 +7,12 @@
     <!-- Header Section -->
     <div class="flex flex-col md:flex-row md:items-center md:justify-between">
         <div>
-            <h1 class="text-3xl font-bold text-gray-900">المواعيد</h1>
-            <p class="text-gray-600 mt-2">إدارة مواعيد المرضى مع الأطباء</p>
+            <h1 class="text-3xl font-bold text-gray-900 dark:text-slate-100">المواعيد</h1>
+            <p class="text-gray-600 dark:text-slate-400 mt-2">إدارة مواعيد المرضى مع الأطباء</p>
         </div>
         @can('create appointments')
         <div class="mt-4 md:mt-0">
-            <a href="{{ route('appointments.create') }}" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200">
+            <a href="{{ route('appointments.create') }}" class="inline-flex items-center px-4 py-2 bg-blue-600 dark:bg-blue-700 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors duration-200">
                 <i class="fas fa-plus mr-2"></i>
                 حجز موعد جديد
             </a>
@@ -22,49 +22,49 @@
 
     <!-- Statistics Cards -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div class="bg-gradient-to-r from-blue-500 to-blue-600 rounded-2xl p-6 text-white shadow-lg">
+        <div class="bg-gradient-to-r from-blue-500 to-blue-600 dark:from-blue-900 dark:to-blue-800 rounded-2xl p-6 text-white shadow-lg dark:shadow-slate-900">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-blue-100 text-sm font-medium">إجمالي المواعيد</p>
+                    <p class="text-blue-100 dark:text-blue-300 text-sm font-medium">إجمالي المواعيد</p>
                     <p class="text-3xl font-bold">{{ $stats['total_appointments'] }}</p>
                 </div>
-                <div class="bg-blue-400 rounded-full p-3">
+                <div class="bg-blue-400 dark:bg-blue-700 rounded-full p-3">
                     <i class="fas fa-calendar-alt text-2xl"></i>
                 </div>
             </div>
         </div>
 
-        <div class="bg-gradient-to-r from-yellow-500 to-yellow-600 rounded-2xl p-6 text-white shadow-lg">
+        <div class="bg-gradient-to-r from-yellow-500 to-yellow-600 dark:from-yellow-900 dark:to-yellow-800 rounded-2xl p-6 text-white shadow-lg dark:shadow-slate-900">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-yellow-100 text-sm font-medium">مواعيد مجدولة</p>
+                    <p class="text-yellow-100 dark:text-yellow-300 text-sm font-medium">مواعيد مجدولة</p>
                     <p class="text-3xl font-bold">{{ $stats['scheduled_appointments'] }}</p>
                 </div>
-                <div class="bg-yellow-400 rounded-full p-3">
+                <div class="bg-yellow-400 dark:bg-yellow-700 rounded-full p-3">
                     <i class="fas fa-clock text-2xl"></i>
                 </div>
             </div>
         </div>
 
-        <div class="bg-gradient-to-r from-green-500 to-green-600 rounded-2xl p-6 text-white shadow-lg">
+        <div class="bg-gradient-to-r from-green-500 to-green-600 dark:from-green-900 dark:to-green-800 rounded-2xl p-6 text-white shadow-lg dark:shadow-slate-900">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-green-100 text-sm font-medium">مواعيد مكتملة</p>
+                    <p class="text-green-100 dark:text-green-300 text-sm font-medium">مواعيد مكتملة</p>
                     <p class="text-3xl font-bold">{{ $stats['completed_appointments'] }}</p>
                 </div>
-                <div class="bg-green-400 rounded-full p-3">
+                <div class="bg-green-400 dark:bg-green-700 rounded-full p-3">
                     <i class="fas fa-check-circle text-2xl"></i>
                 </div>
             </div>
         </div>
 
-        <div class="bg-gradient-to-r from-purple-500 to-purple-600 rounded-2xl p-6 text-white shadow-lg">
+        <div class="bg-gradient-to-r from-purple-500 to-purple-600 dark:from-purple-900 dark:to-purple-800 rounded-2xl p-6 text-white shadow-lg dark:shadow-slate-900">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-purple-100 text-sm font-medium">مواعيد اليوم</p>
+                    <p class="text-purple-100 dark:text-purple-300 text-sm font-medium">مواعيد اليوم</p>
                     <p class="text-3xl font-bold">{{ $stats['today_appointments'] }}</p>
                 </div>
-                <div class="bg-purple-400 rounded-full p-3">
+                <div class="bg-purple-400 dark:bg-purple-700 rounded-full p-3">
                     <i class="fas fa-calendar-day text-2xl"></i>
                 </div>
             </div>
@@ -73,10 +73,10 @@
 
     <!-- Additional Statistics Row -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div class="bg-gradient-to-r from-indigo-500 to-indigo-600 rounded-2xl p-6 text-white shadow-lg">
+        <div class="bg-gradient-to-r from-indigo-500 to-indigo-600 dark:from-indigo-900 dark:to-indigo-800 rounded-2xl p-6 text-white shadow-lg dark:shadow-slate-900">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-indigo-100 text-sm font-medium">مواعيد مؤكدة</p>
+                    <p class="text-indigo-100 dark:text-indigo-300 text-sm font-medium">مواعيد مؤكدة</p>
                     <p class="text-3xl font-bold">{{ $stats['confirmed_appointments'] }}</p>
                 </div>
                 <div class="bg-indigo-400 rounded-full p-3">

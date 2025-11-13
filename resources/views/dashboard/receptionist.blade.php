@@ -1,13 +1,13 @@
 <!-- Receptionist Dashboard -->
 <div class="space-y-6">
     <!-- Welcome Section -->
-    <div class="bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl p-8 text-white">
+    <div class="bg-gradient-to-r from-blue-500 to-purple-600 dark:from-blue-700 dark:to-purple-800 rounded-2xl p-8 text-white">
         <div class="flex items-center justify-between">
             <div>
                 <h1 class="text-3xl font-bold mb-2">مرحباً، {{ auth()->user()->name }}</h1>
-                <p class="text-blue-100 text-lg">موظف استقبال - لوحة التحكم</p>
+                <p class="text-blue-100 dark:text-blue-200 text-lg">موظف استقبال - لوحة التحكم</p>
             </div>
-            <div class="bg-white bg-opacity-20 rounded-full p-4">
+            <div class="bg-white bg-opacity-20 dark:bg-opacity-30 rounded-full p-4">
                 <i class="fas fa-user-tie text-4xl"></i>
             </div>
         </div>
@@ -15,49 +15,49 @@
 
     <!-- Quick Stats -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div class="bg-white rounded-2xl p-6 shadow-lg">
+        <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg dark:shadow-slate-900">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-gray-500 text-sm font-medium">المواعيد اليوم</p>
-                    <p class="text-3xl font-bold text-blue-600">{{ $stats['today_appointments'] ?? 0 }}</p>
+                    <p class="text-gray-500 dark:text-slate-400 text-sm font-medium">المواعيد اليوم</p>
+                    <p class="text-3xl font-bold text-blue-600 dark:text-blue-400">{{ $stats['today_appointments'] ?? 0 }}</p>
                 </div>
-                <div class="bg-blue-100 rounded-full p-3">
-                    <i class="fas fa-calendar-day text-blue-600 text-xl"></i>
+                <div class="bg-blue-100 dark:bg-blue-900 rounded-full p-3">
+                    <i class="fas fa-calendar-day text-blue-600 dark:text-blue-400 text-xl"></i>
                 </div>
             </div>
         </div>
 
-        <div class="bg-white rounded-2xl p-6 shadow-lg">
+        <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg dark:shadow-slate-900">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-gray-500 text-sm font-medium">المواعيد المجدولة</p>
-                    <p class="text-3xl font-bold text-yellow-600">{{ $stats['scheduled_appointments'] ?? 0 }}</p>
+                    <p class="text-gray-500 dark:text-slate-400 text-sm font-medium">المواعيد المجدولة</p>
+                    <p class="text-3xl font-bold text-yellow-600 dark:text-yellow-400">{{ $stats['scheduled_appointments'] ?? 0 }}</p>
                 </div>
-                <div class="bg-yellow-100 rounded-full p-3">
-                    <i class="fas fa-clock text-yellow-600 text-xl"></i>
+                <div class="bg-yellow-100 dark:bg-yellow-900 rounded-full p-3">
+                    <i class="fas fa-clock text-yellow-600 dark:text-yellow-400 text-xl"></i>
                 </div>
             </div>
         </div>
 
-        <div class="bg-white rounded-2xl p-6 shadow-lg">
+        <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg dark:shadow-slate-900">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-gray-500 text-sm font-medium">المرضى الجدد</p>
-                    <p class="text-3xl font-bold text-green-600">{{ $stats['new_patients'] ?? 0 }}</p>
+                    <p class="text-gray-500 dark:text-slate-400 text-sm font-medium">المرضى الجدد</p>
+                    <p class="text-3xl font-bold text-green-600 dark:text-green-400">{{ $stats['new_patients'] ?? 0 }}</p>
                 </div>
-                <div class="bg-green-100 rounded-full p-3">
-                    <i class="fas fa-user-plus text-green-600 text-xl"></i>
+                <div class="bg-green-100 dark:bg-green-900 rounded-full p-3">
+                    <i class="fas fa-user-plus text-green-600 dark:text-green-400 text-xl"></i>
                 </div>
             </div>
         </div>
 
-        <div class="bg-white rounded-2xl p-6 shadow-lg">
+        <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg dark:shadow-slate-900">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-gray-500 text-sm font-medium">إجمالي الفواتير</p>
-                    <p class="text-3xl font-bold text-purple-600">{{ $stats['total_bills'] ?? 0 }}</p>
+                    <p class="text-gray-500 dark:text-slate-400 text-sm font-medium">إجمالي الفواتير</p>
+                    <p class="text-3xl font-bold text-purple-600 dark:text-purple-400">{{ $stats['total_bills'] ?? 0 }}</p>
                 </div>
-                <div class="bg-purple-100 rounded-full p-3">
+                <div class="bg-purple-100 dark:bg-purple-900 rounded-full p-3">
                     <i class="fas fa-file-invoice-dollar text-purple-600 text-xl"></i>
                 </div>
             </div>

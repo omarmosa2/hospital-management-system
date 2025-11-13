@@ -1,13 +1,13 @@
 <!-- Nurse Dashboard -->
 <div class="space-y-6">
     <!-- Welcome Section -->
-    <div class="bg-gradient-to-r from-green-500 to-teal-600 rounded-2xl p-8 text-white">
+    <div class="bg-gradient-to-r from-green-500 to-teal-600 dark:from-green-700 dark:to-teal-800 rounded-2xl p-8 text-white">
         <div class="flex items-center justify-between">
             <div>
                 <h1 class="text-3xl font-bold mb-2">مرحباً، {{ auth()->user()->name }}</h1>
-                <p class="text-green-100 text-lg">ممرض - لوحة التحكم</p>
+                <p class="text-green-100 dark:text-green-200 text-lg">ممرض - لوحة التحكم</p>
             </div>
-            <div class="bg-white bg-opacity-20 rounded-full p-4">
+            <div class="bg-white bg-opacity-20 dark:bg-opacity-30 rounded-full p-4">
                 <i class="fas fa-user-nurse text-4xl"></i>
             </div>
         </div>
@@ -15,49 +15,49 @@
 
     <!-- Quick Stats -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div class="bg-white rounded-2xl p-6 shadow-lg">
+        <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg dark:shadow-slate-900">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-gray-500 text-sm font-medium">المرضى اليوم</p>
-                    <p class="text-3xl font-bold text-green-600">{{ $stats['today_patients'] ?? 0 }}</p>
+                    <p class="text-gray-500 dark:text-slate-400 text-sm font-medium">المرضى اليوم</p>
+                    <p class="text-3xl font-bold text-green-600 dark:text-green-400">{{ $stats['today_patients'] ?? 0 }}</p>
                 </div>
-                <div class="bg-green-100 rounded-full p-3">
-                    <i class="fas fa-users text-green-600 text-xl"></i>
+                <div class="bg-green-100 dark:bg-green-900 rounded-full p-3">
+                    <i class="fas fa-users text-green-600 dark:text-green-400 text-xl"></i>
                 </div>
             </div>
         </div>
 
-        <div class="bg-white rounded-2xl p-6 shadow-lg">
+        <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg dark:shadow-slate-900">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-gray-500 text-sm font-medium">السجلات الطبية</p>
-                    <p class="text-3xl font-bold text-blue-600">{{ $stats['medical_records'] ?? 0 }}</p>
+                    <p class="text-gray-500 dark:text-slate-400 text-sm font-medium">السجلات الطبية</p>
+                    <p class="text-3xl font-bold text-blue-600 dark:text-blue-400">{{ $stats['medical_records'] ?? 0 }}</p>
                 </div>
-                <div class="bg-blue-100 rounded-full p-3">
-                    <i class="fas fa-file-medical text-blue-600 text-xl"></i>
+                <div class="bg-blue-100 dark:bg-blue-900 rounded-full p-3">
+                    <i class="fas fa-file-medical text-blue-600 dark:text-blue-400 text-xl"></i>
                 </div>
             </div>
         </div>
 
-        <div class="bg-white rounded-2xl p-6 shadow-lg">
+        <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg dark:shadow-slate-900">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-gray-500 text-sm font-medium">الوصفات الطبية</p>
-                    <p class="text-3xl font-bold text-purple-600">{{ $stats['prescriptions'] ?? 0 }}</p>
+                    <p class="text-gray-500 dark:text-slate-400 text-sm font-medium">الوصفات الطبية</p>
+                    <p class="text-3xl font-bold text-purple-600 dark:text-purple-400">{{ $stats['prescriptions'] ?? 0 }}</p>
                 </div>
-                <div class="bg-purple-100 rounded-full p-3">
-                    <i class="fas fa-prescription-bottle-alt text-purple-600 text-xl"></i>
+                <div class="bg-purple-100 dark:bg-purple-900 rounded-full p-3">
+                    <i class="fas fa-prescription-bottle-alt text-purple-600 dark:text-purple-400 text-xl"></i>
                 </div>
             </div>
         </div>
 
-        <div class="bg-white rounded-2xl p-6 shadow-lg">
+        <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg dark:shadow-slate-900">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-gray-500 text-sm font-medium">المواعيد المكتملة</p>
-                    <p class="text-3xl font-bold text-orange-600">{{ $stats['completed_appointments'] ?? 0 }}</p>
+                    <p class="text-gray-500 dark:text-slate-400 text-sm font-medium">المواعيد المكتملة</p>
+                    <p class="text-3xl font-bold text-orange-600 dark:text-orange-400">{{ $stats['completed_appointments'] ?? 0 }}</p>
                 </div>
-                <div class="bg-orange-100 rounded-full p-3">
+                <div class="bg-orange-100 dark:bg-orange-900 rounded-full p-3">
                     <i class="fas fa-check-circle text-orange-600 text-xl"></i>
                 </div>
             </div>
