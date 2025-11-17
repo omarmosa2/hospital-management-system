@@ -51,7 +51,7 @@ class ExampleTranslationController extends Controller
      */
     public function changeLocale($locale)
     {
-        if (in_array($locale, ['ar', 'en', 'fr', 'tr'])) {
+        if (in_array($locale, ['ar', 'en'])) {
             app()->setLocale($locale);
             session()->put('locale', $locale);
             

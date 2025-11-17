@@ -85,14 +85,6 @@
                    class="px-4 py-2 border rounded {{ app()->getLocale() === 'en' ? 'bg-blue-600 text-white' : 'bg-white text-gray-700' }}">
                     {{ __('english') }}
                 </a>
-                <a href="{{ LaravelLocalization::getLocalizedURL('fr') }}" 
-                   class="px-4 py-2 border rounded {{ app()->getLocale() === 'fr' ? 'bg-blue-600 text-white' : 'bg-white text-gray-700' }}">
-                    {{ __('french') }}
-                </a>
-                <a href="{{ LaravelLocalization::getLocalizedURL('tr') }}" 
-                   class="px-4 py-2 border rounded {{ app()->getLocale() === 'tr' ? 'bg-blue-600 text-white' : 'bg-white text-gray-700' }}">
-                    {{ __('turkish') }}
-                </a>
             </div>
         </div>
 
