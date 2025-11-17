@@ -103,7 +103,7 @@
                     <div class="flex items-center justify-between">
                         <div class="flex items-center">
                             <i class="fas fa-user-md text-blue-600 mr-3"></i>
-                            <span class="text-sm text-gray-600">الأطباء</span>
+                            <span class="text-sm text-gray-600">{{ __('doctors') }}</span>
                         </div>
                         <span class="font-semibold text-gray-900">{{ $clinic->doctors_count ?? 0 }}</span>
                     </div>
@@ -111,7 +111,7 @@
                     <div class="flex items-center justify-between">
                         <div class="flex items-center">
                             <i class="fas fa-calendar-alt text-green-600 mr-3"></i>
-                            <span class="text-sm text-gray-600">المواعيد</span>
+                            <span class="text-sm text-gray-600">{{ __('appointments') }}</span>
                         </div>
                         <span class="font-semibold text-gray-900">{{ $clinic->appointments_count ?? 0 }}</span>
                     </div>
@@ -131,7 +131,7 @@
                     <a href="{{ route('reception.doctors.index') }}?clinic_id={{ $clinic->id }}" 
                        class="w-full bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors duration-200 flex items-center justify-center">
                         <i class="fas fa-user-md mr-2"></i>
-                        عرض الأطباء
+                        {{ __('view_doctors') }}
                     </a>
                 </div>
             </div>
@@ -143,7 +143,7 @@
         <div class="bg-white rounded-2xl shadow-lg p-6">
             <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
                 <i class="fas fa-user-md text-green-600 mr-2"></i>
-                الأطباء في هذه العيادة
+                {{ __('doctors_in_clinic') }}
             </h3>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">

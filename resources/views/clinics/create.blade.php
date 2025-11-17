@@ -1,19 +1,19 @@
 @extends('layouts.app')
 
-@section('title', 'إضافة عيادة جديدة')
+@section('title', __('add_new_clinic'))
 
 @section('content')
 <div class="space-y-6">
     <!-- Header Section -->
     <div class="flex flex-col md:flex-row md:items-center md:justify-between">
         <div>
-            <h1 class="text-3xl font-bold text-gray-900 dark:text-slate-100">إضافة عيادة جديدة</h1>
-            <p class="text-gray-600 dark:text-slate-400 mt-2">قم بملء البيانات التالية لإضافة عيادة جديدة</p>
+            <h1 class="text-3xl font-bold text-gray-900 dark:text-slate-100">{{ __('add_new_clinic') }}</h1>
+            <p class="text-gray-600 dark:text-slate-400 mt-2">{{ __('fill_data_to_add') }} {{ __('clinics') }}</p>
         </div>
         <div class="mt-4 md:mt-0">
             <a href="{{ route('clinics.index') }}" class="inline-flex items-center px-4 py-2 bg-gray-100 dark:bg-slate-700 text-gray-700 dark:text-slate-200 rounded-lg hover:bg-gray-200 dark:hover:bg-slate-600 transition-colors duration-200">
                 <i class="fas fa-arrow-right mr-2"></i>
-                رجوع للعيادات
+                {{ __('back_to_clinics') }}
             </a>
         </div>
                 </div>
@@ -27,21 +27,21 @@
             <div class="border-b border-gray-200 dark:border-slate-700 pb-6">
                 <h3 class="text-lg font-semibold text-gray-900 dark:text-slate-100 mb-4 flex items-center">
                     <i class="fas fa-info-circle text-blue-600 dark:text-blue-400 mr-2"></i>
-                    المعلومات الأساسية
+                    {{ __('basic_information') }}
                 </h3>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <!-- Clinic Name -->
                     <div class="space-y-2">
                         <label for="name" class="block text-sm font-medium text-gray-700 dark:text-slate-300">
-                            اسم العيادة <span class="text-red-500 dark:text-red-400">*</span>
+                            {{ __('clinic_name') }} <span class="text-red-500 dark:text-red-400">*</span>
                         </label>
                         <input type="text"
                                id="name"
                                name="name"
                                value="{{ old('name') }}"
                                class="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-100 placeholder-gray-400 dark:placeholder-slate-400 @error('name') border-red-500 @enderror"
-                               placeholder="أدخل اسم العيادة"
+                               placeholder="{{ __('enter_clinic_name') }}"
                                required>
                                     @error('name')
                             <p class="text-red-500 dark:text-red-400 text-sm mt-1">{{ $message }}</p>
@@ -51,14 +51,14 @@
                     <!-- Location -->
                     <div class="space-y-2">
                         <label for="location" class="block text-sm font-medium text-gray-700 dark:text-slate-300">
-                            الموقع
+                            {{ __('location') }}
                         </label>
                         <input type="text"
                                id="location"
                                name="location"
                                value="{{ old('location') }}"
                                class="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-100 placeholder-gray-400 dark:placeholder-slate-400 @error('location') border-red-500 @enderror"
-                               placeholder="أدخل موقع العيادة">
+                               placeholder="{{ __('enter_clinic_location') }}">
                                     @error('location')
                             <p class="text-red-500 dark:text-red-400 text-sm mt-1">{{ $message }}</p>
                                     @enderror
@@ -71,19 +71,19 @@
             <div class="space-y-6">
                 <h3 class="text-lg font-semibold text-gray-900 dark:text-slate-100 mb-4 flex items-center">
                     <i class="fas fa-file-alt text-purple-600 dark:text-purple-400 mr-2"></i>
-                    معلومات إضافية
+                    {{ __('additional_information') }}
                 </h3>
 
                 <!-- Description -->
                 <div class="space-y-2">
                     <label for="description" class="block text-sm font-medium text-gray-700 dark:text-slate-300">
-                        الوصف
+                        {{ __('description') }}
                     </label>
                     <textarea id="description"
                               name="description"
                               rows="4"
                               class="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-100 placeholder-gray-400 dark:placeholder-slate-400 @error('description') border-red-500 @enderror"
-                              placeholder="أدخل وصفاً مختصراً للعيادة">{{ old('description') }}</textarea>
+                              placeholder="{{ __('enter_brief_clinic_description') }}">{{ old('description') }}</textarea>
                             @error('description')
                         <p class="text-red-500 dark:text-red-400 text-sm mt-1">{{ $message }}</p>
                             @enderror
@@ -94,18 +94,26 @@
             <div class="border-b border-gray-200 dark:border-slate-700 pb-6">
                 <h3 class="text-lg font-semibold text-gray-900 dark:text-slate-100 mb-4 flex items-center">
                     <i class="fas fa-clock text-orange-600 dark:text-orange-400 mr-2"></i>
-                    ساعات العمل
+                    {{ __('working_hours') }}
                 </h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     @php
-                        $days = ['السبت', 'الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة'];
+                        $days = [
+                            __('saturday'),
+                            __('sunday'),
+                            __('monday'),
+                            __('tuesday'),
+                            __('wednesday'),
+                            __('thursday'),
+                            __('friday')
+                        ];
                     @endphp
                     @foreach($days as $index => $day)
                         <div class="border border-gray-200 dark:border-slate-600 rounded-lg p-4 bg-white dark:bg-slate-700">
                             <div class="flex items-center justify-between mb-3">
                                 <h4 class="font-medium text-gray-900 dark:text-slate-100">{{ $day }}</h4>
                                 <label class="flex items-center">
-                                    <span class="mr-2 text-sm text-gray-600 dark:text-slate-400">مفعل</span>
+                                    <span class="mr-2 text-sm text-gray-600 dark:text-slate-400">{{ __('enabled') }}</span>
                                     <div class="relative inline-block w-12 h-6">
                                         <input type="checkbox"
                                                name="working_hours[{{ $index }}][enabled]"
@@ -120,13 +128,13 @@
                             </div>
                             <div class="space-y-2 day-hours" id="day-hours-{{ $index }}">
                                 <div>
-                                    <label class="block text-xs text-gray-600 dark:text-slate-400 mb-1">من</label>
+                                    <label class="block text-xs text-gray-600 dark:text-slate-400 mb-1">{{ __('from') }}</label>
                                     <input type="time" name="working_hours[{{ $index }}][start]"
                                            value="{{ old('working_hours.'.$index.'.start', '09:00') }}"
                                            class="w-full px-2 py-1 border border-gray-300 dark:border-slate-600 rounded text-sm bg-white dark:bg-slate-600 text-gray-900 dark:text-slate-100">
                                 </div>
                                 <div>
-                                    <label class="block text-xs text-gray-600 dark:text-slate-400 mb-1">إلى</label>
+                                    <label class="block text-xs text-gray-600 dark:text-slate-400 mb-1">{{ __('to') }}</label>
                                     <input type="time" name="working_hours[{{ $index }}][end]"
                                            value="{{ old('working_hours.'.$index.'.end', '17:00') }}"
                                            class="w-full px-2 py-1 border border-gray-300 dark:border-slate-600 rounded text-sm bg-white dark:bg-slate-600 text-gray-900 dark:text-slate-100">
@@ -142,12 +150,12 @@
                 <button type="submit"
                         class="flex-1 bg-blue-600 dark:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors duration-200 flex items-center justify-center">
                     <i class="fas fa-save mr-2"></i>
-                    حفظ العيادة
+                    {{ __('save_clinic') }}
                 </button>
                 <a href="{{ route('clinics.index') }}"
                    class="flex-1 bg-gray-100 dark:bg-slate-700 text-gray-700 dark:text-slate-200 px-6 py-3 rounded-lg font-medium hover:bg-gray-200 dark:hover:bg-slate-600 transition-colors duration-200 flex items-center justify-center">
                     <i class="fas fa-times mr-2"></i>
-                    إلغاء
+                    {{ __('cancel') }}
                 </a>
         </div>
         </form>

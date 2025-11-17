@@ -8,7 +8,7 @@
     <div class="flex flex-col md:flex-row md:items-center md:justify-between">
         <div>
             <h1 class="text-3xl font-bold text-gray-900">العيادات</h1>
-            <p class="text-gray-600 mt-2">عرض جميع العيادات المتاحة في المستشفى</p>
+            <p class="text-gray-600 mt-2">{{ __('view_all_clinics') }}</p>
         </div>
     </div>
 
@@ -33,7 +33,7 @@
                             </th>
                             <th scope="col" class="px-6 py-4 text-right text-xs font-bold text-white uppercase tracking-wider">
                                 <i class="fas fa-user-md ml-2"></i>
-                                عدد الأطباء
+                                {{ __('number_of_doctors') }}
                             </th>
                             <th scope="col" class="px-6 py-4 text-right text-xs font-bold text-white uppercase tracking-wider">
                                 <i class="fas fa-toggle-on ml-2"></i>
@@ -105,7 +105,7 @@
                                     <a href="{{ route('reception.clinics.show', $clinic) }}"
                                        class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200">
                                         <i class="fas fa-eye ml-2"></i>
-                                        عرض التفاصيل
+                                        {{ __('view_details') }}
                                     </a>
                                 </td>
                             </tr>
@@ -119,7 +119,7 @@
                     <i class="fas fa-hospital text-gray-400 text-3xl"></i>
                 </div>
                 <h3 class="text-xl font-semibold text-gray-900 mb-2">لا توجد عيادات</h3>
-                <p class="text-gray-600">لم يتم إضافة أي عيادات بعد</p>
+                <p class="text-gray-600">{{ __('no_clinics_yet') }}</p>
             </div>
         @endif
     </div>

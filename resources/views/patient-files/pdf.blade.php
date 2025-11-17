@@ -274,7 +274,7 @@
 
     <!-- Appointments History -->
     <div class="section">
-        <div class="section-title">تاريخ المواعيد</div>
+        <div class="section-title">{{ __('appointment_history') }}</div>
         @if($patient->appointments->count() > 0)
             <table class="table">
                 <thead>

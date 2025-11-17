@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }} - تسجيل الدخول</title>
+    <title>{{ config('app.name', 'Laravel') }} - {{ __('login') }}</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -88,8 +88,8 @@
                     <div class="inline-flex items-center justify-center w-20 h-20 bg-white rounded-full shadow-lg mb-4">
                         <i class="fas fa-hospital text-3xl text-blue-600"></i>
                     </div>
-                    <h1 class="text-3xl font-bold text-white mb-2">نظام إدارة المستشفى</h1>
-                    <p class="text-blue-100">مرحباً بك، يرجى تسجيل الدخول للمتابعة</p>
+                    <h1 class="text-3xl font-bold text-white mb-2">{{ __('hospital_management_system') }}</h1>
+                    <p class="text-blue-100">{{ __('welcome_please_login') }}</p>
                 </div>
 
                 <!-- Login form -->
@@ -101,7 +101,7 @@
                                     <i class="fas fa-exclamation-circle text-red-400"></i>
                                 </div>
                                 <div class="mr-3">
-                                    <h3 class="text-sm font-medium text-red-800">حدث خطأ في تسجيل الدخول</h3>
+                                    <h3 class="text-sm font-medium text-red-800">{{ __('login_error') }}</h3>
                                     <div class="mt-2 text-sm text-red-700">
                                         <ul class="list-disc list-inside space-y-1">
                                             @foreach ($errors->all() as $error)
@@ -121,7 +121,7 @@
                         <div>
                             <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
                                 <i class="fas fa-envelope mr-2 text-blue-600"></i>
-                                البريد الإلكتروني
+                                {{ __('email') }}
                             </label>
                             <div class="relative">
                                 <input id="email" 
@@ -131,7 +131,7 @@
                                        value="{{ old('email') }}" 
                                        required 
                                        autofocus 
-                                       placeholder="أدخل بريدك الإلكتروني" />
+                                       placeholder="{{ __('enter_email') }}" />
                                 <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                                     <i class="fas fa-user text-gray-400"></i>
                                 </div>
@@ -142,7 +142,7 @@
                         <div>
                             <label for="password" class="block text-sm font-medium text-gray-700 mb-2">
                                 <i class="fas fa-lock mr-2 text-blue-600"></i>
-                                كلمة المرور
+                                {{ __('password') }}
                             </label>
                             <div class="relative">
                                 <input id="password" 
@@ -151,7 +151,7 @@
                                        name="password" 
                                        required 
                                        autocomplete="current-password"
-                                       placeholder="أدخل كلمة المرور" />
+                                       placeholder="{{ __('enter_password') }}" />
                                 <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                                     <i class="fas fa-key text-gray-400"></i>
                                 </div>
@@ -165,12 +165,12 @@
                                        type="checkbox" 
                                        class="rounded border-gray-300 text-blue-600 shadow-sm focus:ring-blue-500" 
                                        name="remember">
-                                <span class="mr-2 text-sm text-gray-600">تذكرني</span>
+                                <span class="mr-2 text-sm text-gray-600">{{ __('remember_me') }}</span>
                             </label>
 
                             @if (Route::has('password.request'))
                                 <a class="text-sm text-blue-600 hover:text-blue-500 transition-colors duration-200" href="{{ route('password.request') }}">
-                                    نسيت كلمة المرور؟
+                                    {{ __('forgot_password') }}
                                 </a>
                             @endif
                         </div>
@@ -179,7 +179,7 @@
                         <div>
                             <button type="submit" class="btn-hover w-full flex justify-center items-center px-4 py-3 bg-gradient-to-r from-blue-600 to-purple-600 border border-transparent rounded-xl font-semibold text-white uppercase tracking-widest hover:from-blue-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-300">
                                 <i class="fas fa-sign-in-alt mr-2"></i>
-                                تسجيل الدخول
+                                {{ __('login') }}
                             </button>
                         </div>
                     </form>
@@ -188,7 +188,7 @@
                 <!-- Footer -->
                 <div class="text-center mt-8">
                     <p class="text-blue-100 text-sm">
-                        © {{ date('Y') }} نظام إدارة المستشفى. جميع الحقوق محفوظة.
+                        © {{ date('Y') }} {{ __('hospital_management_system') }}. {{ __('all_rights_reserved') }}.
                     </p>
                 </div>
             </div>
@@ -200,7 +200,7 @@
         // Add loading state to form submission
         document.querySelector('form').addEventListener('submit', function(e) {
             const button = document.querySelector('button[type="submit"]');
-            button.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>جاري تسجيل الدخول...';
+            button.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>{{ __('logging_in') }}';
             button.disabled = true;
         });
 

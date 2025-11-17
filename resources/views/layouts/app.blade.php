@@ -1,5 +1,8 @@
+@php
+    use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+@endphp
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="{{ app()->getLocale() }}" dir="{{ LaravelLocalization::getCurrentLocaleDirection() }}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,10 +24,13 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
     <!-- Custom Styles -->
     <style>
         * { font-family: 'Tajawal', sans-serif; }
-        body { font-family: 'Tajawal', sans-serif; direction: rtl; text-align: right; }
+        body { font-family: 'Tajawal', sans-serif; }
         .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
         .card-hover { transition: all 0.3s ease; }
         .card-hover:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
@@ -143,90 +149,90 @@
         <div class="sidebar-gradient w-64 min-h-screen shadow-xl hidden md:block" id="sidebar">
             <div class="p-6">
                 <!-- Logo -->
-                <div class="flex items-center space-x-3 mb-8">
+                <div class="flex items-center gap-3 mb-8" dir="{{ LaravelLocalization::getCurrentLocaleDirection() }}">
                     <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
                         <i class="fas fa-hospital text-blue-600 text-xl"></i>
                     </div>
                     <div>
                         <h1 class="text-white text-xl font-bold">MediCare</h1>
-                        <p class="text-blue-200 text-xs">Hospital Management</p>
+                        <p class="text-blue-200 text-xs">{{ __('hospital_management') }}</p>
                     </div>
                 </div>
 
                 <!-- Navigation Menu -->
                 <nav class="space-y-2">
-                    <a href="{{ route('dashboard') }}" class="flex items-center space-x-3 px-4 py-3 text-white rounded-lg hover:bg-blue-600 transition-colors duration-200 {{ request()->routeIs('dashboard') ? 'bg-blue-600' : '' }}">
+                    <a href="{{ route('dashboard') }}" class="flex items-center gap-3 px-4 py-3 text-white rounded-lg hover:bg-blue-600 transition-colors duration-200 {{ request()->routeIs('dashboard') ? 'bg-blue-600' : '' }}">
                         <i class="fas fa-tachometer-alt w-5"></i>
-                        <span>لوحة التحكم</span>
+                        <span>{{ __('dashboard') }}</span>
                     </a>
                     
                     @can('view clinics')
                         @if(auth()->user()->isReceptionist())
-                            <a href="{{ route('reception.clinics.index') }}" class="flex items-center space-x-3 px-4 py-3 text-blue-200 rounded-lg hover:bg-blue-600 hover:text-white transition-colors duration-200 {{ request()->routeIs('reception.clinics.*') ? 'bg-blue-600 text-white' : '' }}">
+                            <a href="{{ route('reception.clinics.index') }}" class="flex items-center gap-3 px-4 py-3 text-blue-200 rounded-lg hover:bg-blue-600 hover:text-white transition-colors duration-200 {{ request()->routeIs('reception.clinics.*') ? 'bg-blue-600 text-white' : '' }}">
                                 <i class="fas fa-hospital w-5"></i>
-                                <span>العيادات</span>
+                                <span>{{ __('clinics') }}</span>
                             </a>
                         @else
-                            <a href="{{ route('clinics.index') }}" class="flex items-center space-x-3 px-4 py-3 text-blue-200 rounded-lg hover:bg-blue-600 hover:text-white transition-colors duration-200 {{ request()->routeIs('clinics.*') ? 'bg-blue-600 text-white' : '' }}">
+                            <a href="{{ route('clinics.index') }}" class="flex items-center gap-3 px-4 py-3 text-blue-200 rounded-lg hover:bg-blue-600 hover:text-white transition-colors duration-200 {{ request()->routeIs('clinics.*') ? 'bg-blue-600 text-white' : '' }}">
                                 <i class="fas fa-hospital w-5"></i>
-                                <span>العيادات</span>
+                                <span>{{ __('clinics') }}</span>
                             </a>
                         @endif
                     @endcan
                     
                     @can('view doctors')
                         @if(auth()->user()->isReceptionist())
-                            <a href="{{ route('reception.doctors.index') }}" class="flex items-center space-x-3 px-4 py-3 text-blue-200 rounded-lg hover:bg-blue-600 hover:text-white transition-colors duration-200 {{ request()->routeIs('reception.doctors.*') ? 'bg-blue-600 text-white' : '' }}">
+                            <a href="{{ route('reception.doctors.index') }}" class="flex items-center gap-3 px-4 py-3 text-blue-200 rounded-lg hover:bg-blue-600 hover:text-white transition-colors duration-200 {{ request()->routeIs('reception.doctors.*') ? 'bg-blue-600 text-white' : '' }}">
                                 <i class="fas fa-user-md w-5"></i>
-                                <span>الأطباء</span>
+                                <span>{{ __('doctors') }}</span>
                             </a>
                         @else
-                            <a href="{{ route('doctors.index') }}" class="flex items-center space-x-3 px-4 py-3 text-blue-200 rounded-lg hover:bg-blue-600 hover:text-white transition-colors duration-200 {{ request()->routeIs('doctors.*') ? 'bg-blue-600 text-white' : '' }}">
+                            <a href="{{ route('doctors.index') }}" class="flex items-center gap-3 px-4 py-3 text-blue-200 rounded-lg hover:bg-blue-600 hover:text-white transition-colors duration-200 {{ request()->routeIs('doctors.*') ? 'bg-blue-600 text-white' : '' }}">
                                 <i class="fas fa-user-md w-5"></i>
-                                <span>الأطباء</span>
+                                <span>{{ __('doctors') }}</span>
                             </a>
                         @endif
                     @endcan
                     
                     @can('view patients')
-                    <a href="{{ route('patients.index') }}" class="flex items-center space-x-3 px-4 py-3 text-blue-200 rounded-lg hover:bg-blue-600 hover:text-white transition-colors duration-200 {{ request()->routeIs('patients.*') ? 'bg-blue-600 text-white' : '' }}">
+                    <a href="{{ route('patients.index') }}" class="flex items-center gap-3 px-4 py-3 text-blue-200 rounded-lg hover:bg-blue-600 hover:text-white transition-colors duration-200 {{ request()->routeIs('patients.*') ? 'bg-blue-600 text-white' : '' }}">
                         <i class="fas fa-users w-5"></i>
-                        <span>المرضى</span>
+                        <span>{{ __('patients') }}</span>
                     </a>
                     @endcan
                     
                     @can('view appointments')
-                    <a href="{{ route('appointments.index') }}" class="flex items-center space-x-3 px-4 py-3 text-blue-200 rounded-lg hover:bg-blue-600 hover:text-white transition-colors duration-200 {{ request()->routeIs('appointments.*') ? 'bg-blue-600 text-white' : '' }}">
+                    <a href="{{ route('appointments.index') }}" class="flex items-center gap-3 px-4 py-3 text-blue-200 rounded-lg hover:bg-blue-600 hover:text-white transition-colors duration-200 {{ request()->routeIs('appointments.*') ? 'bg-blue-600 text-white' : '' }}">
                         <i class="fas fa-calendar-alt w-5"></i>
-                        <span>المواعيد</span>
+                        <span>{{ __('appointments') }}</span>
                     </a>
                     @endcan
                     
                     @can('view expenses')
-                    <a href="{{ route('expenses.index') }}" class="flex items-center space-x-3 px-4 py-3 text-blue-200 rounded-lg hover:bg-blue-600 hover:text-white transition-colors duration-200 {{ request()->routeIs('expenses.*') ? 'bg-blue-600 text-white' : '' }}">
+                    <a href="{{ route('expenses.index') }}" class="flex items-center gap-3 px-4 py-3 text-blue-200 rounded-lg hover:bg-blue-600 hover:text-white transition-colors duration-200 {{ request()->routeIs('expenses.*') ? 'bg-blue-600 text-white' : '' }}">
                         <i class="fas fa-receipt w-5"></i>
-                        <span>مصروفات المشفى</span>
+                        <span>{{ __('hospital_expenses') }}</span>
                     </a>
                     @endcan
                     
                     @can('view salaries')
-                    <a href="{{ route('salaries.index') }}" class="flex items-center space-x-3 px-4 py-3 text-blue-200 rounded-lg hover:bg-blue-600 hover:text-white transition-colors duration-200 {{ request()->routeIs('salaries.*') ? 'bg-blue-600 text-white' : '' }}">
+                    <a href="{{ route('salaries.index') }}" class="flex items-center gap-3 px-4 py-3 text-blue-200 rounded-lg hover:bg-blue-600 hover:text-white transition-colors duration-200 {{ request()->routeIs('salaries.*') ? 'bg-blue-600 text-white' : '' }}">
                         <i class="fas fa-money-bill-wave w-5"></i>
-                        <span>الرواتب</span>
+                        <span>{{ __('salaries') }}</span>
                     </a>
                     @endcan
                     
                     @can('manage accounts')
-                    <a href="{{ route('accounts.index') }}" class="flex items-center space-x-3 px-4 py-3 text-blue-200 rounded-lg hover:bg-blue-600 hover:text-white transition-colors duration-200 {{ request()->routeIs('accounts.*') ? 'bg-blue-600 text-white' : '' }}">
+                    <a href="{{ route('accounts.index') }}" class="flex items-center gap-3 px-4 py-3 text-blue-200 rounded-lg hover:bg-blue-600 hover:text-white transition-colors duration-200 {{ request()->routeIs('accounts.*') ? 'bg-blue-600 text-white' : '' }}">
                         <i class="fas fa-users-cog w-5"></i>
-                        <span>إدارة الحسابات</span>
+                        <span>{{ __('manage_accounts_system') }}</span>
                     </a>
                     @endcan
                     
                     @can('view patient files')
-                    <a href="{{ route('patient-files.index') }}" class="flex items-center space-x-3 px-4 py-3 text-blue-200 rounded-lg hover:bg-blue-600 hover:text-white transition-colors duration-200 {{ request()->routeIs('patient-files.*') ? 'bg-blue-600 text-white' : '' }}">
+                    <a href="{{ route('patient-files.index') }}" class="flex items-center gap-3 px-4 py-3 text-blue-200 rounded-lg hover:bg-blue-600 hover:text-white transition-colors duration-200 {{ request()->routeIs('patient-files.*') ? 'bg-blue-600 text-white' : '' }}">
                         <i class="fas fa-folder-open w-5"></i>
-                        <span>أضبارات المرضى</span>
+                        <span>{{ __('patient_folders') }}</span>
                     </a>
                     @endcan
                 </nav>
@@ -234,7 +240,7 @@
 
             <!-- User Profile Section -->
             <div class="absolute bottom-0 w-64 p-6 border-t border-blue-600">
-                <div class="flex items-center space-x-3">
+                <div class="flex items-center gap-3">
                     <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center">
                         <span class="text-white font-semibold">{{ substr(Auth::user()->name, 0, 1) }}</span>
                     </div>
@@ -246,18 +252,18 @@
                         <button type="button" class="text-blue-200 hover:text-white" id="user-menu-button">
                             <i class="fas fa-ellipsis-v"></i>
                         </button>
-                        <div class="absolute bottom-0 right-0 w-48 bg-white rounded-lg shadow-lg py-2 hidden" id="user-menu">
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                                <i class="fas fa-user mr-2"></i>الملف الشخصي
+                        <div class="absolute bottom-0 {{ app()->getLocale() === 'ar' ? 'right-0' : 'left-0' }} w-48 bg-white dark:bg-slate-800 rounded-lg shadow-lg py-2 hidden" id="user-menu">
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-slate-300 hover:bg-gray-100 dark:hover:bg-slate-700">
+                                <i class="fas fa-user {{ app()->getLocale() === 'ar' ? 'ml-2' : 'mr-2' }}"></i>{{ __('profile') }}
                             </a>
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                                <i class="fas fa-cog mr-2"></i>الإعدادات
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-slate-300 hover:bg-gray-100 dark:hover:bg-slate-700">
+                                <i class="fas fa-cog {{ app()->getLocale() === 'ar' ? 'ml-2' : 'mr-2' }}"></i>{{ __('settings') }}
                             </a>
-                            <hr class="my-1">
+                            <hr class="my-1 border-gray-200 dark:border-slate-700">
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
-                                <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50">
-                                    <i class="fas fa-sign-out-alt mr-2"></i>تسجيل الخروج
+                                <button type="submit" class="block w-full {{ app()->getLocale() === 'ar' ? 'text-right' : 'text-left' }} px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-slate-700">
+                                    <i class="fas fa-sign-out-alt {{ app()->getLocale() === 'ar' ? 'ml-2' : 'mr-2' }}"></i>{{ __('logout') }}
                                 </button>
                             </form>
                         </div>
@@ -273,10 +279,43 @@
                 <div class="px-4 md:px-6 py-4">
                     <div class="flex items-center justify-between">
                         <div class="md:block">
-                            <h2 class="text-xl md:text-2xl font-bold text-gray-900 dark:text-slate-100">@yield('title', 'لوحة التحكم')</h2>
-                            <p class="text-gray-600 dark:text-slate-400 text-sm mt-1 hidden md:block">مرحباً بك في نظام إدارة المستشفى</p>
+                            <h2 class="text-xl md:text-2xl font-bold text-gray-900 dark:text-slate-100">@yield('title', __('dashboard'))</h2>
+                            <p class="text-gray-600 dark:text-slate-400 text-sm mt-1 hidden md:block">{{ __('welcome') }} {{ __('to_hospital_system') }}</p>
                         </div>
-                        <div class="flex items-center space-x-2 md:space-x-4">
+                        <div class="flex items-center gap-2 md:gap-4">
+                            <!-- Language Dropdown -->
+                            <div class="relative" x-data="{ open: false }">
+                                <button @click="open = !open" @click.away="open = false" class="flex items-center gap-2 p-2 text-gray-400 hover:text-gray-600 dark:text-slate-400 dark:hover:text-slate-200 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors duration-300" title="{{ __('change_language') }}">
+                                    <i class="fas fa-globe text-lg md:text-xl"></i>
+                                    <span class="hidden md:inline text-sm font-medium">{{ LaravelLocalization::getCurrentLocaleNative() }}</span>
+                                    <i class="fas fa-chevron-down text-xs"></i>
+                                </button>
+                                
+                                <!-- Dropdown Menu -->
+                                <div x-show="open" 
+                                     x-transition:enter="transition ease-out duration-100"
+                                     x-transition:enter-start="transform opacity-0 scale-95"
+                                     x-transition:enter-end="transform opacity-100 scale-100"
+                                     x-transition:leave="transition ease-in duration-75"
+                                     x-transition:leave-start="transform opacity-100 scale-100"
+                                     x-transition:leave-end="transform opacity-0 scale-95"
+                                     class="absolute left-0 mt-2 w-48 bg-white dark:bg-slate-800 rounded-lg shadow-lg border border-gray-200 dark:border-slate-700 z-50"
+                                     style="display: none;">
+                                    <div class="py-1">
+                                        @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                            <a href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}" 
+                                               class="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 dark:text-slate-300 hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors duration-150 {{ app()->getLocale() === $localeCode ? 'bg-gray-50 dark:bg-slate-700/50 font-semibold' : '' }}">
+                                                <i class="fas fa-language text-gray-400 dark:text-slate-500"></i>
+                                                <span>{{ $properties['native'] }}</span>
+                                                @if(app()->getLocale() === $localeCode)
+                                                    <i class="fas fa-check text-green-500 mr-auto"></i>
+                                                @endif
+                                            </a>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+
                             <!-- Theme Toggle Button -->
                             <button id="theme-toggle-btn" class="theme-toggle-btn relative p-2 text-gray-400 hover:text-gray-600 dark:text-slate-400 dark:hover:text-slate-200 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors duration-300" title="تبديل الوضع">
                                 <i class="fas fa-moon text-lg md:text-xl dark:hidden"></i>

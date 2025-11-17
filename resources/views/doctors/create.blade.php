@@ -1,18 +1,18 @@
 @extends('layouts.app')
 
-@section('title', 'إضافة طبيب جديد')
+@section('title', __('add_new_doctor'))
 
 @section('content')
 <div class="space-y-6">
     <!-- Header Section -->
     <div class="flex items-center justify-between">
         <div>
-            <h1 class="text-3xl font-bold text-gray-900">إضافة طبيب جديد</h1>
-            <p class="text-gray-600 mt-2">أدخل معلومات الطبيب الجديد</p>
+            <h1 class="text-3xl font-bold text-gray-900">{{ __('add_new_doctor') }}</h1>
+            <p class="text-gray-600 mt-2">{{ __('enter_new_doctor_info') }}</p>
         </div>
         <a href="{{ route('doctors.index') }}" class="inline-flex items-center px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors duration-200">
             <i class="fas fa-arrow-right mr-2"></i>
-            العودة للقائمة
+            {{ __('back_to_list') }}
         </a>
     </div>
 
@@ -23,10 +23,10 @@
             
             <!-- Personal Information -->
             <div class="border-b border-gray-200 pb-6">
-                <h3 class="text-lg font-semibold text-gray-900 mb-4">المعلومات الشخصية</h3>
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">{{ __('personal_information') }}</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                        <label for="name" class="block text-sm font-medium text-gray-700 mb-2">الاسم الكامل</label>
+                        <label for="name" class="block text-sm font-medium text-gray-700 mb-2">{{ __('full_name') }}</label>
                         <input type="text" id="name" name="name" value="{{ old('name') }}" required
                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('name') border-red-500 @enderror">
                         @error('name')
@@ -35,7 +35,7 @@
                     </div>
                     
                     <div>
-                        <label for="email" class="block text-sm font-medium text-gray-700 mb-2">البريد الإلكتروني</label>
+                        <label for="email" class="block text-sm font-medium text-gray-700 mb-2">{{ __('email') }}</label>
                         <input type="email" id="email" name="email" value="{{ old('email') }}" required
                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('email') border-red-500 @enderror">
                         @error('email')
@@ -44,7 +44,7 @@
                     </div>
                     
                     <div>
-                        <label for="password" class="block text-sm font-medium text-gray-700 mb-2">كلمة المرور</label>
+                        <label for="password" class="block text-sm font-medium text-gray-700 mb-2">{{ __('password') }}</label>
                         <input type="password" id="password" name="password" required
                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('password') border-red-500 @enderror">
                         @error('password')
@@ -57,14 +57,14 @@
 
             <!-- Professional Information -->
             <div class="border-b border-gray-200 pb-6">
-                <h3 class="text-lg font-semibold text-gray-900 mb-4">المعلومات المهنية</h3>
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">{{ __('professional_information') }}</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                        <label for="clinic_id" class="block text-sm font-medium text-gray-700 mb-2">العيادة <span class="text-red-500">*</span></label>
+                        <label for="clinic_id" class="block text-sm font-medium text-gray-700 mb-2">{{ __('clinic') }} <span class="text-red-500">*</span></label>
                         <select id="clinic_id" name="clinic_id" required
                                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('clinic_id') border-red-500 @enderror"
                                 onchange="loadClinicWorkingHours()">
-                            <option value="">اختر العيادة</option>
+                            <option value="">{{ __('select_clinic') }}</option>
                             @foreach($clinics as $clinic)
                                 <option value="{{ $clinic->id }}" {{ old('clinic_id') == $clinic->id ? 'selected' : '' }}>
                                     {{ $clinic->name }}
@@ -78,7 +78,7 @@
                     
                     
                     <div>
-                        <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">رقم الهاتف</label>
+                        <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">{{ __('phone_number') }}</label>
                         <input type="text" id="phone" name="phone" value="{{ old('phone') }}" required
                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('phone') border-red-500 @enderror">
                         @error('phone')
@@ -88,7 +88,7 @@
                     
                     
                     <div>
-                        <label for="consultation_fee" class="block text-sm font-medium text-gray-700 mb-2">رسوم الاستشارة ($)</label>
+                        <label for="consultation_fee" class="block text-sm font-medium text-gray-700 mb-2">{{ __('consultation_fee') }} ($)</label>
                         <input type="number" id="consultation_fee" name="consultation_fee" value="{{ old('consultation_fee') }}" step="0.01" min="0" required
                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('consultation_fee') border-red-500 @enderror">
                         @error('consultation_fee')
@@ -101,17 +101,25 @@
 
             <!-- Working Hours -->
             <div class="border-b border-gray-200 pb-6">
-                <h3 class="text-lg font-semibold text-gray-900 mb-4">ساعات العمل</h3>
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">{{ __('working_hours') }}</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     @php
-                        $days = ['السبت', 'الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة'];
+                        $days = [
+                            __('saturday'),
+                            __('sunday'),
+                            __('monday'),
+                            __('tuesday'),
+                            __('wednesday'),
+                            __('thursday'),
+                            __('friday')
+                        ];
                     @endphp
                     @foreach($days as $index => $day)
                         <div class="border border-gray-200 rounded-lg p-4">
                             <div class="flex items-center justify-between mb-3">
                                 <h4 class="font-medium text-gray-900">{{ $day }}</h4>
                                 <label class="flex items-center">
-                                    <span class="mr-2 text-sm text-gray-600">مفعل</span>
+                                    <span class="mr-2 text-sm text-gray-600">{{ __('enabled') }}</span>
                                     <div class="relative inline-block w-12 h-6">
                                         <input type="checkbox" 
                                                name="working_hours[{{ $index }}][enabled]" 
@@ -126,13 +134,13 @@
                             </div>
                             <div class="space-y-2 day-hours" id="day-hours-{{ $index }}">
                                 <div>
-                                    <label class="block text-xs text-gray-600 mb-1">من</label>
+                                    <label class="block text-xs text-gray-600 mb-1">{{ __('from') }}</label>
                                     <input type="time" name="working_hours[{{ $index }}][start]" 
                                            value="{{ old('working_hours.'.$index.'.start', '09:00') }}"
                                            class="w-full px-2 py-1 border border-gray-300 rounded text-sm">
                                 </div>
                                 <div>
-                                    <label class="block text-xs text-gray-600 mb-1">إلى</label>
+                                    <label class="block text-xs text-gray-600 mb-1">{{ __('to') }}</label>
                                     <input type="time" name="working_hours[{{ $index }}][end]" 
                                            value="{{ old('working_hours.'.$index.'.end', '17:00') }}"
                                            class="w-full px-2 py-1 border border-gray-300 rounded text-sm">
@@ -147,11 +155,11 @@
             <!-- Form Actions -->
             <div class="flex justify-end space-x-4">
                 <a href="{{ route('doctors.index') }}" class="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors duration-200">
-                    إلغاء
+                    {{ __('cancel') }}
                 </a>
                 <button type="submit" class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200">
                     <i class="fas fa-save mr-2"></i>
-                    حفظ الطبيب
+                    {{ __('save_doctor') }}
                 </button>
             </div>
         </form>

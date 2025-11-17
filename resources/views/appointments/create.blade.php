@@ -1,18 +1,18 @@
     @extends('layouts.app')
 
-@section('title', 'حجز موعد جديد')
+@section('title', __('book_new_appointment'))
 
 @section('content')
 <div class="space-y-6">
     <!-- Header Section -->
     <div class="flex items-center justify-between">
         <div>
-            <h1 class="text-3xl font-bold text-gray-900">حجز موعد جديد</h1>
-            <p class="text-gray-600 mt-2">حجز موعد بين مريض وطبيب</p>
+            <h1 class="text-3xl font-bold text-gray-900">{{ __('book_new_appointment') }}</h1>
+            <p class="text-gray-600 mt-2">{{ __('book_appointment_between') }}</p>
         </div>
         <a href="{{ route('appointments.index') }}" class="inline-flex items-center px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors duration-200">
             <i class="fas fa-arrow-right mr-2"></i>
-            العودة للقائمة
+            {{ __('back_to_list') }}
         </a>
     </div>
 
@@ -23,13 +23,13 @@
             
             <!-- Patient, Clinic and Doctor Selection -->
             <div class="border-b border-gray-200 pb-6">
-                <h3 class="text-lg font-semibold text-gray-900 mb-4">اختيار المريض والعيادة والطبيب</h3>
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">{{ __('select_patient_clinic_doctor') }}</h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div>
-                        <label for="patient_id" class="block text-sm font-medium text-gray-700 mb-2">المريض</label>
+                        <label for="patient_id" class="block text-sm font-medium text-gray-700 mb-2">{{ __('patient') }}</label>
                         <select id="patient_id" name="patient_id" required
                                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('patient_id') border-red-500 @enderror">
-                            <option value="">اختر المريض</option>
+                            <option value="">{{ __('select_patient') }}</option>
                             @foreach($patients as $patient)
                                 <option value="{{ $patient->id }}" {{ old('patient_id') == $patient->id ? 'selected' : '' }}>
                                     {{ $patient->user->name }} - {{ $patient->medical_record_number }}
@@ -42,10 +42,10 @@
                     </div>
                     
                     <div>
-                        <label for="clinic_id" class="block text-sm font-medium text-gray-700 mb-2">العيادة <span class="text-red-500">*</span></label>
+                        <label for="clinic_id" class="block text-sm font-medium text-gray-700 mb-2">{{ __('clinic') }} <span class="text-red-500">*</span></label>
                         <select id="clinic_id" name="clinic_id" required
                                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('clinic_id') border-red-500 @enderror">
-                            <option value="">اختر العيادة</option>
+                            <option value="">{{ __('select_clinic') }}</option>
                             @foreach($clinics as $clinic)
                                 <option value="{{ $clinic->id }}" {{ old('clinic_id') == $clinic->id ? 'selected' : '' }}>
                                     {{ $clinic->name }}
@@ -58,10 +58,10 @@
                     </div>
                     
                     <div>
-                        <label for="doctor_id" class="block text-sm font-medium text-gray-700 mb-2">الطبيب</label>
+                        <label for="doctor_id" class="block text-sm font-medium text-gray-700 mb-2">{{ __('doctor') }}</label>
                         <select id="doctor_id" name="doctor_id" required
                                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('doctor_id') border-red-500 @enderror">
-                            <option value="">اختر الطبيب</option>
+                            <option value="">{{ __('select_doctor') }}</option>
                             @foreach($doctors as $doctor)
                                 <option value="{{ $doctor->id }}" data-clinic="{{ $doctor->clinic_id }}" {{ old('doctor_id') == $doctor->id ? 'selected' : '' }}>
                                     {{ $doctor->user->name }} - {{ $doctor->specialty }}
@@ -77,10 +77,10 @@
 
             <!-- Appointment Details -->
             <div class="border-b border-gray-200 pb-6">
-                <h3 class="text-lg font-semibold text-gray-900 mb-4">تفاصيل الموعد</h3>
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">{{ __('appointment_details') }}</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                        <label for="appointment_date" class="block text-sm font-medium text-gray-700 mb-2">تاريخ الموعد</label>
+                        <label for="appointment_date" class="block text-sm font-medium text-gray-700 mb-2">{{ __('appointment_date') }}</label>
                         <input type="date" id="appointment_date" name="appointment_date" value="{{ old('appointment_date') }}" required
                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('appointment_date') border-red-500 @enderror">
                         @error('appointment_date')
@@ -89,7 +89,7 @@
                     </div>
                     
                     <div>
-                        <label for="appointment_time" class="block text-sm font-medium text-gray-700 mb-2">وقت الموعد</label>
+                        <label for="appointment_time" class="block text-sm font-medium text-gray-700 mb-2">{{ __('appointment_time') }}</label>
                         <input type="time" id="appointment_time" name="appointment_time" value="{{ old('appointment_time') }}" required
                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('appointment_time') border-red-500 @enderror">
                         @error('appointment_time')
@@ -98,11 +98,11 @@
                     </div>
                     
                     <div>
-                        <label for="status" class="block text-sm font-medium text-gray-700 mb-2">حالة الموعد</label>
+                        <label for="status" class="block text-sm font-medium text-gray-700 mb-2">{{ __('appointment_status') }}</label>
                         <select id="status" name="status" required
                                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('status') border-red-500 @enderror">
-                            <option value="scheduled" {{ old('status') == 'scheduled' ? 'selected' : '' }}>مجدول</option>
-                            <option value="confirmed" {{ old('status') == 'confirmed' ? 'selected' : '' }}>مؤكد</option>
+                            <option value="scheduled" {{ old('status') == 'scheduled' ? 'selected' : '' }}>{{ __('scheduled') }}</option>
+                            <option value="confirmed" {{ old('status') == 'confirmed' ? 'selected' : '' }}>{{ __('confirmed') }}</option>
                         </select>
                         @error('status')
                             <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
@@ -110,7 +110,7 @@
                     </div>
                     
                     <div>
-                        <label for="fee" class="block text-sm font-medium text-gray-700 mb-2">رسوم الموعد ($)</label>
+                        <label for="fee" class="block text-sm font-medium text-gray-700 mb-2">{{ __('appointment_fee') }} ($)</label>
                         <input type="number" id="fee" name="fee" value="{{ old('fee') }}" step="0.01" min="0" required
                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('fee') border-red-500 @enderror">
                         @error('fee')
@@ -120,10 +120,10 @@
                 </div>
                 
                 <div class="mt-6">
-                    <label for="reason" class="block text-sm font-medium text-gray-700 mb-2">سبب الموعد</label>
+                    <label for="reason" class="block text-sm font-medium text-gray-700 mb-2">{{ __('appointment_reason') }}</label>
                     <textarea id="reason" name="reason" rows="3"
                               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('reason') border-red-500 @enderror"
-                              placeholder="أدخل سبب الموعد أو الأعراض...">{{ old('reason') }}</textarea>
+                              placeholder="{{ __('enter_appointment_reason_symptoms') }}">{{ old('reason') }}</textarea>
                     @error('reason')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                     @enderror
@@ -132,12 +132,12 @@
 
             <!-- Additional Notes -->
             <div class="pb-6">
-                <h3 class="text-lg font-semibold text-gray-900 mb-4">ملاحظات إضافية</h3>
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">{{ __('additional_notes') }}</h3>
                 <div>
-                    <label for="notes" class="block text-sm font-medium text-gray-700 mb-2">ملاحظات</label>
+                    <label for="notes" class="block text-sm font-medium text-gray-700 mb-2">{{ __('notes') }}</label>
                     <textarea id="notes" name="notes" rows="4"
                               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('notes') border-red-500 @enderror"
-                              placeholder="أي ملاحظات إضافية حول الموعد...">{{ old('notes') }}</textarea>
+                              placeholder="{{ __('any_additional_notes_about_appointment') }}">{{ old('notes') }}</textarea>
                     @error('notes')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                     @enderror
@@ -147,11 +147,11 @@
             <!-- Form Actions -->
             <div class="flex justify-end space-x-4">
                 <a href="{{ route('appointments.index') }}" class="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors duration-200">
-                    إلغاء
+                    {{ __('cancel') }}
                 </a>
                 <button type="submit" class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200">
                     <i class="fas fa-save mr-2"></i>
-                    حجز الموعد
+                    {{ __('book_appointment') }}
                 </button>
             </div>
         </form>

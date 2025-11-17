@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
-@section('title', 'الأطباء')
+@section('title', __('doctors'))
 
 @section('content')
 <div class="space-y-6">
     <!-- Header Section -->
     <div class="flex flex-col md:flex-row md:items-center md:justify-between">
         <div>
-            <h1 class="text-3xl font-bold text-gray-900">الأطباء</h1>
-            <p class="text-gray-600 mt-2">عرض جميع الأطباء المتاحين في المستشفى</p>
+            <h1 class="text-3xl font-bold text-gray-900">{{ __('doctors') }}</h1>
+            <p class="text-gray-600 mt-2">{{ __('view_all_doctors') }}</p>
         </div>
         
         <div class="mt-4 md:mt-0">
@@ -133,7 +133,7 @@
                                     <div class="flex items-center gap-2">
                                         <a href="{{ route('reception.doctors.show', $doctor) }}"
                                            class="inline-flex items-center px-3 py-1.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200"
-                                           title="عرض التفاصيل">
+                                           title="{{ __('view_details') }}">
                                             <i class="fas fa-eye"></i>
                                         </a>
 
@@ -157,7 +157,7 @@
                     <i class="fas fa-user-md text-gray-400 text-3xl"></i>
                 </div>
                 <h3 class="text-xl font-semibold text-gray-900 mb-2">لا توجد أطباء</h3>
-                <p class="text-gray-600">لم يتم إضافة أي أطباء بعد</p>
+                <p class="text-gray-600">{{ __('no_doctors_yet') }}</p>
             </div>
         @endif
     </div>

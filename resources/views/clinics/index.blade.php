@@ -1,20 +1,20 @@
 @extends('layouts.app')
 
-@section('title', 'العيادات')
+@section('title', __('clinics'))
 
 @section('content')
 <div class="space-y-6">
     <!-- Header Section -->
     <div class="flex flex-col md:flex-row md:items-center md:justify-between">
         <div>
-            <h1 class="text-3xl font-bold text-gray-900 dark:text-slate-100">العيادات</h1>
-            <p class="text-gray-600 dark:text-slate-400 mt-2">إدارة عيادات المستشفى والمتخصصين</p>
+            <h1 class="text-3xl font-bold text-gray-900 dark:text-slate-100">{{ __('clinics') }}</h1>
+            <p class="text-gray-600 dark:text-slate-400 mt-2">{{ __('manage_hospital_clinics_specialists') }}</p>
         </div>
         <div class="mt-4 md:mt-0">
             @can('create clinics')
             <a href="{{ route('clinics.create') }}" class="inline-flex items-center px-4 py-2 bg-blue-600 dark:bg-blue-700 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors duration-200">
                 <i class="fas fa-plus mr-2"></i>
-                إضافة عيادة جديدة
+                {{ __('add_new_clinic') }}
             </a>
             @endcan
         </div>
@@ -25,21 +25,21 @@
         <div class="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0">
             <div class="flex-1 md:mr-6">
                 <div class="relative">
-                    <input type="text" placeholder="البحث عن عيادة..." class="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-100 placeholder-gray-400 dark:placeholder-slate-400">
+                    <input type="text" placeholder="{{ __('search_for_clinic') }}" class="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-100 placeholder-gray-400 dark:placeholder-slate-400">
                     <i class="fas fa-search absolute left-3 top-3 text-gray-400 dark:text-slate-400"></i>
                 </div>
             </div>
             <div class="flex space-x-4">
                 <select class="px-4 py-2 border border-gray-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-100">
-                    <option>جميع المواقع</option>
-                    <option>الطابق الأول</option>
-                    <option>الطابق الثاني</option>
-                    <option>الطابق الثالث</option>
+                    <option>{{ __('all_locations') }}</option>
+                    <option>{{ __('first_floor') }}</option>
+                    <option>{{ __('second_floor') }}</option>
+                    <option>{{ __('third_floor') }}</option>
                 </select>
                 <select class="px-4 py-2 border border-gray-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-100">
-                    <option>جميع الحالات</option>
-                    <option>نشط</option>
-                    <option>غير نشط</option>
+                    <option>{{ __('all_statuses') }}</option>
+                    <option>{{ __('active') }}</option>
+                    <option>{{ __('inactive') }}</option>
                 </select>
             </div>
         </div>
@@ -54,31 +54,31 @@
                         <tr>
                             <th scope="col" class="px-6 py-4 text-right text-xs font-bold text-white uppercase tracking-wider">
                                 <i class="fas fa-hospital ml-2"></i>
-                                اسم العيادة
+                                {{ __('clinic_name') }}
                             </th>
                             <th scope="col" class="px-6 py-4 text-right text-xs font-bold text-white uppercase tracking-wider">
                                 <i class="fas fa-map-marker-alt ml-2"></i>
-                                الموقع
+                                {{ __('location') }}
                             </th>
                             <th scope="col" class="px-6 py-4 text-right text-xs font-bold text-white uppercase tracking-wider">
                                 <i class="fas fa-info-circle ml-2"></i>
-                                الوصف
+                                {{ __('description') }}
                             </th>
                             <th scope="col" class="px-6 py-4 text-right text-xs font-bold text-white uppercase tracking-wider">
                                 <i class="fas fa-user-md ml-2"></i>
-                                عدد الأطباء
+                                {{ __('number_of_doctors') }}
                             </th>
                             <th scope="col" class="px-6 py-4 text-right text-xs font-bold text-white uppercase tracking-wider">
                                 <i class="fas fa-calendar-alt ml-2"></i>
-                                عدد المواعيد
+                                {{ __('number_of_appointments') }}
                             </th>
                             <th scope="col" class="px-6 py-4 text-right text-xs font-bold text-white uppercase tracking-wider">
                                 <i class="fas fa-toggle-on ml-2"></i>
-                                الحالة
+                                {{ __('status') }}
                             </th>
                             <th scope="col" class="px-6 py-4 text-right text-xs font-bold text-white uppercase tracking-wider">
                                 <i class="fas fa-cog ml-2"></i>
-                                الإجراءات
+                                {{ __('actions') }}
                             </th>
                         </tr>
                     </thead>
@@ -101,14 +101,14 @@
                                 <td class="px-6 py-4">
                                     <div class="text-sm text-gray-900 dark:text-slate-100">
                                         <i class="fas fa-map-marker-alt text-gray-400 dark:text-slate-400 ml-2"></i>
-                                        {{ $clinic->location ?? 'غير محدد' }}
+                                        {{ $clinic->location ?? __('not_specified') }}
                                     </div>
                                 </td>
 
                                 <!-- Description -->
                                 <td class="px-6 py-4">
                                     <div class="text-sm text-gray-600 dark:text-slate-400 max-w-xs">
-                                        {{ $clinic->description ? Str::limit($clinic->description, 60) : 'لا يوجد وصف' }}
+                                        {{ $clinic->description ? Str::limit($clinic->description, 60) : __('no_description') }}
                                     </div>
                                 </td>
 
@@ -137,12 +137,12 @@
                                     @if($clinic->is_active)
                                         <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200">
                                             <i class="fas fa-check-circle ml-1"></i>
-                                            نشط
+                                            {{ __('active') }}
                                         </span>
                                     @else
                                         <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200">
                                             <i class="fas fa-times-circle ml-1"></i>
-                                            غير نشط
+                                            {{ __('inactive') }}
                                         </span>
                                     @endif
                                 </td>
@@ -153,7 +153,7 @@
                                         @can('view clinics')
                                         <a href="{{ route('clinics.show', $clinic) }}"
                                            class="inline-flex items-center px-3 py-1.5 bg-blue-600 dark:bg-blue-700 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors duration-200"
-                                           title="عرض">
+                                           title="{{ __('view') }}">
                                             <i class="fas fa-eye"></i>
                                         </a>
                                         @endcan
@@ -161,18 +161,18 @@
                                         @can('edit clinics')
                                         <a href="{{ route('clinics.edit', $clinic) }}"
                                            class="inline-flex items-center px-3 py-1.5 bg-green-600 dark:bg-green-700 text-white rounded-lg hover:bg-green-700 dark:hover:bg-green-600 transition-colors duration-200"
-                                           title="تعديل">
+                                           title="{{ __('edit') }}">
                                             <i class="fas fa-edit"></i>
                                         </a>
                                         @endcan
 
                                         @can('delete clinics')
-                                        <form action="{{ route('clinics.destroy', $clinic) }}" method="POST" class="inline-block" onsubmit="return confirm('هل أنت متأكد من حذف هذه العيادة؟')">
+                                        <form action="{{ route('clinics.destroy', $clinic) }}" method="POST" class="inline-block" onsubmit="return confirm('{{ __('confirm_delete_clinic') }}')">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit"
                                                     class="inline-flex items-center px-3 py-1.5 bg-red-600 dark:bg-red-700 text-white rounded-lg hover:bg-red-700 dark:hover:bg-red-600 transition-colors duration-200"
-                                                    title="حذف">
+                                                    title="{{ __('delete') }}">
                                                 <i class="fas fa-trash"></i>
                                             </button>
                                         </form>
@@ -189,12 +189,12 @@
                 <div class="bg-gray-100 dark:bg-slate-700 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
                     <i class="fas fa-hospital text-gray-400 dark:text-slate-400 text-3xl"></i>
                 </div>
-                <h3 class="text-xl font-semibold text-gray-900 dark:text-slate-100 mb-2">لا توجد عيادات</h3>
-                <p class="text-gray-600 dark:text-slate-400 mb-6">لم يتم إضافة أي عيادات بعد</p>
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-slate-100 mb-2">{{ __('no_clinics') }}</h3>
+                <p class="text-gray-600 dark:text-slate-400 mb-6">{{ __('no_clinics_yet') }}</p>
                 @can('create clinics')
                 <a href="{{ route('clinics.create') }}" class="inline-flex items-center px-4 py-2 bg-blue-600 dark:bg-blue-700 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors duration-200">
                     <i class="fas fa-plus mr-2"></i>
-                    إضافة أول عيادة
+                    {{ __('add_first_clinic') }}
                 </a>
                 @endcan
             </div>
@@ -206,7 +206,7 @@
         <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg dark:shadow-slate-900">
             <div class="flex items-center justify-between">
                 <div class="text-sm text-gray-700 dark:text-slate-300">
-                    عرض {{ $clinics->firstItem() }} إلى {{ $clinics->lastItem() }} من {{ $clinics->total() }} عيادة
+                    {{ __('showing') }} {{ $clinics->firstItem() }} {{ __('to') }} {{ $clinics->lastItem() }} {{ __('from') }} {{ $clinics->total() }} {{ __('clinics') }}
                 </div>
                 <div>
                     {{ $clinics->links() }}

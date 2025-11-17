@@ -1,19 +1,19 @@
 @extends('layouts.app')
 
-@section('title', 'تعديل المصروف')
+@section('title', __('edit_expense'))
 
 @section('content')
 <div class="space-y-6">
     <!-- Header Section -->
     <div class="flex flex-col md:flex-row md:items-center md:justify-between">
         <div>
-            <h1 class="text-3xl font-bold text-gray-900 dark:text-slate-100">تعديل المصروف</h1>
-            <p class="text-gray-600 dark:text-slate-400 mt-2">رقم المصروف: {{ $expense->expense_number }}</p>
+            <h1 class="text-3xl font-bold text-gray-900 dark:text-slate-100">{{ __('edit_expense') }}</h1>
+            <p class="text-gray-600 dark:text-slate-400 mt-2">{{ __('expense_number') }}: {{ $expense->expense_number }}</p>
         </div>
         <div class="mt-4 md:mt-0">
             <a href="{{ route('expenses.index') }}" class="inline-flex items-center px-4 py-2 bg-gray-100 dark:bg-slate-700 text-gray-700 dark:text-slate-200 rounded-lg hover:bg-gray-200 dark:hover:bg-slate-600 transition-colors duration-200">
                 <i class="fas fa-arrow-right mr-2"></i>
-                رجوع للمصروفات
+                {{ __('back_to_expenses') }}
             </a>
         </div>
     </div>
@@ -28,21 +28,21 @@
             <div class="border-b border-gray-200 dark:border-slate-700 pb-6">
                 <h3 class="text-lg font-semibold text-gray-900 dark:text-slate-100 mb-4 flex items-center">
                     <i class="fas fa-info-circle text-blue-600 dark:text-blue-400 mr-2"></i>
-                    المعلومات الأساسية
+                    {{ __('basic_information') }}
                 </h3>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <!-- Title -->
                     <div class="space-y-2">
                         <label for="title" class="block text-sm font-medium text-gray-700 dark:text-slate-300">
-                            عنوان المصروف <span class="text-red-500 dark:text-red-400">*</span>
+                            {{ __('expense_title') }} <span class="text-red-500 dark:text-red-400">*</span>
                         </label>
                         <input type="text"
                                id="title"
                                name="title"
                                value="{{ old('title', $expense->title) }}"
                                class="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-100 placeholder-gray-400 dark:placeholder-slate-400 @error('title') border-red-500 @enderror"
-                               placeholder="أدخل عنوان المصروف"
+                               placeholder="{{ __('enter_expense_title') }}"
                                required>
                         @error('title')
                             <p class="text-red-500 dark:text-red-400 text-sm mt-1">{{ $message }}</p>
@@ -52,20 +52,20 @@
                     <!-- Category -->
                     <div class="space-y-2">
                         <label for="category" class="block text-sm font-medium text-gray-700 dark:text-slate-300">
-                            الفئة <span class="text-red-500 dark:text-red-400">*</span>
+                            {{ __('category') }} <span class="text-red-500 dark:text-red-400">*</span>
                         </label>
                         <select id="category"
                                 name="category"
                                 class="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-100 @error('category') border-red-500 @enderror"
                                 required>
-                            <option value="">اختر الفئة</option>
-                            <option value="equipment" {{ old('category', $expense->category) == 'equipment' ? 'selected' : '' }}>معدات</option>
-                            <option value="medicines" {{ old('category', $expense->category) == 'medicines' ? 'selected' : '' }}>أدوية</option>
-                            <option value="utilities" {{ old('category', $expense->category) == 'utilities' ? 'selected' : '' }}>مرافق</option>
-                            <option value="maintenance" {{ old('category', $expense->category) == 'maintenance' ? 'selected' : '' }}>صيانة</option>
-                            <option value="staff" {{ old('category', $expense->category) == 'staff' ? 'selected' : '' }}>موظفين</option>
-                            <option value="supplies" {{ old('category', $expense->category) == 'supplies' ? 'selected' : '' }}>مستلزمات</option>
-                            <option value="other" {{ old('category', $expense->category) == 'other' ? 'selected' : '' }}>أخرى</option>
+                            <option value="">{{ __('select_category') }}</option>
+                            <option value="equipment" {{ old('category', $expense->category) == 'equipment' ? 'selected' : '' }}>{{ __('equipment') }}</option>
+                            <option value="medicines" {{ old('category', $expense->category) == 'medicines' ? 'selected' : '' }}>{{ __('medicines') }}</option>
+                            <option value="utilities" {{ old('category', $expense->category) == 'utilities' ? 'selected' : '' }}>{{ __('utilities') }}</option>
+                            <option value="maintenance" {{ old('category', $expense->category) == 'maintenance' ? 'selected' : '' }}>{{ __('maintenance') }}</option>
+                            <option value="staff" {{ old('category', $expense->category) == 'staff' ? 'selected' : '' }}>{{ __('staff') }}</option>
+                            <option value="supplies" {{ old('category', $expense->category) == 'supplies' ? 'selected' : '' }}>{{ __('supplies') }}</option>
+                            <option value="other" {{ old('category', $expense->category) == 'other' ? 'selected' : '' }}>{{ __('other') }}</option>
                         </select>
                         @error('category')
                             <p class="text-red-500 dark:text-red-400 text-sm mt-1">{{ $message }}</p>
@@ -76,13 +76,13 @@
                 <!-- Description -->
                 <div class="mt-6 space-y-2">
                     <label for="description" class="block text-sm font-medium text-gray-700 dark:text-slate-300">
-                        الوصف
+                        {{ __('description') }}
                     </label>
                     <textarea id="description"
                               name="description"
                               rows="3"
                               class="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-100 placeholder-gray-400 dark:placeholder-slate-400 @error('description') border-red-500 @enderror"
-                              placeholder="أدخل وصفاً مفصلاً للمصروف">{{ old('description', $expense->description) }}</textarea>
+                              placeholder="{{ __('enter_detailed_expense_description') }}">{{ old('description', $expense->description) }}</textarea>
                     @error('description')
                         <p class="text-red-500 dark:text-red-400 text-sm mt-1">{{ $message }}</p>
                     @enderror
@@ -93,14 +93,14 @@
             <div class="border-b border-gray-200 dark:border-slate-700 pb-6">
                 <h3 class="text-lg font-semibold text-gray-900 dark:text-slate-100 mb-4 flex items-center">
                     <i class="fas fa-dollar-sign text-green-600 dark:text-green-400 mr-2"></i>
-                    المعلومات المالية
+                    {{ __('financial_information') }}
                 </h3>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <!-- Amount -->
                     <div class="space-y-2">
                         <label for="amount" class="block text-sm font-medium text-gray-700">
-                            المبلغ <span class="text-red-500">*</span>
+                            {{ __('amount') }} <span class="text-red-500">*</span>
                         </label>
                         <input type="number" 
                                id="amount" 
@@ -119,17 +119,17 @@
                     <!-- Payment Method -->
                     <div class="space-y-2">
                         <label for="payment_method" class="block text-sm font-medium text-gray-700">
-                            طريقة الدفع <span class="text-red-500">*</span>
+                            {{ __('payment_method') }} <span class="text-red-500">*</span>
                         </label>
                         <select id="payment_method" 
                                 name="payment_method" 
                                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('payment_method') border-red-500 @enderror"
                                 required>
-                            <option value="">اختر طريقة الدفع</option>
-                            <option value="cash" {{ old('payment_method', $expense->payment_method) == 'cash' ? 'selected' : '' }}>نقداً</option>
-                            <option value="card" {{ old('payment_method', $expense->payment_method) == 'card' ? 'selected' : '' }}>بطاقة ائتمان</option>
-                            <option value="bank_transfer" {{ old('payment_method', $expense->payment_method) == 'bank_transfer' ? 'selected' : '' }}>تحويل بنكي</option>
-                            <option value="check" {{ old('payment_method', $expense->payment_method) == 'check' ? 'selected' : '' }}>شيك</option>
+                            <option value="">{{ __('select_payment_method') }}</option>
+                            <option value="cash" {{ old('payment_method', $expense->payment_method) == 'cash' ? 'selected' : '' }}>{{ __('cash') }}</option>
+                            <option value="card" {{ old('payment_method', $expense->payment_method) == 'card' ? 'selected' : '' }}>{{ __('credit_card') }}</option>
+                            <option value="bank_transfer" {{ old('payment_method', $expense->payment_method) == 'bank_transfer' ? 'selected' : '' }}>{{ __('bank_transfer') }}</option>
+                            <option value="check" {{ old('payment_method', $expense->payment_method) == 'check' ? 'selected' : '' }}>{{ __('check') }}</option>
                         </select>
                         @error('payment_method')
                             <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
@@ -142,14 +142,14 @@
             <div class="border-b border-gray-200 pb-6">
                 <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
                     <i class="fas fa-calendar text-purple-600 mr-2"></i>
-                    التواريخ والمورد
+                    {{ __('dates_and_vendor') }}
                 </h3>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <!-- Expense Date -->
                     <div class="space-y-2">
                         <label for="expense_date" class="block text-sm font-medium text-gray-700">
-                            تاريخ المصروف <span class="text-red-500">*</span>
+                            {{ __('expense_date') }} <span class="text-red-500">*</span>
                         </label>
                         <input type="date" 
                                id="expense_date" 
@@ -165,7 +165,7 @@
                     <!-- Due Date -->
                     <div class="space-y-2">
                         <label for="due_date" class="block text-sm font-medium text-gray-700">
-                            تاريخ الاستحقاق
+                            {{ __('due_date') }}
                         </label>
                         <input type="date" 
                                id="due_date" 
@@ -180,14 +180,14 @@
                     <!-- Vendor -->
                     <div class="space-y-2">
                         <label for="vendor" class="block text-sm font-medium text-gray-700">
-                            المورد
+                            {{ __('vendor') }}
                         </label>
                         <input type="text" 
                                id="vendor" 
                                name="vendor" 
                                value="{{ old('vendor', $expense->vendor) }}"
                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('vendor') border-red-500 @enderror"
-                               placeholder="اسم المورد أو الشركة">
+                               placeholder="{{ __('vendor_or_company_name') }}">
                         @error('vendor')
                             <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                         @enderror
@@ -196,14 +196,14 @@
                     <!-- Reference Number -->
                     <div class="space-y-2">
                         <label for="reference_number" class="block text-sm font-medium text-gray-700">
-                            رقم المرجع
+                            {{ __('reference_number') }}
                         </label>
                         <input type="text" 
                                id="reference_number" 
                                name="reference_number" 
                                value="{{ old('reference_number', $expense->reference_number) }}"
                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('reference_number') border-red-500 @enderror"
-                               placeholder="رقم الفاتورة أو المرجع">
+                               placeholder="{{ __('invoice_or_reference_number') }}">
                         @error('reference_number')
                             <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                         @enderror
@@ -213,13 +213,13 @@
                 <!-- Notes -->
                 <div class="mt-6 space-y-2">
                     <label for="notes" class="block text-sm font-medium text-gray-700">
-                        ملاحظات إضافية
+                        {{ __('additional_notes') }}
                     </label>
                     <textarea id="notes" 
                               name="notes" 
                               rows="3"
                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('notes') border-red-500 @enderror"
-                              placeholder="أي ملاحظات إضافية">{{ old('notes', $expense->notes) }}</textarea>
+                              placeholder="{{ __('any_additional_notes') }}">{{ old('notes', $expense->notes) }}</textarea>
                     @error('notes')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                     @enderror
@@ -231,12 +231,12 @@
                 <button type="submit" 
                         class="flex-1 bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors duration-200 flex items-center justify-center">
                     <i class="fas fa-save mr-2"></i>
-                    حفظ التغييرات
+                    {{ __('save_changes') }}
                 </button>
                 <a href="{{ route('expenses.index') }}" 
                    class="flex-1 bg-gray-100 text-gray-700 px-6 py-3 rounded-lg font-medium hover:bg-gray-200 transition-colors duration-200 flex items-center justify-center">
                     <i class="fas fa-times mr-2"></i>
-                    إلغاء
+                    {{ __('cancel') }}
                 </a>
             </div>
         </form>

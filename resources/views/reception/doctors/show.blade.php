@@ -132,7 +132,7 @@
                     <div class="flex items-center justify-between">
                         <div class="flex items-center">
                             <i class="fas fa-calendar-alt text-blue-600 mr-3"></i>
-                            <span class="text-sm text-gray-600">المواعيد</span>
+                            <span class="text-sm text-gray-600">{{ __('appointments') }}</span>
                         </div>
                         <span class="font-semibold text-gray-900">{{ $doctor->appointments_count ?? 0 }}</span>
                     </div>
@@ -162,7 +162,7 @@
                     <a href="{{ route('reception.clinics.show', $doctor->clinic) }}" 
                        class="w-full bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-200 flex items-center justify-center">
                         <i class="fas fa-hospital mr-2"></i>
-                        عرض العيادة
+                        {{ __('view_clinic') }}
                     </a>
                 </div>
             </div>
@@ -174,7 +174,7 @@
         <div class="bg-white rounded-2xl shadow-lg p-6">
             <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
                 <i class="fas fa-calendar-alt text-purple-600 mr-2"></i>
-                المواعيد الأخيرة
+                {{ __('recent_appointments') }}
             </h3>
             
             <div class="overflow-x-auto">

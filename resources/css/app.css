@@ -24,153 +24,324 @@
     html.dark {
         color-scheme: dark;
     }
+
+    /* RTL/LTR Direction Support */
+    [dir="rtl"] {
+        direction: rtl;
+        text-align: right;
+    }
+
+    [dir="ltr"] {
+        direction: ltr;
+        text-align: left;
+    }
 }
 
 /* Smooth transitions for theme changes */
 @layer components {
     * {
-        @apply transition-colors duration-300;
+        transition-property: color, background-color, border-color;
+        transition-duration: 300ms;
     }
 
     body {
-        @apply bg-white dark:bg-slate-900 text-gray-900 dark:text-slate-100;
+        background-color: white;
+        color: rgb(17 24 39);
+    }
+
+    html.dark body {
+        background-color: rgb(15 23 42);
+        color: rgb(241 245 249);
     }
 
     /* Header */
     header {
-        @apply bg-white dark:bg-slate-800 border-gray-200 dark:border-slate-700;
+        background-color: white;
+        border-color: rgb(229 231 235);
+    }
+
+    html.dark header {
+        background-color: rgb(30 41 59);
+        border-color: rgb(51 65 85);
     }
 
     /* Cards and containers */
-    .card, .bg-white {
-        @apply bg-white dark:bg-slate-800 text-gray-900 dark:text-slate-100;
+    .card,
+    .bg-white {
+        background-color: white;
+        color: rgb(17 24 39);
+    }
+
+    html.dark .card,
+    html.dark .bg-white {
+        background-color: rgb(30 41 59);
+        color: rgb(241 245 249);
     }
 
     /* Inputs */
-    input, textarea, select {
-        @apply bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-100 border-gray-300 dark:border-slate-600;
+    input,
+    textarea,
+    select {
+        background-color: white;
+        color: rgb(17 24 39);
+        border-color: rgb(209 213 219);
     }
 
-    input::placeholder, textarea::placeholder {
-        @apply text-gray-400 dark:text-slate-400;
+    html.dark input,
+    html.dark textarea,
+    html.dark select {
+        background-color: rgb(51 65 85);
+        color: rgb(241 245 249);
+        border-color: rgb(71 85 105);
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+        color: rgb(156 163 175);
+    }
+
+    html.dark input::placeholder,
+    html.dark textarea::placeholder {
+        color: rgb(148 163 184);
     }
 
     /* Tables */
     table {
-        @apply divide-gray-200 dark:divide-slate-700;
+        border-color: rgb(229 231 235);
+    }
+
+    html.dark table {
+        border-color: rgb(51 65 85);
     }
 
     thead {
-        @apply bg-gray-50 dark:bg-slate-700;
+        background-color: rgb(249 250 251);
+    }
+
+    html.dark thead {
+        background-color: rgb(51 65 85);
     }
 
     tbody {
-        @apply bg-white dark:bg-slate-800;
+        background-color: white;
+    }
+
+    html.dark tbody {
+        background-color: rgb(30 41 59);
     }
 
     tbody tr {
-        @apply border-gray-200 dark:border-slate-700 hover:bg-gray-50 dark:hover:bg-slate-700;
+        border-color: rgb(229 231 235);
+    }
+
+    html.dark tbody tr {
+        border-color: rgb(51 65 85);
+    }
+
+    tbody tr:hover {
+        background-color: rgb(249 250 251);
+    }
+
+    html.dark tbody tr:hover {
+        background-color: rgb(51 65 85);
     }
 
     /* Text colors */
     .text-gray-900 {
-        @apply dark:text-slate-100;
+        color: rgb(17 24 39);
+    }
+
+    html.dark .text-gray-900 {
+        color: rgb(241 245 249);
     }
 
     .text-gray-600 {
-        @apply dark:text-slate-400;
+        color: rgb(75 85 99);
+    }
+
+    html.dark .text-gray-600 {
+        color: rgb(203 213 225);
     }
 
     .text-gray-400 {
-        @apply dark:text-slate-500;
+        color: rgb(156 163 175);
+    }
+
+    html.dark .text-gray-400 {
+        color: rgb(148 163 184);
     }
 
     .text-gray-500 {
-        @apply dark:text-slate-500;
+        color: rgb(107 114 128);
+    }
+
+    html.dark .text-gray-500 {
+        color: rgb(148 163 184);
     }
 
     /* Border colors */
     .border-gray-200 {
-        @apply dark:border-slate-700;
+        border-color: rgb(229 231 235);
+    }
+
+    html.dark .border-gray-200 {
+        border-color: rgb(51 65 85);
     }
 
     .border-gray-300 {
-        @apply dark:border-slate-600;
+        border-color: rgb(209 213 219);
+    }
+
+    html.dark .border-gray-300 {
+        border-color: rgb(71 85 105);
     }
 
     /* Background colors */
     .bg-gray-50 {
-        @apply dark:bg-slate-900;
+        background-color: rgb(249 250 251);
+    }
+
+    html.dark .bg-gray-50 {
+        background-color: rgb(15 23 42);
     }
 
     .bg-gray-100 {
-        @apply dark:bg-slate-700;
+        background-color: rgb(243 244 246);
+    }
+
+    html.dark .bg-gray-100 {
+        background-color: rgb(51 65 85);
     }
 
     /* Shadows */
-    .shadow-sm, .shadow-lg, .shadow-xl {
-        @apply dark:shadow-slate-900;
+    .shadow-sm,
+    .shadow-lg,
+    .shadow-xl {
+        box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    }
+
+    html.dark .shadow-sm,
+    html.dark .shadow-lg,
+    html.dark .shadow-xl {
+        box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.3);
     }
 
     /* Buttons */
     button {
-        @apply transition-colors duration-300;
+        transition-property: color, background-color, border-color;
+        transition-duration: 300ms;
     }
 
     /* Status badges */
     .bg-green-100 {
-        @apply dark:bg-green-900;
+        background-color: rgb(220 252 231);
+    }
+
+    html.dark .bg-green-100 {
+        background-color: rgb(20 83 45);
     }
 
     .text-green-800 {
-        @apply dark:text-green-200;
+        color: rgb(22 101 52);
+    }
+
+    html.dark .text-green-800 {
+        color: rgb(187 247 208);
     }
 
     .bg-yellow-100 {
-        @apply dark:bg-yellow-900;
+        background-color: rgb(254 249 195);
+    }
+
+    html.dark .bg-yellow-100 {
+        background-color: rgb(113 63 18);
     }
 
     .text-yellow-800 {
-        @apply dark:text-yellow-200;
+        color: rgb(133 77 14);
+    }
+
+    html.dark .text-yellow-800 {
+        color: rgb(254 240 138);
     }
 
     .bg-red-100 {
-        @apply dark:bg-red-900;
+        background-color: rgb(254 226 226);
+    }
+
+    html.dark .bg-red-100 {
+        background-color: rgb(127 29 29);
     }
 
     .text-red-800 {
-        @apply dark:text-red-200;
+        color: rgb(153 27 27);
+    }
+
+    html.dark .text-red-800 {
+        color: rgb(254 202 202);
     }
 
     .bg-blue-100 {
-        @apply dark:bg-blue-900;
+        background-color: rgb(219 234 254);
+    }
+
+    html.dark .bg-blue-100 {
+        background-color: rgb(30 58 138);
     }
 
     .text-blue-800 {
-        @apply dark:text-blue-200;
+        color: rgb(30 64 175);
+    }
+
+    html.dark .text-blue-800 {
+        color: rgb(191 219 254);
     }
 
     .bg-purple-100 {
-        @apply dark:bg-purple-900;
+        background-color: rgb(243 232 255);
+    }
+
+    html.dark .bg-purple-100 {
+        background-color: rgb(88 28 135);
     }
 
     .text-purple-800 {
-        @apply dark:text-purple-200;
+        color: rgb(107 33 168);
+    }
+
+    html.dark .text-purple-800 {
+        color: rgb(233 213 255);
     }
 
     .bg-pink-100 {
-        @apply dark:bg-pink-900;
+        background-color: rgb(252 231 243);
+    }
+
+    html.dark .bg-pink-100 {
+        background-color: rgb(131 24 67);
     }
 
     .text-pink-800 {
-        @apply dark:text-pink-200;
+        color: rgb(157 23 77);
+    }
+
+    html.dark .text-pink-800 {
+        color: rgb(251 207 232);
     }
 
     .bg-indigo-100 {
-        @apply dark:bg-indigo-900;
+        background-color: rgb(224 231 255);
+    }
+
+    html.dark .bg-indigo-100 {
+        background-color: rgb(49 46 129);
     }
 
     .text-indigo-800 {
-        @apply dark:text-indigo-200;
+        color: rgb(55 48 163);
+    }
+
+    html.dark .text-indigo-800 {
+        color: rgb(199 210 254);
     }
 }

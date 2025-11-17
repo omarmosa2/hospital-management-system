@@ -38,50 +38,26 @@ class Expense extends Model
     }
 
     /**
-     * Get the category name in Arabic.
+     * Get the category name.
      */
     public function getCategoryNameAttribute(): string
     {
-        $categories = [
-            'equipment' => 'معدات',
-            'medicines' => 'أدوية',
-            'utilities' => 'مرافق',
-            'maintenance' => 'صيانة',
-            'staff' => 'موظفين',
-            'supplies' => 'مستلزمات',
-            'other' => 'أخرى',
-        ];
-
-        return $categories[$this->category] ?? $this->category;
+        return __($this->category);
     }
 
     /**
-     * Get the status name in Arabic.
+     * Get the status name.
      */
     public function getStatusNameAttribute(): string
     {
-        $statuses = [
-            'pending' => 'معلق',
-            'approved' => 'موافق عليه',
-            'paid' => 'مدفوع',
-            'rejected' => 'مرفوض',
-        ];
-
-        return $statuses[$this->status] ?? $this->status;
+        return __($this->status);
     }
 
     /**
-     * Get the payment method name in Arabic.
+     * Get the payment method name.
      */
     public function getPaymentMethodNameAttribute(): string
     {
-        $methods = [
-            'cash' => 'نقداً',
-            'card' => 'بطاقة ائتمان',
-            'bank_transfer' => 'تحويل بنكي',
-            'check' => 'شيك',
-        ];
-
-        return $methods[$this->payment_method] ?? $this->payment_method;
+        return __($this->payment_method);
     }
 }

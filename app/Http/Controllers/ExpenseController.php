@@ -65,7 +65,7 @@ class ExpenseController extends Controller
         Expense::create($expenseData);
 
         return redirect()->route('expenses.index')
-            ->with('success', 'تم إنشاء المصروف بنجاح');
+            ->with('success', __('expense_created_successfully'));
     }
 
     /**
@@ -113,7 +113,7 @@ class ExpenseController extends Controller
         $expense->update($request->all());
 
         return redirect()->route('expenses.index')
-            ->with('success', 'تم تحديث المصروف بنجاح');
+            ->with('success', __('expense_updated_successfully'));
     }
 
     /**
@@ -126,7 +126,7 @@ class ExpenseController extends Controller
         $expense->delete();
 
         return redirect()->route('expenses.index')
-            ->with('success', 'تم حذف المصروف بنجاح');
+            ->with('success', __('expense_deleted_successfully'));
     }
 
     /**
@@ -142,7 +142,7 @@ class ExpenseController extends Controller
         ]);
 
         return redirect()->route('expenses.index')
-            ->with('success', 'تم الموافقة على المصروف');
+            ->with('success', __('expense_approved_successfully'));
     }
 
     /**
@@ -158,7 +158,7 @@ class ExpenseController extends Controller
         ]);
 
         return redirect()->route('expenses.index')
-            ->with('success', 'تم رفض المصروف');
+            ->with('success', __('expense_rejected_successfully'));
     }
 
     /**
@@ -173,6 +173,6 @@ class ExpenseController extends Controller
         ]);
 
         return redirect()->route('expenses.index')
-            ->with('success', 'تم تسجيل دفع المصروف');
+            ->with('success', __('expense_marked_paid_successfully'));
     }
 }

@@ -7,7 +7,7 @@
                 <p class="text-gray-600 dark:text-slate-400 text-sm font-medium">مواعيدي</p>
                 <p class="text-3xl font-bold text-gray-900 dark:text-slate-100 mt-2">{{ $stats['my_appointments'] ?? 0 }}</p>
                 <p class="text-blue-600 dark:text-blue-400 text-sm mt-1">
-                    <i class="fas fa-calendar mr-1"></i>إجمالي المواعيد
+                    <i class="fas fa-calendar mr-1"></i>{{ __('total_appointments') }}
                 </p>
             </div>
             <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center">
@@ -20,7 +20,7 @@
     <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg dark:shadow-slate-900 card-hover border-l-4 border-green-500">
         <div class="flex items-center justify-between">
             <div>
-                <p class="text-gray-600 dark:text-slate-400 text-sm font-medium">المواعيد القادمة</p>
+                <p class="text-gray-600 dark:text-slate-400 text-sm font-medium">{{ __('upcoming_appointments') }}</p>
                 <p class="text-3xl font-bold text-gray-900 dark:text-slate-100 mt-2">{{ $stats['upcoming_appointments'] ?? 0 }}</p>
                 <p class="text-green-600 dark:text-green-400 text-sm mt-1">
                     <i class="fas fa-clock mr-1"></i>مواعيد مجدولة
@@ -70,9 +70,9 @@
     <!-- Upcoming Appointments -->
     <div class="bg-white rounded-2xl p-6 shadow-lg">
         <div class="flex items-center justify-between mb-6">
-            <h3 class="text-xl font-bold text-gray-900">المواعيد القادمة</h3>
+            <h3 class="text-xl font-bold text-gray-900">{{ __('upcoming_appointments') }}</h3>
             <a href="{{ route('appointments.index') }}" class="text-blue-600 hover:text-blue-800 text-sm font-medium">
-                عرض الكل <i class="fas fa-arrow-left mr-1"></i>
+                {{ __('view_all') }} <i class="fas fa-arrow-left mr-1"></i>
             </a>
         </div>
         <div class="space-y-4">
@@ -114,9 +114,9 @@
     <!-- Recent Appointments -->
     <div class="bg-white rounded-2xl p-6 shadow-lg">
         <div class="flex items-center justify-between mb-6">
-            <h3 class="text-xl font-bold text-gray-900">المواعيد الأخيرة</h3>
+            <h3 class="text-xl font-bold text-gray-900">{{ __('recent_appointments') }}</h3>
             <a href="{{ route('appointments.index') }}" class="text-blue-600 hover:text-blue-800 text-sm font-medium">
-                عرض الكل <i class="fas fa-arrow-left mr-1"></i>
+                {{ __('view_all') }} <i class="fas fa-arrow-left mr-1"></i>
             </a>
         </div>
         <div class="space-y-4">
@@ -180,7 +180,7 @@
                 </div>
                 <div>
                     <p class="font-semibold text-gray-900">السجل الطبي</p>
-                    <p class="text-sm text-gray-600">عرض السجل الطبي</p>
+                    <p class="text-sm text-gray-600">{{ __('view_medical_record') }}</p>
                 </div>
             </a>
             
@@ -190,7 +190,7 @@
                 </div>
                 <div>
                     <p class="font-semibold text-gray-900">الوصفات الطبية</p>
-                    <p class="text-sm text-gray-600">عرض الوصفات</p>
+                    <p class="text-sm text-gray-600">{{ __('view_prescriptions') }}</p>
                 </div>
             </a>
             
@@ -200,7 +200,7 @@
                 </div>
                 <div>
                     <p class="font-semibold text-gray-900">الفواتير</p>
-                    <p class="text-sm text-gray-600">عرض الفواتير</p>
+                    <p class="text-sm text-gray-600">{{ __('view_bills') }}</p>
                 </div>
             </a>
         </div>

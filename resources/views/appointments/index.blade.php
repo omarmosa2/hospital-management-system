@@ -1,20 +1,20 @@
 @extends('layouts.app')
 
-@section('title', 'المواعيد')
+@section('title', __('appointments'))
 
 @section('content')
 <div class="space-y-6">
     <!-- Header Section -->
     <div class="flex flex-col md:flex-row md:items-center md:justify-between">
         <div>
-            <h1 class="text-3xl font-bold text-gray-900 dark:text-slate-100">المواعيد</h1>
-            <p class="text-gray-600 dark:text-slate-400 mt-2">إدارة مواعيد المرضى مع الأطباء</p>
+            <h1 class="text-3xl font-bold text-gray-900 dark:text-slate-100">{{ __('appointments') }}</h1>
+            <p class="text-gray-600 dark:text-slate-400 mt-2">{{ __('manage_appointments') }}</p>
         </div>
         @can('create appointments')
         <div class="mt-4 md:mt-0">
             <a href="{{ route('appointments.create') }}" class="inline-flex items-center px-4 py-2 bg-blue-600 dark:bg-blue-700 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors duration-200">
                 <i class="fas fa-plus mr-2"></i>
-                حجز موعد جديد
+                {{ __('book_new_appointment') }}
             </a>
         </div>
         @endcan
@@ -25,7 +25,7 @@
         <div class="bg-gradient-to-r from-blue-500 to-blue-600 dark:from-blue-900 dark:to-blue-800 rounded-2xl p-6 text-white shadow-lg dark:shadow-slate-900">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-blue-100 dark:text-blue-300 text-sm font-medium">إجمالي المواعيد</p>
+                    <p class="text-blue-100 dark:text-blue-300 text-sm font-medium">{{ __('total_appointments') }}</p>
                     <p class="text-3xl font-bold">{{ $stats['total_appointments'] }}</p>
                 </div>
                 <div class="bg-blue-400 dark:bg-blue-700 rounded-full p-3">
@@ -37,7 +37,7 @@
         <div class="bg-gradient-to-r from-yellow-500 to-yellow-600 dark:from-yellow-900 dark:to-yellow-800 rounded-2xl p-6 text-white shadow-lg dark:shadow-slate-900">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-yellow-100 dark:text-yellow-300 text-sm font-medium">مواعيد مجدولة</p>
+                    <p class="text-yellow-100 dark:text-yellow-300 text-sm font-medium">{{ __('scheduled_appointments') }}</p>
                     <p class="text-3xl font-bold">{{ $stats['scheduled_appointments'] }}</p>
                 </div>
                 <div class="bg-yellow-400 dark:bg-yellow-700 rounded-full p-3">
@@ -49,7 +49,7 @@
         <div class="bg-gradient-to-r from-green-500 to-green-600 dark:from-green-900 dark:to-green-800 rounded-2xl p-6 text-white shadow-lg dark:shadow-slate-900">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-green-100 dark:text-green-300 text-sm font-medium">مواعيد مكتملة</p>
+                    <p class="text-green-100 dark:text-green-300 text-sm font-medium">{{ __('completed_appointments') }}</p>
                     <p class="text-3xl font-bold">{{ $stats['completed_appointments'] }}</p>
                 </div>
                 <div class="bg-green-400 dark:bg-green-700 rounded-full p-3">
@@ -61,7 +61,7 @@
         <div class="bg-gradient-to-r from-purple-500 to-purple-600 dark:from-purple-900 dark:to-purple-800 rounded-2xl p-6 text-white shadow-lg dark:shadow-slate-900">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-purple-100 dark:text-purple-300 text-sm font-medium">مواعيد اليوم</p>
+                    <p class="text-purple-100 dark:text-purple-300 text-sm font-medium">{{ __('todays_appointments') }}</p>
                     <p class="text-3xl font-bold">{{ $stats['today_appointments'] }}</p>
                 </div>
                 <div class="bg-purple-400 dark:bg-purple-700 rounded-full p-3">
@@ -76,7 +76,7 @@
         <div class="bg-gradient-to-r from-indigo-500 to-indigo-600 dark:from-indigo-900 dark:to-indigo-800 rounded-2xl p-6 text-white shadow-lg dark:shadow-slate-900">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-indigo-100 dark:text-indigo-300 text-sm font-medium">مواعيد مؤكدة</p>
+                    <p class="text-indigo-100 dark:text-indigo-300 text-sm font-medium">{{ __('confirmed_appointments') }}</p>
                     <p class="text-3xl font-bold">{{ $stats['confirmed_appointments'] }}</p>
                 </div>
                 <div class="bg-indigo-400 rounded-full p-3">
@@ -88,7 +88,7 @@
         <div class="bg-gradient-to-r from-red-500 to-red-600 rounded-2xl p-6 text-white shadow-lg">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-red-100 text-sm font-medium">مواعيد ملغية</p>
+                    <p class="text-red-100 text-sm font-medium">{{ __('cancelled_appointments') }}</p>
                     <p class="text-3xl font-bold">{{ $stats['cancelled_appointments'] }}</p>
                 </div>
                 <div class="bg-red-400 rounded-full p-3">
@@ -100,7 +100,7 @@
         <div class="bg-gradient-to-r from-teal-500 to-teal-600 rounded-2xl p-6 text-white shadow-lg">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-teal-100 text-sm font-medium">هذا الأسبوع</p>
+                    <p class="text-teal-100 text-sm font-medium">{{ __('this_week') }}</p>
                     <p class="text-3xl font-bold">{{ $stats['this_week_appointments'] }}</p>
                 </div>
                 <div class="bg-teal-400 rounded-full p-3">
@@ -112,7 +112,7 @@
         <div class="bg-gradient-to-r from-orange-500 to-orange-600 rounded-2xl p-6 text-white shadow-lg">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-orange-100 text-sm font-medium">هذا الشهر</p>
+                    <p class="text-orange-100 text-sm font-medium">{{ __('this_month') }}</p>
                     <p class="text-3xl font-bold">{{ $stats['this_month_appointments'] }}</p>
                 </div>
                 <div class="bg-orange-400 rounded-full p-3">
@@ -131,22 +131,22 @@
                         <input type="text" 
                                name="search" 
                                value="{{ request('search') }}"
-                               placeholder="البحث عن موعد، مريض، طبيب..." 
+                               placeholder="{{ __('search_for_appointment') }}" 
                                class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200">
                         <i class="fas fa-search absolute left-3 top-3.5 text-gray-400"></i>
                     </div>
                 </div>
                 <div class="flex flex-col sm:flex-row gap-3">
                     <select name="status" class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200">
-                        <option value="">جميع الحالات</option>
-                        <option value="scheduled" {{ request('status') == 'scheduled' ? 'selected' : '' }}>مجدول</option>
-                        <option value="confirmed" {{ request('status') == 'confirmed' ? 'selected' : '' }}>مؤكد</option>
-                        <option value="completed" {{ request('status') == 'completed' ? 'selected' : '' }}>مكتمل</option>
-                        <option value="cancelled" {{ request('status') == 'cancelled' ? 'selected' : '' }}>ملغي</option>
+                        <option value="">{{ __('all_statuses') }}</option>
+                        <option value="scheduled" {{ request('status') == 'scheduled' ? 'selected' : '' }}>{{ __('scheduled') }}</option>
+                        <option value="confirmed" {{ request('status') == 'confirmed' ? 'selected' : '' }}>{{ __('confirmed') }}</option>
+                        <option value="completed" {{ request('status') == 'completed' ? 'selected' : '' }}>{{ __('completed') }}</option>
+                        <option value="cancelled" {{ request('status') == 'cancelled' ? 'selected' : '' }}>{{ __('cancelled') }}</option>
                     </select>
                     
                     <select name="doctor_id" class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200">
-                        <option value="">جميع الأطباء</option>
+                        <option value="">{{ __('all_doctors') }}</option>
                         @foreach($doctors ?? [] as $doctor)
                             <option value="{{ $doctor->id }}" {{ request('doctor_id') == $doctor->id ? 'selected' : '' }}>
                                 {{ $doctor->user->name }}
@@ -161,13 +161,13 @@
                     
                     <button type="submit" class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 flex items-center justify-center">
                         <i class="fas fa-search mr-2"></i>
-                        بحث
+                        {{ __('search') }}
                     </button>
                     
                     @if(request()->hasAny(['search', 'status', 'doctor_id', 'date']))
                         <a href="{{ route('appointments.index') }}" class="px-6 py-3 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors duration-200 flex items-center justify-center">
                             <i class="fas fa-times mr-2"></i>
-                            مسح
+                            {{ __('clear') }}
                         </a>
                     @endif
                 </div>
@@ -180,12 +180,12 @@
         <div class="p-6 border-b border-gray-200 bg-gradient-to-r from-blue-50 to-indigo-50">
             <div class="flex items-center justify-between">
                 <div>
-                    <h3 class="text-lg font-semibold text-gray-900">قائمة المواعيد</h3>
-                    <p class="text-sm text-gray-600 mt-1">إجمالي {{ $appointments->total() }} موعد</p>
+                    <h3 class="text-lg font-semibold text-gray-900">{{ __('appointments_list') }}</h3>
+                    <p class="text-sm text-gray-600 mt-1">{{ __('total') }} {{ $appointments->total() }} {{ __('appointment') }}</p>
                 </div>
                 <div class="flex items-center space-x-2 text-sm text-gray-500">
                     <i class="fas fa-calendar-alt"></i>
-                    <span>آخر تحديث: {{ now()->format('H:i') }}</span>
+                    <span>{{ __('last_update') }}: {{ now()->format('H:i') }}</span>
                 </div>
             </div>
         </div>
@@ -197,49 +197,49 @@
                         <th class="px-6 py-4 text-right text-xs font-semibold text-gray-600 uppercase tracking-wider">
                             <div class="flex items-center">
                                 <i class="fas fa-user mr-2"></i>
-                                المريض
+                                {{ __('patient') }}
                             </div>
                         </th>
                         <th class="px-6 py-4 text-right text-xs font-semibold text-gray-600 uppercase tracking-wider">
                             <div class="flex items-center">
                                 <i class="fas fa-user-md mr-2"></i>
-                                الطبيب
+                                {{ __('doctor') }}
                             </div>
                         </th>
                         <th class="px-6 py-4 text-right text-xs font-semibold text-gray-600 uppercase tracking-wider">
                             <div class="flex items-center">
                                 <i class="fas fa-hospital mr-2"></i>
-                                العيادة
+                                {{ __('clinic') }}
                             </div>
                         </th>
                         <th class="px-6 py-4 text-right text-xs font-semibold text-gray-600 uppercase tracking-wider">
                             <div class="flex items-center">
                                 <i class="fas fa-clock mr-2"></i>
-                                التاريخ والوقت
+                                {{ __('date_and_time') }}
                             </div>
                         </th>
                         <th class="px-6 py-4 text-right text-xs font-semibold text-gray-600 uppercase tracking-wider">
                             <div class="flex items-center">
                                 <i class="fas fa-file-medical mr-2"></i>
-                                السبب
+                                {{ __('reason') }}
                             </div>
                         </th>
                         <th class="px-6 py-4 text-right text-xs font-semibold text-gray-600 uppercase tracking-wider">
                             <div class="flex items-center">
                                 <i class="fas fa-info-circle mr-2"></i>
-                                الحالة
+                                {{ __('status') }}
                             </div>
                         </th>
                         <th class="px-6 py-4 text-right text-xs font-semibold text-gray-600 uppercase tracking-wider">
                             <div class="flex items-center">
                                 <i class="fas fa-dollar-sign mr-2"></i>
-                                الرسوم
+                                {{ __('fees') }}
                             </div>
                         </th>
                         <th class="px-6 py-4 text-right text-xs font-semibold text-gray-600 uppercase tracking-wider">
                             <div class="flex items-center">
                                 <i class="fas fa-cogs mr-2"></i>
-                                الإجراءات
+                                {{ __('actions') }}
                             </div>
                         </th>
                     </tr>
@@ -255,7 +255,7 @@
                                     </div>
                                     <div class="mr-4">
                                         <div class="text-sm font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">
-                                            {{ $appointment->patient->user->name ?? 'غير محدد' }}
+                                            {{ $appointment->patient->user->name ?? __('not_specified') }}
                                         </div>
                                         <div class="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full inline-block mt-1">
                                             {{ $appointment->patient->medical_record_number ?? 'MR-000000' }}
@@ -271,8 +271,8 @@
                                         <i class="fas fa-user-md text-white text-xs"></i>
                                     </div>
                                     <div>
-                                        <div class="text-sm font-semibold text-gray-900">{{ $appointment->doctor->user->name ?? 'غير محدد' }}</div>
-                                        <div class="text-xs text-gray-500">{{ $appointment->doctor->specialty ?? 'طبيب عام' }}</div>
+                                        <div class="text-sm font-semibold text-gray-900">{{ $appointment->doctor->user->name ?? __('not_specified') }}</div>
+                                        <div class="text-xs text-gray-500">{{ $appointment->doctor->specialty ?? __('general_practitioner') }}</div>
                                     </div>
                                 </div>
                             </td>
@@ -284,8 +284,8 @@
                                         <i class="fas fa-hospital text-white text-xs"></i>
                                     </div>
                                     <div>
-                                        <div class="text-sm font-semibold text-gray-900">{{ $appointment->clinic->name ?? 'غير محدد' }}</div>
-                                        <div class="text-xs text-gray-500">{{ $appointment->clinic->location ?? 'غير محدد' }}</div>
+                                        <div class="text-sm font-semibold text-gray-900">{{ $appointment->clinic->name ?? __('not_specified') }}</div>
+                                        <div class="text-xs text-gray-500">{{ $appointment->clinic->location ?? __('not_specified') }}</div>
                                     </div>
                                 </div>
                             </td>
@@ -344,12 +344,12 @@
                                 <div class="flex items-center justify-center space-x-1">
                                     <a href="{{ route('appointments.show', $appointment) }}" 
                                        class="p-2 text-blue-600 hover:text-blue-800 hover:bg-blue-100 rounded-lg transition-all duration-200" 
-                                       title="عرض التفاصيل">
+                                       title="{{ __('view_details') }}">
                                         <i class="fas fa-eye"></i>
                                     </a>
                                     <a href="{{ route('appointments.edit', $appointment) }}" 
                                        class="p-2 text-green-600 hover:text-green-800 hover:bg-green-100 rounded-lg transition-all duration-200" 
-                                       title="تعديل الموعد">
+                                       title="{{ __('edit_appointment') }}">
                                         <i class="fas fa-edit"></i>
                                     </a>
                                     @if($appointment->status == 'scheduled')
@@ -379,8 +379,8 @@
                                         @method('DELETE')
                                         <button type="submit" 
                                                 class="p-2 text-red-600 hover:text-red-800 hover:bg-red-100 rounded-lg transition-all duration-200" 
-                                                title="حذف الموعد"
-                                                onclick="return confirm('هل أنت متأكد من حذف هذا الموعد؟')">
+                                                title="{{ __('delete') }}"
+                                                onclick="return confirm('{{ __('confirm_delete_appointment') }}')">
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </form>
@@ -417,7 +417,7 @@
         <div class="bg-white rounded-2xl p-6 shadow-lg">
             <div class="flex items-center justify-between">
                 <div class="text-sm text-gray-700">
-                    عرض 
+                    {{ __('showing') }}
                     <span class="font-semibold">{{ $appointments->firstItem() }}</span>
                     إلى 
                     <span class="font-semibold">{{ $appointments->lastItem() }}</span>

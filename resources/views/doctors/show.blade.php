@@ -1,23 +1,23 @@
 @extends('layouts.app')
 
-@section('title', 'تفاصيل الطبيب')
+@section('title', __('doctor_details'))
 
 @section('content')
 <div class="space-y-6">
     <!-- Header Section -->
     <div class="flex items-center justify-between">
         <div>
-            <h1 class="text-3xl font-bold text-gray-900">تفاصيل الطبيب</h1>
-            <p class="text-gray-600 mt-2">معلومات مفصلة عن الطبيب</p>
+            <h1 class="text-3xl font-bold text-gray-900">{{ __('doctor_details') }}</h1>
+            <p class="text-gray-600 mt-2">{{ __('detailed_doctor_information') }}</p>
         </div>
         <div class="flex space-x-4">
             <a href="{{ route('doctors.edit', $doctor) }}" class="inline-flex items-center px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors duration-200">
                 <i class="fas fa-edit mr-2"></i>
-                تعديل
+                {{ __('edit') }}
             </a>
             <a href="{{ route('doctors.index') }}" class="inline-flex items-center px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors duration-200">
                 <i class="fas fa-arrow-right mr-2"></i>
-                العودة للقائمة
+                {{ __('back_to_list') }}
             </a>
         </div>
     </div>
@@ -34,7 +34,7 @@
                     <h2 class="text-2xl font-bold text-gray-900">{{ $doctor->user->name }}</h2>
                     <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium mt-2 {{ $doctor->is_available ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
                         <i class="fas fa-circle text-xs mr-1"></i>
-                        {{ $doctor->is_available ? 'متاح' : 'غير متاح' }}
+                        {{ $doctor->is_available ? __('available') : __('not_available') }}
                     </span>
                 </div>
 
@@ -57,7 +57,7 @@
                 <!-- Bio -->
                 @if($doctor->bio)
                     <div class="mt-6 pt-6 border-t border-gray-200">
-                        <h3 class="text-lg font-semibold text-gray-900 mb-3">نبذة عن الطبيب</h3>
+                        <h3 class="text-lg font-semibold text-gray-900 mb-3">{{ __('doctor_bio') }}</h3>
                         <p class="text-gray-600 text-sm leading-relaxed">{{ $doctor->bio }}</p>
                     </div>
                 @endif
@@ -68,10 +68,18 @@
         <div class="lg:col-span-2 space-y-6">
             <!-- Working Hours -->
             <div class="bg-white rounded-2xl shadow-lg p-6">
-                <h3 class="text-xl font-bold text-gray-900 mb-4">ساعات العمل</h3>
+                <h3 class="text-xl font-bold text-gray-900 mb-4">{{ __('working_hours') }}</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     @php
-                        $days = ['السبت', 'الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة'];
+                        $days = [
+                            __('saturday'),
+                            __('sunday'),
+                            __('monday'),
+                            __('tuesday'),
+                            __('wednesday'),
+                            __('thursday'),
+                            __('friday')
+                        ];
                         $workingHours = $doctor->working_hours ?? [];
                     @endphp
                     @foreach($days as $index => $day)
@@ -81,7 +89,7 @@
                                 @if(isset($workingHours[$index]['start']) && isset($workingHours[$index]['end']))
                                     {{ $workingHours[$index]['start'] }} - {{ $workingHours[$index]['end'] }}
                                 @else
-                                    مغلق
+                                    {{ __('closed') }}
                                 @endif
                             </span>
                         </div>
@@ -98,7 +106,7 @@
                         </div>
                         <div class="mr-4">
                             <p class="text-2xl font-bold text-gray-900">{{ $doctor->appointments->count() }}</p>
-                            <p class="text-gray-600 text-sm">إجمالي المواعيد</p>
+                            <p class="text-gray-600 text-sm">{{ __('total_appointments') }}</p>
                         </div>
                     </div>
                 </div>
@@ -110,7 +118,7 @@
                         </div>
                         <div class="mr-4">
                             <p class="text-2xl font-bold text-gray-900">{{ $doctor->appointments->pluck('patient_id')->unique()->count() }}</p>
-                            <p class="text-gray-600 text-sm">عدد المرضى</p>
+                            <p class="text-gray-600 text-sm">{{ __('number_of_patients') }}</p>
                         </div>
                     </div>
                 </div>
@@ -122,7 +130,7 @@
                         </div>
                         <div class="mr-4">
                             <p class="text-2xl font-bold text-gray-900">{{ $doctor->medicalRecords->count() }}</p>
-                            <p class="text-gray-600 text-sm">السجلات الطبية</p>
+                            <p class="text-gray-600 text-sm">{{ __('medical_records') }}</p>
                         </div>
                     </div>
                 </div>
@@ -131,9 +139,9 @@
             <!-- Recent Appointments -->
             <div class="bg-white rounded-2xl shadow-lg p-6">
                 <div class="flex items-center justify-between mb-4">
-                    <h3 class="text-xl font-bold text-gray-900">المواعيد الأخيرة</h3>
+                    <h3 class="text-xl font-bold text-gray-900">{{ __('recent_appointments') }}</h3>
                     <a href="{{ route('appointments.index') }}" class="text-blue-600 hover:text-blue-800 text-sm font-medium">
-                        عرض الكل <i class="fas fa-arrow-left mr-1"></i>
+                        {{ __('view_all') }} <i class="fas fa-arrow-left mr-1"></i>
                     </a>
                 </div>
                 <div class="space-y-4">
@@ -144,7 +152,7 @@
                                     <i class="fas fa-calendar text-blue-600"></i>
                                 </div>
                                 <div>
-                                    <p class="font-semibold text-gray-900">{{ $appointment->patient->user->name ?? 'غير محدد' }}</p>
+                                    <p class="font-semibold text-gray-900">{{ $appointment->patient->user->name ?? __('not_specified') }}</p>
                                     <p class="text-sm text-gray-600">{{ $appointment->appointment_date->format('d M Y - H:i') }}</p>
                                 </div>
                             </div>
@@ -155,10 +163,10 @@
                                     @elseif($appointment->status == 'completed') bg-green-100 text-green-800
                                     @else bg-red-100 text-red-800
                                     @endif">
-                                    @if($appointment->status == 'scheduled') مجدول
-                                    @elseif($appointment->status == 'confirmed') مؤكد
-                                    @elseif($appointment->status == 'completed') مكتمل
-                                    @else ملغي
+                                    @if($appointment->status == 'scheduled') {{ __('scheduled') }}
+                                    @elseif($appointment->status == 'confirmed') {{ __('confirmed') }}
+                                    @elseif($appointment->status == 'completed') {{ __('completed') }}
+                                    @else {{ __('cancelled') }}
                                     @endif
                                 </span>
                             </div>
@@ -166,7 +174,7 @@
                     @empty
                         <div class="text-center py-8">
                             <i class="fas fa-calendar-times text-gray-300 text-4xl mb-4"></i>
-                            <p class="text-gray-500">لا توجد مواعيد</p>
+                            <p class="text-gray-500">{{ __('no_appointments') }}</p>
                         </div>
                     @endforelse
                 </div>

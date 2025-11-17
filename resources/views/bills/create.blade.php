@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
-@section('title', 'إنشاء فاتورة جديدة')
+@section('title', __('create_new_bill'))
 
 @section('content')
 <div class="space-y-6">
     <!-- Header Section -->
     <div class="flex items-center justify-between">
         <div>
-            <h1 class="text-3xl font-bold text-gray-900 dark:text-slate-100">إنشاء فاتورة جديدة</h1>
+            <h1 class="text-3xl font-bold text-gray-900 dark:text-slate-100">{{ __('create_new_bill') }}</h1>
             <p class="text-gray-600 dark:text-slate-400 mt-2">إنشاء فاتورة للمريض والخدمات</p>
         </div>
         <a href="{{ route('bills.index') }}" class="inline-flex items-center px-4 py-2 bg-gray-100 dark:bg-slate-700 text-gray-700 dark:text-slate-200 rounded-lg hover:bg-gray-200 dark:hover:bg-slate-600 transition-colors duration-200">
@@ -100,7 +100,7 @@
             <!-- Form Actions -->
             <div class="flex justify-end space-x-4">
                 <a href="{{ route('bills.index') }}" class="px-6 py-2 border border-gray-300 dark:border-slate-600 text-gray-700 dark:text-slate-200 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors duration-200">
-                    إلغاء
+                    {{ __('cancel') }}
                 </a>
                 <button type="submit" class="px-6 py-2 bg-blue-600 dark:bg-blue-700 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors duration-200">
                     <i class="fas fa-save mr-2"></i>
